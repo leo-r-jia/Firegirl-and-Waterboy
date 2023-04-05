@@ -13,10 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     private MovementState state;
 
-    private readonly float maxSpeed = 12f;
-    private readonly float jumpAmount = 12f;
-    public float acceleration = 5f;
-    public float decceleration = 5f;
+    private float maxSpeed = 12f;
+    private float jumpAmount = 12f;
+    private float acceleration = 6f;
+    private float decceleration = 6f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
     private float dirX;
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpKeyPressed && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
+            rb.AddForce(jumpAmount * Vector2.down);
         }
 
         UpdateAnimationState();
