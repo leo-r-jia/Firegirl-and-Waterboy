@@ -353,7 +353,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.051892757, y: -0.2614498}
+  m_Offset: {x: 0.051892757, y: -0.28577578}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -364,7 +364,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8988447, y: 1.3861613}
+  m_Size: {x: 0.8988447, y: 1.4348133}
   m_EdgeRadius: 0
 --- !u!114 &8373962701897247181
 MonoBehaviour:
@@ -426,7 +426,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8439608877735188998}
+      - m_Target: {fileID: 8373962701897247181}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -691,7 +691,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.051892757, y: -0.2614498}
+  m_Offset: {x: 0.051892757, y: -0.2852462}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -702,7 +702,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8988447, y: 1.3861613}
+  m_Size: {x: 0.8988447, y: 1.4337541}
   m_EdgeRadius: 0
 --- !u!50 &8439608877735188997
 Rigidbody2D:

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,64 +11,59 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
 
-    MovementState state;
+    private MovementState state;
 
-    private float dirX;
-    private float speed = 12f;
+    private float maxSpeed = 12f;
     private float jumpAmount = 12f;
-    private float momentumFactor = 0.8f;
+    private float acceleration = 6f;
+    private float decceleration = 6f;
     private bool isFacingRight = true;
+    private bool jumpKeyPressed;
+    private float dirX;
 
+    //Before first frame update
     private void Start()
     {
         state = MovementState.Idle;
     }
 
-    //Update is called once per frame
-    private void Update()
+    //FixedUpdate is synced with Unity physics
+    private void FixedUpdate()
     {
+        //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
+        rb.AddForce(CalculateMovement() * Vector2.right);
+
         //Flip the player based on what direction they're facing
         if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
         {
             Flip();
         }
-    }
 
-    //FixedUpdate is synced with Unity physics
-    private void FixedUpdate()
-    {
-        //If the player is trying to move and meets the conditions, set their velocity
-        if (dirX != 0 && (IsMovingInDirectionFacing() || HasAlmostStopped(rb.velocity.x)))
+        //If the player is trying to jump and is grounded
+        if (jumpKeyPressed && IsGrounded())
         {
-            rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
-        }
-        //If no key is pressed, decrease the player's velocity over time
-        else
-        {
-            rb.velocity = new Vector2(rb.velocity.x * momentumFactor, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
+            rb.AddForce(jumpAmount * Vector2.down);
         }
 
         UpdateAnimationState();
     }
 
+    //Record the player's x velocity whenever their horizontal movement keys are pressed
+    public void Move(InputAction.CallbackContext context)
+    {
+        dirX = context.ReadValue<Vector2>().x;
+    }
+
     //Jump method
     public void Jump(InputAction.CallbackContext context)
     {
-        //Jump if the jump key is pressed
-        if (context.performed && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
-        }
+        jumpKeyPressed = context.performed;
 
-        //Reduce the jump amount if the player let go of jump early
+        //Reduce the jump amount if the player lets go of jump early
         if (context.canceled && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-
-        if (context.performed)
-        {
-            Debug.Log("test");
         }
     }
 
@@ -77,22 +73,21 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    //Return true if the player's velocity is in the direction they're facing
-    private bool IsMovingInDirectionFacing()
+    //Calculate the and return the player's movement speed
+    private float CalculateMovement()
     {
-        return (isFacingRight && rb.velocity.x > 0) || (!isFacingRight && rb.velocity.x < 0);
-    }
+        //Find the directional (+/-) maxSpeed the player can move
+        float dirMaxSpeed = dirX * maxSpeed;
 
-    //Return true if the player velocity has decreased below a certain magnitude
-    private bool HasAlmostStopped(float velocity)
-    {
-        return velocity > -1f && velocity < 1f;
-    }
+        //Calc. the difference between their current speed and their maxSpeed
+        float speedDif = dirMaxSpeed - rb.velocity.x;
 
-    //Record the player's x velocity whenever their horizontal movement keys are pressed
-    public void Move(InputAction.CallbackContext context)
-    {
-        dirX = context.ReadValue<Vector2>().x;
+        //Set the acceleration based on what direction they're moving
+        float accelRate = (Mathf.Abs(dirMaxSpeed) > 0.01f) ? acceleration : decceleration;
+
+        //Calculate and return their new movement speed
+
+        return Mathf.Abs(speedDif) * accelRate * Mathf.Sign(speedDif);
     }
 
     //Flips the player's sprite
@@ -107,13 +102,8 @@ public class PlayerMovement : MonoBehaviour
     //Update the player's state so that appropriate animations can be played
     private void UpdateAnimationState()
     {
-        if (!HasAlmostStopped(dirX))
-        {
-            state = MovementState.Running;
-        }
-        else if (HasAlmostStopped(dirX)) {
-            state = MovementState.Idle;
-        }
+        //Set to running if the player is not touching their controls
+        state = (dirX == 0f) ? MovementState.Idle : MovementState.Running;
 
         if (rb.velocity.y > 1.5f)
         {
@@ -123,5 +113,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.Falling;
         }
+    }
+
+    //Return the state of the player's movement
+    public MovementState GetState()
+    {
+        return state;
     }
 }

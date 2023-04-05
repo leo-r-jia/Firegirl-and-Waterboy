@@ -1,8 +1,7 @@
-enum MovementState 
+public enum MovementState 
 { 
     Running,
     Idle,
     Jumping,
     Falling
-
 }
