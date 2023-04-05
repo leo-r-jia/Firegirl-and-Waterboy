@@ -383,9 +383,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 12
-  acceleration: 0
-  decceleration: 0
+  acceleration: 1
+  decceleration: 1
 --- !u!114 &8373962701897247182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,7 +744,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 12
   acceleration: 0
   decceleration: 0
 --- !u!114 &8439608877735188999

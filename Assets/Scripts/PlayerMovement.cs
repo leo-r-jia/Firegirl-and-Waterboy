@@ -13,34 +13,25 @@ public class PlayerMovement : MonoBehaviour
 
     private MovementState state;
 
-    private float dirX;
-    public float speed = 12f;
-    public float acceleration;
-    public float decceleration;
-    private float jumpAmount = 12f;
+    private readonly float maxSpeed = 12f;
+    private readonly float jumpAmount = 12f;
+    public float acceleration = 5f;
+    public float decceleration = 5f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
+    private float dirX;
 
+    //Before first frame update
     private void Start()
     {
         state = MovementState.Idle;
-        acceleration = 5;
-        decceleration = 5;
-}
+    }
 
     //FixedUpdate is synced with Unity physics
     private void FixedUpdate()
     {
-        float targetSpeed = dirX * speed;
-
-        float speedDif = targetSpeed - rb.velocity.x;
-
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : decceleration;
-
-        float movement = Mathf.Abs(speedDif) * accelRate * Mathf.Sign(speedDif);
-
         //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
-        rb.AddForce(movement * Vector2.right);
+        rb.AddForce(CalculateMovement() * Vector2.right);
 
         //Flip the player based on what direction they're facing
         if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
@@ -55,6 +46,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         UpdateAnimationState();
+    }
+
+    //Record the player's x velocity whenever their horizontal movement keys are pressed
+    public void Move(InputAction.CallbackContext context)
+    {
+        dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
@@ -75,10 +72,21 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    //Record the player's x velocity whenever their horizontal movement keys are pressed
-    public void Move(InputAction.CallbackContext context)
+    //Calculate the and return the player's movement speed
+    private float CalculateMovement()
     {
-        dirX = context.ReadValue<Vector2>().x;
+        //Find the directional (+/-) maxSpeed the player can move
+        float dirMaxSpeed = dirX * maxSpeed;
+
+        //Calc. the difference between their current speed and their maxSpeed
+        float speedDif = dirMaxSpeed - rb.velocity.x;
+
+        //Set the acceleration based on what direction they're moving
+        float accelRate = (Mathf.Abs(dirMaxSpeed) > 0.01f) ? acceleration : decceleration;
+
+        //Calculate and return their new movement speed
+
+        return Mathf.Abs(speedDif) * accelRate * Mathf.Sign(speedDif);
     }
 
     //Flips the player's sprite
