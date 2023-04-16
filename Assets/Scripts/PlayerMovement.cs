@@ -31,22 +31,19 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
-        if (state != MovementState.Jumping)
-        {
-            rb.AddForce(CalculateMovement() * Vector2.right);
-
-            //Flip the player based on what direction they're facing
-            if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
-            {
-                Flip();
-            }
-        }
+        rb.AddForce(CalculateMovement() * Vector2.right);
         
         //If the player is trying to jump and is grounded
         if (jumpKeyPressed && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
             rb.AddForce(jumpAmount * Vector2.down);
+        }
+
+        //Flip the player based on what direction they're facing
+        if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
+        {
+            Flip();
         }
 
         UpdateAnimationState();
@@ -116,8 +113,6 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.Falling;
         }
-
-        Debug.Log(state + " " + rb.velocity.y);
     }
 
     //Return the state of the player's movement
