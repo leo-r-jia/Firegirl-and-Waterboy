@@ -52,11 +52,11 @@ public class DelayedButtonHandler : SwitchHandler
             //If the delay is up, release the button
             if (elapsedTime > delay)
             {
-                //Allow rb to move along y
-                interactableRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+                //Allow rb to move along y (remove y constraint from bitwise constraints enum)
+                interactableRB.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
 
                 //Fix button staying stuck in place
-                interactableRB.velocity = new Vector3(0f, 0.05f, 0f);
+                interactableRB.velocity = new Vector3(0f, 1f, 0f);
             }
         }
     }
@@ -64,7 +64,7 @@ public class DelayedButtonHandler : SwitchHandler
     //Check if a player is touching the button
     private bool PlayerIsTouching()
     {
-        return (Physics2D.OverlapCircle(player1.position, 0.2f, switchInteractionLayer) || Physics2D.OverlapCircle(player2.position, 0.2f, switchInteractionLayer));
+        return (Physics2D.OverlapCircle(player1.position, 0.3f, switchInteractionLayer) || Physics2D.OverlapCircle(player2.position, 0.3f, switchInteractionLayer));
     }
 
     //Broadcast the button's state
