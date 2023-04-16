@@ -16,10 +16,19 @@ public class ButtonHandler : SwitchHandler
         //Check and set the button's state
         state = (Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer) ? true : false);
 
-        //If the button's value has changed, broadcast this
+        //If the button's value has changed, broadcast this and update its prev. state
         if (state != previousState)
         {
-            onTrigger.Invoke();
+            if (state)
+            {
+                switchedOn.Invoke();
+            } 
+            else
+            {
+                switchedOff.Invoke();
+            }
+
+
             previousState = state;
         }
     }

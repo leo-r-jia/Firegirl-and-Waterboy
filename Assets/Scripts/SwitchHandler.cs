@@ -11,7 +11,8 @@ public abstract class SwitchHandler : MonoBehaviour
 
     protected bool state, previousState;
 
-    public UnityEvent onTrigger;
+    public UnityEvent switchedOn;
+    public UnityEvent switchedOff;
 
     //Checks if the interactable part of the switch is touching a point
     public abstract bool IsOn();

@@ -28,7 +28,15 @@ public class LeverHandler : SwitchHandler
         //If the lever's value has changed, broadcast this and update its prev. state
         if (state != previousState)
         {
-            onTrigger.Invoke();
+            if (state)
+            {
+                switchedOn.Invoke();
+            }
+            else
+            {
+                switchedOff.Invoke();
+            }
+
             previousState = state;
         }
     }

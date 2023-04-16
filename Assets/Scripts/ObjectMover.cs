@@ -8,10 +8,10 @@ public class ObjectMover : MonoBehaviour
     [SerializeField] private Vector3 finalPosition;
     [SerializeField] private float duration;
     [SerializeField] private AnimationCurve curve;
-    [SerializeField] private SwitchHandler switchHandler;
 
     private Vector3 initialPosition, currentPosition;
     private float elapsedTime;
+    private bool movingToFinal;
 
     //Set the object's initial position to where it is on Start
     void Start()
@@ -19,23 +19,32 @@ public class ObjectMover : MonoBehaviour
         initialPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    //Move the object to its destination if it isn't already there
+    public void Update()
     {
-        if (switchHandler.IsOn() && currentPosition != finalPosition)
+        if (movingToFinal && currentPosition != finalPosition)
         {
             Move(finalPosition);
         } 
-        else if (!switchHandler.IsOn() && currentPosition != initialPosition)
+        else if (!movingToFinal && currentPosition != initialPosition)
         {
             Move(initialPosition);
         }
     }
 
-    //Reset the time taken since movement started
-    private void ResetElapsedTime()
+    //Call this method to send the object back to its starting position 
+    public void MoveToInitial()
     {
         elapsedTime = Time.deltaTime;
+
+        movingToFinal = false;
+    }
+
+    //Call this method to send the object to its final position 
+    public void MoveToFinal() {
+        elapsedTime = Time.deltaTime;
+
+        movingToFinal = true;
     }
 
     //Move the object from the current position to the destination position smoothly
