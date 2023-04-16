@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class SwitchHandler : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public abstract class SwitchHandler : MonoBehaviour
 
     protected bool state, previousState;
 
-    public delegate void ChangedValue();
-    public static event ChangedValue ValueChanged;
+    public UnityEvent onTrigger;
 
     //Checks if the interactable part of the switch is touching a point
     public abstract bool IsOn();

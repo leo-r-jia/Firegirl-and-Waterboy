@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonHandler : SwitchHandler
+public class DelayedButtonHandler : SwitchHandler
 {
     //Set button's initial states
     public void Start()

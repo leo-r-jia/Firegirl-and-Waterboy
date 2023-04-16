@@ -6,9 +6,6 @@ public class LeverHandler : SwitchHandler
 {
     [SerializeField] protected Transform offCheck;
 
-    //Redeclare the event for use in this class
-    public static new event ChangedValue ValueChanged;
-
     private void Start()
     {
         //Set the lever's initial states
@@ -28,10 +25,10 @@ public class LeverHandler : SwitchHandler
             state = false;
         }
 
-        //If the lever's value has changed, broadcast this
+        //If the lever's value has changed, broadcast this and update its prev. state
         if (state != previousState)
         {
-            ValueChanged();
+            onTrigger.Invoke();
             previousState = state;
         }
     }

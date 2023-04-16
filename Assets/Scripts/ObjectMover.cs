@@ -19,17 +19,6 @@ public class ObjectMover : MonoBehaviour
         initialPosition = transform.position;
     }
 
-    //Methods for subscribing to 
-    private void OnEnable()
-    {
-        LeverHandler.ValueChanged += ResetElapsedTime;
-    }
-
-    private void OnDisable()
-    {
-        LeverHandler.ValueChanged += ResetElapsedTime;
-    }
-
     // Update is called once per frame
     void Update()
     {

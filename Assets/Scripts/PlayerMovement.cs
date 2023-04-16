@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
 
     private MovementState state;
 
@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
-    public void Move(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
         dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
-    public void Jump(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
         jumpKeyPressed = context.performed;
 
