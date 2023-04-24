@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
 
     private MovementState state;
     private Animator anim;
@@ -34,13 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
         rb.AddForce(CalculateMovement() * Vector2.right);
-
-        //Flip the player based on what direction they're facing
-        if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
-        {
-            Flip();
-        }
-
+        
         //If the player is trying to jump and is grounded
         if (jumpKeyPressed && IsGrounded())
         {
@@ -48,17 +42,23 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(jumpAmount * Vector2.down);
         }
 
+        //Flip the player based on what direction they're facing
+        if (!isFacingRight && dirX > 0f || isFacingRight && dirX < 0f)
+        {
+            Flip();
+        }
+
         UpdateAnimationState();
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
-    public void Move(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
         dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
-    public void Jump(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
         jumpKeyPressed = context.performed;
 
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.Jumping;
         }
-        else if (rb.velocity.y < .1f)
+        else if (rb.velocity.y < -.1f)
         {
             state = MovementState.Falling;
         }
