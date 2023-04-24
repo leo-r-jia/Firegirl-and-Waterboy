@@ -24,126 +24,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     ""name"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""PlayerInput"",
-            ""id"": ""c378b4e4-b2d0-4dca-9bba-185e0fd7436e"",
-            ""actions"": [
-                {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""468c32f7-0692-41f4-9023-dbb52241ead7"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""00611032-6cf3-4b66-a2d9-13100f0d616a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""14390044-c857-4e5c-b896-a2f0e1aba758"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""6d738f5d-5816-41c0-8e35-34e2a881e400"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""9800147d-1a30-4e87-9192-3710fa0fd676"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""586377db-5736-4543-aa26-f206e39a1182"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""bfd01d5d-b5c1-4197-8abc-03b04733fc9c"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""75f1e9fb-6954-4384-912f-d603db67dacf"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Jumping"",
-            ""id"": ""93811605-74c1-416e-ba92-6428f4ae257e"",
-            ""actions"": [
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""a803d74e-c9a5-4638-8d2c-266374757ae5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""a331ffae-6678-4920-b8d7-4bdca61b81da"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Menu"",
             ""id"": ""28a17429-24b4-492d-8d7f-03dcc3048c42"",
             ""actions"": [
@@ -174,13 +54,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // PlayerInput
-        m_PlayerInput = asset.FindActionMap("PlayerInput", throwIfNotFound: true);
-        m_PlayerInput_Movement = m_PlayerInput.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerInput_Jump = m_PlayerInput.FindAction("Jump", throwIfNotFound: true);
-        // Jumping
-        m_Jumping = asset.FindActionMap("Jumping", throwIfNotFound: true);
-        m_Jumping_Jump = m_Jumping.FindAction("Jump", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_PauseMenu = m_Menu.FindAction("PauseMenu", throwIfNotFound: true);
@@ -242,106 +115,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // PlayerInput
-    private readonly InputActionMap m_PlayerInput;
-    private List<IPlayerInputActions> m_PlayerInputActionsCallbackInterfaces = new List<IPlayerInputActions>();
-    private readonly InputAction m_PlayerInput_Movement;
-    private readonly InputAction m_PlayerInput_Jump;
-    public struct PlayerInputActions
-    {
-        private @Controls m_Wrapper;
-        public PlayerInputActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_PlayerInput_Movement;
-        public InputAction @Jump => m_Wrapper.m_PlayerInput_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerInputActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerInputActions instance)
-        {
-            if (instance == null || m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Add(instance);
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-        }
-
-        private void UnregisterCallbacks(IPlayerInputActions instance)
-        {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-        }
-
-        public void RemoveCallbacks(IPlayerInputActions instance)
-        {
-            if (m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IPlayerInputActions instance)
-        {
-            foreach (var item in m_Wrapper.m_PlayerInputActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public PlayerInputActions @PlayerInput => new PlayerInputActions(this);
-
-    // Jumping
-    private readonly InputActionMap m_Jumping;
-    private List<IJumpingActions> m_JumpingActionsCallbackInterfaces = new List<IJumpingActions>();
-    private readonly InputAction m_Jumping_Jump;
-    public struct JumpingActions
-    {
-        private @Controls m_Wrapper;
-        public JumpingActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_Jumping_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Jumping; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(JumpingActions set) { return set.Get(); }
-        public void AddCallbacks(IJumpingActions instance)
-        {
-            if (instance == null || m_Wrapper.m_JumpingActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_JumpingActionsCallbackInterfaces.Add(instance);
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-        }
-
-        private void UnregisterCallbacks(IJumpingActions instance)
-        {
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-        }
-
-        public void RemoveCallbacks(IJumpingActions instance)
-        {
-            if (m_Wrapper.m_JumpingActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IJumpingActions instance)
-        {
-            foreach (var item in m_Wrapper.m_JumpingActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_JumpingActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public JumpingActions @Jumping => new JumpingActions(this);
-
     // Menu
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
@@ -387,15 +160,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
-    public interface IPlayerInputActions
-    {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-    }
-    public interface IJumpingActions
-    {
-        void OnJump(InputAction.CallbackContext context);
-    }
     public interface IMenuActions
     {
         void OnPauseMenu(InputAction.CallbackContext context);

@@ -10,10 +10,10 @@ public class PauseMenu : MonoBehaviour
     private InputAction menu;
 
     public GameObject pauseMenu;
-    public GameObject background;
     public GameObject settingsMenu;
+    public bool activeSettings = false;
 
-    [SerializeField] private bool isPaused;
+    private bool isPaused;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,12 +21,10 @@ public class PauseMenu : MonoBehaviour
         controls = new Controls();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActiveSettings()
     {
-
+        activeSettings = !activeSettings;
     }
-
  
     private void OnEnable()
     {
@@ -44,12 +42,19 @@ public class PauseMenu : MonoBehaviour
     void Pause(InputAction.CallbackContext context)
     {
         isPaused = !isPaused;
-
         if (isPaused)
         {
             ActivateMenu();
         }
 
+        else if(!isPaused && activeSettings == true)
+        {
+            isPaused = true;
+            activeSettings = false;
+            settingsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+            
+        }
         else
         {
             DeactivateMenu();
@@ -70,7 +75,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        //background.SetActive(false);
         Cursor.visible = false;
         isPaused = false;
     }
@@ -88,12 +92,5 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pauseMenu.SetActive(false);
         Cursor.visible = false;
-    }
-    
-    // Opens settings menu
-    public void settings()
-    {
-        pauseMenu.SetActive(false);
-        settingsMenu.SetActive(true);
     }
 }
