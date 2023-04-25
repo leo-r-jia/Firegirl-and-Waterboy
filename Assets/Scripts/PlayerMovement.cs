@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private MovementState state;
+    private Animator anim;
 
     [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float jumpAmount = 12f;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         state = MovementState.Idle;
+        anim = GetComponent<Animator>();
     }
 
     //FixedUpdate is synced with Unity physics
@@ -113,6 +115,9 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.Falling;
         }
+
+        anim.SetInteger("state", (int)state);
+
     }
 
     //Return the state of the player's movement

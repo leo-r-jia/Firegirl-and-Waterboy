@@ -14,29 +14,29 @@ TagManager:
   - Player 1
   - Player 2
   - Switch Trigger
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Switch Trigger
     uniqueID: 4076158141
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Terrain
+    uniqueID: 1874670833
     locked: 0
