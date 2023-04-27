@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         state = MovementState.Idle;
+        InputSystem.EnableDevice(Keyboard.current);
     }
 
     //FixedUpdate is synced with Unity physics
@@ -120,4 +121,5 @@ public class PlayerMovement : MonoBehaviour
     {
         return state;
     }
+
 }
