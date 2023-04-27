@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 241f742f0911c3a428eea6612ae23b77
+guid: 706d086f6daba094abee6701e000157c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9101230857065804138
-    second: Double Jump (32x32)_0
+      213: 6868122594974341346
+    second: Hit (32x32)_0
   - first:
-      213: -6204479477933590408
-    second: Double Jump (32x32)_1
+      213: 7167584040609486739
+    second: Hit (32x32)_1
   - first:
-      213: 7040038629683462113
-    second: Double Jump (32x32)_2
+      213: -1675461080110260169
+    second: Hit (32x32)_2
   - first:
-      213: 781615245368611544
-    second: Double Jump (32x32)_3
+      213: 8480664182131228983
+    second: Hit (32x32)_3
   - first:
-      213: -3939753913355333839
-    second: Double Jump (32x32)_4
+      213: -953560442851353963
+    second: Hit (32x32)_4
   - first:
-      213: 6301718139250434432
-    second: Double Jump (32x32)_5
+      213: -3450976776972242761
+    second: Hit (32x32)_5
+  - first:
+      213: 7062579536633761780
+    second: Hit (32x32)_6
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -65,7 +68,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,23 +122,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Double Jump (32x32)_0
+      name: Hit (32x32)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d33dc45120fa5543915052198af8846
-      internalID: -9101230857065804138
+      spriteID: a62336805af0d0849be23153a2f1537f
+      internalID: 6868122594974341346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Double Jump (32x32)_1
+      name: Hit (32x32)_1
       rect:
         serializedVersion: 2
         x: 32
@@ -170,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5342c216d32f700498d2494b73f1a1b4
-      internalID: -6204479477933590408
+      spriteID: 15e8a18ea1266f0448c53a598056808a
+      internalID: 7167584040609486739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Double Jump (32x32)_2
+      name: Hit (32x32)_2
       rect:
         serializedVersion: 2
         x: 64
@@ -191,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f17e67ea4b029e4892234616431dcef
-      internalID: 7040038629683462113
+      spriteID: e47310c939f1b3346a76d1517c54940d
+      internalID: -1675461080110260169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Double Jump (32x32)_3
+      name: Hit (32x32)_3
       rect:
         serializedVersion: 2
         x: 96
@@ -212,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2953b313efcbc314fbe941952125062e
-      internalID: 781615245368611544
+      spriteID: ac2c9eb843ebe4a4481730bde3254529
+      internalID: 8480664182131228983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Double Jump (32x32)_4
+      name: Hit (32x32)_4
       rect:
         serializedVersion: 2
         x: 128
@@ -233,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f229188cc8169154ca21f4f398f8b554
-      internalID: -3939753913355333839
+      spriteID: 7e8ab2736787bef41b301b11a2ba701c
+      internalID: -953560442851353963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Double Jump (32x32)_5
+      name: Hit (32x32)_5
       rect:
         serializedVersion: 2
         x: 160
@@ -254,8 +245,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ebfea11b697e8b4e9f2498449034377
-      internalID: 6301718139250434432
+      spriteID: 1cd1bccbf7378bd4797051abeb133f17
+      internalID: -3450976776972242761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit (32x32)_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5999b75e91231254082dccfd02a68af1
+      internalID: 7062579536633761780
       vertices: []
       indices: 
       edges: []
@@ -271,12 +283,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Double Jump (32x32)_0: -9101230857065804138
-      Double Jump (32x32)_1: -6204479477933590408
-      Double Jump (32x32)_2: 7040038629683462113
-      Double Jump (32x32)_3: 781615245368611544
-      Double Jump (32x32)_4: -3939753913355333839
-      Double Jump (32x32)_5: 6301718139250434432
+      Hit (32x32)_0: 6868122594974341346
+      Hit (32x32)_1: 7167584040609486739
+      Hit (32x32)_2: -1675461080110260169
+      Hit (32x32)_3: 8480664182131228983
+      Hit (32x32)_4: -953560442851353963
+      Hit (32x32)_5: -3450976776972242761
+      Hit (32x32)_6: 7062579536633761780
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
