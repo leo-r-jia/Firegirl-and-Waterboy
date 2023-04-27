@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class playerDeath : MonoBehaviour
 {
 
     [SerializeField] public bool fireWeakness = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject gameOverMenu;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,9 +22,12 @@ public class playerDeath : MonoBehaviour
         }
     }
 
+    // Opens game over menu
     private void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 0f;
+        gameOverMenu.SetActive(true);
+        Cursor.visible = true;
+        InputSystem.DisableDevice(Keyboard.current);
     }
-
 }
