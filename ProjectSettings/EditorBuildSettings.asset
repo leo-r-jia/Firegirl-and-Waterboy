@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Jack/Menu.unity
+    guid: 67f50b6430f9a404d91a9fd3d5ac3c00
+  - enabled: 1
+    path: Assets/Scenes/Jack/LevelOne.unity
+    guid: e16797a39589d1b4ba6abf67e5102125
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acbdd3e5a2a6adb4c82b8a96da50c907, type: 2}
