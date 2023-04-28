@@ -6,13 +6,16 @@ using PlayFab.ClientModels;
 using UnityEditor.PackageManager;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class PlayFabManager : MonoBehaviour
 {
-    public TMP_Text messageText;
-    public TMP_InputField emailInput, passwordInput;
+    [SerializeField] private TMP_Text messageText;
+    [SerializeField] private TMP_InputField emailInput, passwordInput;
     private Color red = new Color32(231, 112, 112, 255);
     private Color green = new Color32(112, 231, 115, 255);
+
+    public UnityEvent LoggedIn;
 
     //When the register button is clicked
     public void RegisterButton()
@@ -50,34 +53,14 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
 
-    //When the reset password button is clicked
-    public void ResetPasswordButton()
-    {
-        var request = new SendAccountRecoveryEmailRequest
-        {
-            Email = emailInput.text,
-            TitleId = "AB628"
-        };
-
-        PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
-    }
-
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        messageText.color = green;
-        messageText.text = "Successfully registered and logged in!";
+        LoggedIn.Invoke();
     }
 
     private void OnLoginSuccess(LoginResult result)
     {
-        messageText.color = green;
-        messageText.text = "Successfully logged in!";
-    }
-
-    private void OnPasswordReset(SendAccountRecoveryEmailResult result)
-    {
-        messageText.color = green;
-        messageText.text = "Password reset email sent";
+        LoggedIn.Invoke();
     }
 
     private void OnError(PlayFabError error)

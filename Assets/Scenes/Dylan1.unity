@@ -356,6 +356,9 @@ MonoBehaviour:
   messageText: {fileID: 0}
   emailInput: {fileID: 0}
   passwordInput: {fileID: 0}
+  LoggedIn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8373962701897247181
 MonoBehaviour:
   m_ObjectHideFlags: 0
