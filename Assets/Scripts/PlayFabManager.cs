@@ -7,6 +7,7 @@ using UnityEditor.PackageManager;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using UnityEditor;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -17,15 +18,17 @@ public class PlayFabManager : MonoBehaviour
 
     public UnityEvent LoggedIn;
 
-    /*public void Start()
+    public void Start()
     {
-        var request = new GetAccountInfoRequest
+        if (PlayFabAuthenticationAPI.IsEntityLoggedIn())
         {
-
+            Debug.Log("Is logged in!");
+            LoggedIn.Invoke();
+        } else
+        {
+            Debug.Log("Not logged in...");
         }
-
-        Debug.Log(PlayFabClientAPI.getAcc);
-    }*/
+    }
 
     //When the register button is clicked
     public void CreateAccountButton()

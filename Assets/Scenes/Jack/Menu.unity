@@ -4082,7 +4082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageText: {fileID: 1228822324}
-  usernameInput: {fileID: 0}
+  usernameInput: {fileID: 176227918}
   passwordInput: {fileID: 730944612}
   LoggedIn:
     m_PersistentCalls:
