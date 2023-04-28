@@ -15,10 +15,10 @@ MonoBehaviour:
   DevAccountEmail: mdr1525@autuni.ac.nz
   DevAccountToken: ycb4yu78g8i8gfmxrw6j7og6wnd94r6wcw3zz9fph1acy3f3f63nqtfwhan7hxt93wzypawix1s5ayytnri8peihmfd473qqck4m984tsn6h14s1tjbp3q37orh8psckpzbghg5m5g7j6dtip63uyqp4z7z46z9hotyrf4h4u75a6xpr3hwtzck58oonrroukkw5habq
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: Waterboys
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0

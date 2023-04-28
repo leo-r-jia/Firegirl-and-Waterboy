@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 1285909036}
   - component: {fileID: 1285909035}
   - component: {fileID: 1285909034}
+  - component: {fileID: 1285909037}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -340,6 +341,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285909037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285909033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f18e98a603dc448b0796d5ee7a778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText: {fileID: 0}
+  emailInput: {fileID: 0}
+  passwordInput: {fileID: 0}
 --- !u!114 &8373962701897247181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +376,8 @@ MonoBehaviour:
   switchTriggerLayer:
     serializedVersion: 2
     m_Bits: 0
+  maxSpeed: 12
+  jumpAmount: 12
 --- !u!114 &8373962701897247182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +789,8 @@ MonoBehaviour:
   switchTriggerLayer:
     serializedVersion: 2
     m_Bits: 0
+  maxSpeed: 12
+  jumpAmount: 12
 --- !u!114 &8439608877735188999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,7 +942,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &8439608877735189003
