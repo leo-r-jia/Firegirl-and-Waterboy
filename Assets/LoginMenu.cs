@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LoginMenu : MonoBehaviour
 {
-    //NOTE: Code which explicity deals with PlayFab can be found in PlayFabManager.cs
+    //NOTE: Code which uses the PlayFab API can be found in PlayFabManager.cs
 
     [SerializeField] private List<TMP_InputField> fields;
     private int fieldIndexer;

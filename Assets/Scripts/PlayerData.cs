@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    public string Username {  get; set; }
+
     [SerializeField] private int numLevels;
     public int Gems { get; private set; }
     public bool[] LevelsUnlocked { get; private set; }
@@ -18,6 +20,14 @@ public class PlayerData : MonoBehaviour
         {
             numLevels = 1;
         }
+
+        InitialisePlayer();
+    }
+
+    //Initialise the player to default values
+    public void InitialisePlayer()
+    {
+        Username = string.Empty;
 
         //Set all high scores to 0 and only the first level as unlocked
         HighScores = Enumerable.Repeat(0, numLevels).ToArray();
@@ -67,6 +77,7 @@ public class PlayerData : MonoBehaviour
         return LevelsUnlocked[level];
     }
 
+    //Unlock the next level -> set the next false to true
     public void UnlockNextLevel()
     {
         for (int i = 0; i < LevelsUnlocked.Length; i++)
@@ -79,8 +90,11 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void LoadPlayer(string gems, string levelString, string scoreString) 
+    //Set the player's data to the passed values
+    public void LoadPlayer(string username, string gems, string levelString, string scoreString) 
     {
+        Username = username;
+
         Gems = int.Parse(gems);
         
         string[] scores = scoreString.Split(',');

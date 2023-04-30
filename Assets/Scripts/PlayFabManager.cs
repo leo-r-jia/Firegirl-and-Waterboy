@@ -14,19 +14,21 @@ public class PlayFabManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private TMP_InputField usernameInput, passwordInput;
-    private Color red = new Color32(231, 112, 112, 255);
-    private Color green = new Color32(112, 231, 115, 255);
     [SerializeField] private PlayerData playerData;
 
-    public UnityEvent LoggedIn;
+    public UnityEvent<string> LoggedIn;
+    public UnityEvent LoggedOut;
 
     #region Login and Sign Up
     public void Start()
     {
+        messageText.color = new Color32(231, 112, 112, 255); //Red
+
         //Log in the player if this canvas is loaded and they've already logged in
         if (PlayFabAuthenticationAPI.IsEntityLoggedIn())
         {
-            LoggedIn.Invoke();
+            ClearFields();
+            LoggedIn.Invoke(playerData.Username);
         }
     }
 
@@ -72,8 +74,6 @@ public class PlayFabManager : MonoBehaviour
     //Perform basic input validation. Returns true if all checks pass
     private bool validateInput()
     {
-        messageText.color = red;
-
         if (usernameInput.text.Length < 1)
         {
             messageText.text = "Please enter a username";
@@ -93,29 +93,56 @@ public class PlayFabManager : MonoBehaviour
         return true;
     }
 
+    //Clear the input fields of data
+    private void ClearFields()
+    {
+        usernameInput.text = string.Empty;
+        passwordInput.text = string.Empty;
+
+        messageText.text = string.Empty;
+    }
+
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         SavePlayer();
-        LoggedIn.Invoke();
+        playerData.Username = usernameInput.text;
+        ClearFields();
+        LoggedIn.Invoke(playerData.Username);
     }
 
     private void OnLoginSuccess(LoginResult result)
     {
-        SavePlayer();
-        LoggedIn.Invoke();
+        LoadPlayer();
     }
 
     private void OnError(PlayFabError error)
     {
-        messageText.color = red;
         messageText.text = error.ErrorMessage;
         Debug.Log(error.GenerateErrorReport());
     }
     #endregion
 
     #region Player data
+    //See OnDataRecieved
     public void LoadPlayer() {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+    }
+
+    //Imports the player data recieved from PlayFab into the PlayerData script
+    private void OnDataRecieved(GetUserDataResult result)
+    {
+        if (result.Data != null && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("High Scores"))
+        {
+            playerData.LoadPlayer(usernameInput.text, result.Data["Gems"].Value, result.Data["Unlocked Levels"].Value, result.Data["High Scores"].Value);
+        }
+        else
+        {
+            Debug.Log("Player data incomplete and could not be loaded!");
+        }
+
+        ClearFields();
+        LoggedIn.Invoke(playerData.Username);
+
     }
 
     //Save a player's data to PlayFab
@@ -128,7 +155,7 @@ public class PlayFabManager : MonoBehaviour
                 { "Gems", playerData.Gems.ToString() },
                 { "Unlocked Levels", string.Join(',', playerData.LevelsUnlocked) },
                 { "High Scores", string.Join(',', playerData.HighScores) }
-    }
+            }
         };
 
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
@@ -138,19 +165,18 @@ public class PlayFabManager : MonoBehaviour
     {
         //Can add debug if needed
     }
-
-    //Imports the player data recieved from PlayFab into the PlayerData script
-    private void OnDataRecieved(GetUserDataResult result)
-    {
-        if (result.Data != null && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("High Scores"))
-        {
-            playerData.LoadPlayer(result.Data["Gems"].Value, result.Data["Unlocked Levels"].Value, result.Data["High Scores"].Value);
-        }
-        else
-        {
-            Debug.Log("Player data incomplete and could not be loaded!");
-        }
-    }
-
     #endregion
+
+    //Log out the player, saving their data and allowing them to sign in with another account
+    public void Logout()
+    {
+        //Save and then reset the player
+        SavePlayer();
+        playerData.InitialisePlayer();
+
+        //Not an API call, just clears login credentials within Unity. A player's session ticket is valid for 24 hours
+        PlayFabClientAPI.ForgetAllCredentials();
+
+        LoggedOut.Invoke();
+    }
 }
