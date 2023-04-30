@@ -9,12 +9,14 @@ public class LoginMenu : MonoBehaviour
     //NOTE: Code which explicity deals with PlayFab can be found in PlayFabManager.cs
 
     [SerializeField] private List<TMP_InputField> fields;
-    private int _fieldIndexer;
+    private int fieldIndexer;
 
     //On start, set the username field as selected
     private void Start()
     {
-        fields[0].Select();
+        fieldIndexer = 0;
+        fields[fieldIndexer].Select();
+        fieldIndexer++;
     }
 
     private void Update()
@@ -22,12 +24,13 @@ public class LoginMenu : MonoBehaviour
         //If tab key is pressed, set the next InputField in the list as selected
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (fields.Count <= _fieldIndexer)
+            if (fields.Count <= fieldIndexer)
             {
-                _fieldIndexer = 0;
+                fieldIndexer = 0;
             }
-            fields[_fieldIndexer].Select();
-            _fieldIndexer++;
+
+            fields[fieldIndexer].Select();
+            fieldIndexer++;
         }
     }
 }
