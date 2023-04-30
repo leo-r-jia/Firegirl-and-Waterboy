@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InputTab : MonoBehaviour
+public class LoginMenu : MonoBehaviour
 {
+    //NOTE: Code which explicity deals with PlayFab can be found in PlayFabManager.cs
+
     [SerializeField] private List<TMP_InputField> fields;
     private int _fieldIndexer;
 
