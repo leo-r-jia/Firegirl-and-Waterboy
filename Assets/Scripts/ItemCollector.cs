@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class ItemCollector : MonoBehaviour
 {
-    private int gems = 0;
+    [SerializeField] public ScoreManager scoreManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Gem"))
+        if (collision.gameObject.CompareTag("Coin"))
         {
             Destroy(collision.gameObject);
-            gems++;
+            scoreManager.UpdateScore();
         }
     }
 }
