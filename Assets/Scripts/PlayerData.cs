@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour
     public string Username {  get; set; }
 
     [SerializeField] private int numLevels;
-    public int Gems { get; private set; }
+    public int Coins { get; private set; }
     public bool[] LevelsUnlocked { get; private set; }
     public int[] HighScores { get; private set; }
 
@@ -34,23 +34,23 @@ public class PlayerData : MonoBehaviour
         LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();
         LevelsUnlocked[0] = true;
 
-        Gems = 0;
+        Coins = 0;
     }
 
-    public void AddGems(int amount)
+    public void AddCoins(int amount)
     {
-        Gems += amount;
+        Coins += amount;
     }
 
-    //Remove gems if possible. Returns true if gems could be removed
-    public bool RemoveGems(int amount)
+    //Remove Coins if possible. Returns true if Coins could be removed
+    public bool RemoveCoins(int amount)
     {
-        if (amount > Gems)
+        if (amount > Coins)
         {
             return false;
         }
 
-        Gems -= amount;
+        Coins -= amount;
         return true;
     }
 
@@ -91,11 +91,11 @@ public class PlayerData : MonoBehaviour
     }
 
     //Set the player's data to the passed values
-    public void LoadPlayer(string username, string gems, string levelString, string scoreString) 
+    public void LoadPlayer(string username, string coins, string levelString, string scoreString) 
     {
         Username = username;
 
-        Gems = int.Parse(gems);
+        Coins = int.Parse(coins);
         
         string[] scores = scoreString.Split(',');
 
