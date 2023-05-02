@@ -82,10 +82,11 @@ public class PauseMenu : MonoBehaviour
     // Returns user to start point and restarts the level
     public void restart()
     {
-        Time.timeScale = 1f;
+        Debug.Log("Restarted");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
         InputSystem.EnableDevice(Keyboard.current);
-        pauseMenu.SetActive(false);
         Cursor.visible = false;
+        
     }
 }
