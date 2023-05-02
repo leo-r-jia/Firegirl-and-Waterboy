@@ -7,6 +7,10 @@ TagManager:
   - Gems
   - Water
   - Fire
+  - Player1
+  - Player2
+  - FireDoor
+  - WaterDoor
   layers:
   - Default
   - TransparentFX
