@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jack/LevelOne.unity
     guid: e16797a39589d1b4ba6abf67e5102125
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Dylan1.unity
+    guid: d9fa1482aa1351a42885d2cb2a77765b
+  - enabled: 1
+    path: Assets/Scenes/Dylan/LevelOneDylan.unity
+    guid: cc6e93d0c0579044c8cef855224fc934
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acbdd3e5a2a6adb4c82b8a96da50c907, type: 2}
