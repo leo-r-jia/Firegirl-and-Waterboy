@@ -171,9 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBool: {fileID: 396274329}
   waterBool: {fileID: 1341504542}
-  bothDoors: 0
-  atWaterDoor: 0
-  atFireDoor: 0
+  completeLevelMenu: {fileID: 575375925}
 --- !u!1 &16064336
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 332366583}
   m_Layer: 7
-  m_Name: P2 Ground Check
+  m_Name: WB Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1969,7 +1967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -112}
+  m_AnchoredPosition: {x: 0, y: -53}
   m_SizeDelta: {x: 182.3956, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &523662819
@@ -2020,18 +2018,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
-        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2228,8 +2214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 37.492798, y: -33}
-  m_SizeDelta: {x: -1265.3645, y: -506.2161}
+  m_AnchoredPosition: {x: 37.492798, y: 36.32898}
+  m_SizeDelta: {x: -1265.3645, y: -644.874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &575375927
 MonoBehaviour:
@@ -2316,7 +2302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 642944793}
   m_Layer: 6
-  m_Name: P1 Ground Check
+  m_Name: FG Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2354,7 +2340,7 @@ GameObject:
   - component: {fileID: 667201097}
   - component: {fileID: 667201104}
   m_Layer: 7
-  m_Name: Player 2
+  m_Name: Waterboy
   m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2612,7 +2598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667201096}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.7, y: 8.1, z: 0}
+  m_LocalPosition: {x: 23.2, y: 12, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4597,7 +4583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0001411438, y: 207}
+  m_AnchoredPosition: {x: 0, y: 142}
   m_SizeDelta: {x: 623.82, y: 111.507}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1155715826
@@ -5483,7 +5469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -212}
+  m_AnchoredPosition: {x: 0, y: -143}
   m_SizeDelta: {x: 182.3956, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1528122480
@@ -6005,7 +5991,7 @@ GameObject:
   - component: {fileID: 1594958490}
   - component: {fileID: 1594958497}
   m_Layer: 6
-  m_Name: Player 1
+  m_Name: Firegirl
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8090,18 +8076,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2079013413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8177,7 +8151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -22}
+  m_AnchoredPosition: {x: 0, y: 37}
   m_SizeDelta: {x: 182.3956, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131450512
@@ -8224,28 +8198,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1831862966}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: restart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 1065034770}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: LevelTwo
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2131450513
