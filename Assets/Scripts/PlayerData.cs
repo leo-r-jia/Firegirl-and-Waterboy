@@ -15,13 +15,16 @@ public class PlayerData : MonoBehaviour
 
     public void Start()
     {
-        //Ensure the number of levels is valid
-        if (numLevels < 1)
+        if (Username == null)
         {
-            numLevels = 1;
-        }
+            //Ensure the number of levels is valid
+            if (numLevels < 1)
+            {
+                numLevels = 1;
+            }
 
-        InitialisePlayer();
+            InitialisePlayer();
+        }
     }
 
     //Initialise the player to default values
