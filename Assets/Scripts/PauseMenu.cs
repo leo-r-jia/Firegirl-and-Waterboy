@@ -79,18 +79,14 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    // Returns user to main menu
-    public void quit()
-    {
-        Application.Quit();
-    }
-
     // Returns user to start point and restarts the level
     public void restart()
     {
-        Time.timeScale = 1f;
+        Debug.Log("Restarted");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        InputSystem.EnableDevice(Keyboard.current);
         Cursor.visible = false;
+        
     }
 }

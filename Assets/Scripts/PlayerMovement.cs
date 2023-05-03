@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask switchTriggerLayer;
 
     private MovementState state;
     private Animator anim;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         state = MovementState.Idle;
         anim = GetComponent<Animator>();
+        InputSystem.EnableDevice(Keyboard.current);
     }
 
     //FixedUpdate is synced with Unity physics
@@ -69,10 +71,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Returns true if the player is touching the ground layer
+    //Returns true if the player is touching the ground layer (or the top of a switch)
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
     }
 
     //Calculate the and return the player's movement speed
@@ -125,4 +127,5 @@ public class PlayerMovement : MonoBehaviour
     {
         return state;
     }
+
 }

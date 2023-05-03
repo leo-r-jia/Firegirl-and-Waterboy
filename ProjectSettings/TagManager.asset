@@ -4,6 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Gems
+  - Water
+  - Fire
+  - Player1
+  - Player2
+  - FireDoor
+  - WaterDoor
   - Coin
   layers:
   - Default
