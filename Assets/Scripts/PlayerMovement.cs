@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private float maxSpeed = 12f;
-    [SerializeField] private float jumpAmount = 12f;
+    [SerializeField] private float jumpAmount = 15f;
     private float acceleration = 6f;
     private float decceleration = 6f;
     private bool isFacingRight = true;
