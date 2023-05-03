@@ -12,7 +12,7 @@ public class CompleteLevel : MonoBehaviour
 
     private bool atWaterDoor = false;
     private bool atFireDoor = false;
-    private int count = 0;
+    private bool active = false;
 
 
     public void Update()
@@ -20,21 +20,24 @@ public class CompleteLevel : MonoBehaviour
         CompleteLevelCheck();
     }
 
-    // Changes scene to next level.
+    // Checks if both players are at their exits.
     private void CompleteLevelCheck()
     { 
         atWaterDoor = waterBool.getIsAtDoor();
         atFireDoor = fireBool.getIsAtDoor();
     
-        if(atFireDoor && atWaterDoor && count == 0)
+        if(atFireDoor && atWaterDoor && !active)
         {
             Win();
+            active = true;
         }
     }
 
+    // Opens level complete menu
     private void Win()
     {
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
+        Debug.Log("Freeze");
         completeLevelMenu.SetActive(true);
         Cursor.visible = true;
         InputSystem.DisableDevice(Keyboard.current);
