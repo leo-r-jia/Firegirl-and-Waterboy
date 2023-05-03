@@ -19,11 +19,6 @@ public class MainMenu : MonoBehaviour
 
             LogOutButton.gameObject.SetActive(true);
             ProfileButton.gameObject.SetActive(false);
-            Debug.Log("User found!");
-        }
-        else
-        {
-            Debug.Log("User not found...");
         }
     }
 }
