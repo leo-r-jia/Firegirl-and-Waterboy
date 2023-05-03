@@ -74,7 +74,6 @@ public class ObjectMover : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         float percentageComplete = elapsedTime / scaledDuration;
-        Debug.Log(elapsedTime + " / " + scaledDuration + " = " + percentageComplete);
 
         transform.position = Vector2.Lerp(calledPosition, destinationPosition, curve.Evaluate(percentageComplete));
     }
