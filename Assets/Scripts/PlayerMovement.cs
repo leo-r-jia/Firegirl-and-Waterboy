@@ -94,10 +94,10 @@ public class PlayerMovement : MonoBehaviour
             falling = true;
         }
 
-        if (IsGrounded() && falling)
+        if (IsGrounded() && falling && !Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer) && !landSoundEffect.isPlaying)
         {
-            falling = false;
             landSoundEffect.Play();
+            falling = false;
         }
 
         //If jumping from ground, play jump sound effect
