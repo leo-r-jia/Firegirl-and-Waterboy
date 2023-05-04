@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ButtonHandler : SwitchHandler
 {
+    [SerializeField] private AudioSource clickSound;
+    private bool on = false;
+
     //Set button's initial states
     public void Start()
     {
@@ -22,13 +25,14 @@ public class ButtonHandler : SwitchHandler
             if (state)
             {
                 switchedOn.Invoke();
+                on = true;
+                PlaySound();
             } 
             else
             {
                 switchedOff.Invoke();
+                on = false;
             }
-
-
             previousState = state;
         }
     }
@@ -37,5 +41,14 @@ public class ButtonHandler : SwitchHandler
     public override bool IsOn()
     {
         return state;
+    }
+
+    private void PlaySound()
+    {
+        if (on)
+        {
+            clickSound.Play();
+        }
+
     }
 }

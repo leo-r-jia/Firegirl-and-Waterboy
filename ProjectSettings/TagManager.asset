@@ -24,7 +24,7 @@ TagManager:
   - Player 2
   - Switch Trigger
   - Game UI
-  - 
+  - Background
   - 
   - 
   - 
@@ -47,6 +47,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2023479083
+    locked: 0
+  - name: Background Foreground
+    uniqueID: 1908832745
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

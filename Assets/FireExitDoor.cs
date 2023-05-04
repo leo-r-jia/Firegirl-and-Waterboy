@@ -8,13 +8,13 @@ public class FireExitDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player1")
+        if (collision.tag == "Player 1")
             isAtFireDoor = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player1")
+        if (collision.tag == "Player 1")
             isAtFireDoor = false;
     }
 
