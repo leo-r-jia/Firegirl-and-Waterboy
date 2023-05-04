@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class CompleteLevel : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CompleteLevel : MonoBehaviour
     private bool atFireDoor = false;
     private bool active = false;
 
+    public UnityEvent LevelComplete;
 
     public void Update()
     {

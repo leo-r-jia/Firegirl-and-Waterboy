@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private float decceleration = 6f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
-    private bool landSoundEffectPlayed = false;
     private float dirX;
 
     //For sound effects
@@ -105,6 +104,14 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpSoundEffect.Play();
         }
+    }
+
+    //Stop all player sound effects playing
+    public void StopSoundEffects()
+    {
+        jumpSoundEffect.Stop();
+        landSoundEffect.Stop();
+        runSoundEffect.Stop();
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
