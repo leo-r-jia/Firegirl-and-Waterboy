@@ -17,11 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private float maxSpeed = 12f;
-    [SerializeField] private float jumpAmount = 12f;
+    [SerializeField] private float jumpAmount = 15f;
     private float acceleration = 6f;
     private float decceleration = 6f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
+    private bool landSoundEffectPlayed = false;
     private float dirX;
 
     //For sound effects
@@ -61,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded() && GetState() == MovementState.Running)
         {
             runSoundEffect.enabled = true;
-        } else if (runSoundEffect.enabled)
+        }
+        else if (runSoundEffect.enabled)
         {
             //Ease out running/footstep sound
             float currentTime = 0;
@@ -72,9 +74,20 @@ public class PlayerMovement : MonoBehaviour
                 currentTime += Time.deltaTime;
                 runSoundEffect.volume = Mathf.Lerp(start, 0, currentTime / (float)3500);
             }
-            
+
             runSoundEffect.enabled = false;
             runSoundEffect.volume = start;
+        }
+
+        //Play the player's landing sound effect if they've jumped and haven't yet landed
+        if (!IsGrounded())
+        {
+            landSoundEffectPlayed = false;
+        }
+        else if (IsGrounded() && !landSoundEffectPlayed)
+        {
+            landSoundEffectPlayed = true;
+            landSoundEffect.Play();
         }
 
         UpdateAnimationState();
@@ -91,8 +104,6 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpKeyPressed = context.performed;
 
-        HasLanded();
-
         //Reduce the jump amount if the player lets go of jump early
         if (context.canceled && rb.velocity.y > 0f)
         {
@@ -104,16 +115,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
-    }
-
-    //Plays landing sound effect when player lands
-    private void HasLanded()
-    {
-        while (!IsGrounded())
-        {
-        }
-
-        landSoundEffect.Play();
     }
 
     //Calculate the and return the player's movement speed
@@ -166,5 +167,4 @@ public class PlayerMovement : MonoBehaviour
     {
         return state;
     }
-
 }

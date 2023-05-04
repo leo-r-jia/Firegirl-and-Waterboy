@@ -9,11 +9,11 @@ public class ObjectMover : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private AnimationCurve curve;
 
-    private Vector2 initialPosition, currentPosition;
+    private Vector2 initialPosition, currentPosition, calledPosition;
     private float elapsedTime, scaledDuration;
     private bool movingToFinal;
 
-    //Set the object's initial position to where it is on Start
+    //Set the object's initial position to where it is on Start and scaledDuration to duration
     void Start()
     {
         initialPosition = transform.position;
@@ -23,6 +23,8 @@ public class ObjectMover : MonoBehaviour
     //Move the object to its destination if it isn't already there
     public void Update()
     {
+        currentPosition = transform.position;
+
         if (movingToFinal && currentPosition != finalPosition)
         {
             Move(finalPosition);
@@ -37,8 +39,11 @@ public class ObjectMover : MonoBehaviour
     public void MoveToInitial()
     {
         elapsedTime = Time.deltaTime;
+        //Called position is where the object was when this was called
+        calledPosition = currentPosition;
 
-        scaledDuration = duration - duration * (1 - InverseLerp(initialPosition, finalPosition, currentPosition));
+        //Scaled duration is the duration scaled to how far the object is from its desitination
+        scaledDuration = duration - duration * (1 - InverseLerp(initialPosition, finalPosition, calledPosition));
 
         movingToFinal = false;
     }
@@ -47,8 +52,11 @@ public class ObjectMover : MonoBehaviour
     public void MoveToFinal() 
     {
         elapsedTime = Time.deltaTime;
-        
-        scaledDuration = duration - duration * InverseLerp(initialPosition, finalPosition, currentPosition);
+        //Called position is where the object was when this was called
+        calledPosition = currentPosition;
+
+        //Scaled duration is the duration scaled to how far it is from its desitination
+        scaledDuration = duration - duration * InverseLerp(initialPosition, finalPosition, calledPosition);
 
         movingToFinal = true;
     }
@@ -64,10 +72,9 @@ public class ObjectMover : MonoBehaviour
     //Move the object from the current position to the destination position smoothly
     private void Move(Vector3 destinationPosition)
     {
-        currentPosition = transform.position;
         elapsedTime += Time.deltaTime;
         float percentageComplete = elapsedTime / scaledDuration;
 
-        transform.position = Vector3.Lerp(currentPosition, destinationPosition, curve.Evaluate(percentageComplete));
+        transform.position = Vector2.Lerp(calledPosition, destinationPosition, curve.Evaluate(percentageComplete));
     }
 }
