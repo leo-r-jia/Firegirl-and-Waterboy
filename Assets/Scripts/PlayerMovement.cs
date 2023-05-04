@@ -43,13 +43,12 @@ public class PlayerMovement : MonoBehaviour
     {
         //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
         rb.AddForce(CalculateMovement() * Vector2.right);
-        
+
         //If the player is trying to jump and is grounded
         if (jumpKeyPressed && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
             rb.AddForce(jumpAmount * Vector2.down);
-            jumpSoundEffect.Play();
         }
 
         //Flip the player based on what direction they're facing
@@ -57,6 +56,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
+
+        SoundEffectManager();
+
+        UpdateAnimationState();
+    }
+
+    //Triggers sound effects depending on player state
+    private void SoundEffectManager()
+    {
+        bool falling = false;
 
         //If player is running on the ground, play running sound effect
         if (IsGrounded() && GetState() == MovementState.Running)
@@ -79,18 +88,23 @@ public class PlayerMovement : MonoBehaviour
             runSoundEffect.volume = start;
         }
 
-        //Play the player's landing sound effect if they've jumped and haven't yet landed
-        if (!IsGrounded())
+        //If falling, play landing sound upon landing
+        if (GetState() == MovementState.Falling)
         {
-            landSoundEffectPlayed = false;
-        }
-        else if (IsGrounded() && !landSoundEffectPlayed)
-        {
-            landSoundEffectPlayed = true;
-            landSoundEffect.Play();
+            falling = true;
         }
 
-        UpdateAnimationState();
+        if (IsGrounded() && falling && !Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer) && !landSoundEffect.isPlaying)
+        {
+            landSoundEffect.Play();
+            falling = false;
+        }
+
+        //If jumping from ground, play jump sound effect
+        if (jumpKeyPressed && IsGrounded())
+        {
+            jumpSoundEffect.Play();
+        }
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed

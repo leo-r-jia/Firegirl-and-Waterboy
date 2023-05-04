@@ -5,6 +5,7 @@ using UnityEngine;
 public class LeverHandler : SwitchHandler
 {
     [SerializeField] protected Transform offCheck;
+    [SerializeField] private AudioSource clickSound;
 
     private void Start()
     {
@@ -25,15 +26,17 @@ public class LeverHandler : SwitchHandler
             state = false;
         }
 
-        //If the lever's value has changed, broadcast this and update its prev. state
+        //If the lever's value has changed, broadcast this and update its prev. state, play click sound when switched
         if (state != previousState)
         {
             if (state)
             {
+                clickSound.Play();
                 switchedOn.Invoke();
             }
             else
             {
+                clickSound.Play();
                 switchedOff.Invoke();
             }
 
