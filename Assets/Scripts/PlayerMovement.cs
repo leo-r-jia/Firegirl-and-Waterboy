@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
             rb.AddForce(jumpAmount * Vector2.down);
-            jumpSoundEffect.Play();
         }
 
         //Flip the player based on what direction they're facing
@@ -57,11 +56,22 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
+        SoundEffectManager();
+
+        UpdateAnimationState();
+    }
+
+    //Triggers sound effects depending on player state
+    private void SoundEffectManager()
+    {
+        bool falling = false;
+
         //If player is running on the ground, play running sound effect
         if (IsGrounded() && GetState() == MovementState.Running)
         {
             runSoundEffect.enabled = true;
-        } else if (runSoundEffect.enabled)
+        }
+        else if (runSoundEffect.enabled)
         {
             //Ease out running/footstep sound
             float currentTime = 0;
@@ -72,12 +82,28 @@ public class PlayerMovement : MonoBehaviour
                 currentTime += Time.deltaTime;
                 runSoundEffect.volume = Mathf.Lerp(start, 0, currentTime / (float)3500);
             }
-            
+
             runSoundEffect.enabled = false;
             runSoundEffect.volume = start;
         }
 
-        UpdateAnimationState();
+        //If falling, play landing sound upon landing
+        if (GetState() == MovementState.Falling)
+        {
+            falling = true;
+        }
+
+        if (IsGrounded() && falling)
+        {
+            falling = false;
+            landSoundEffect.Play();
+        }
+
+        //If jumping from ground, play jump sound effect
+        if (jumpKeyPressed && IsGrounded())
+        {
+            jumpSoundEffect.Play();
+        }
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
@@ -91,8 +117,6 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpKeyPressed = context.performed;
 
-        HasLanded();
-
         //Reduce the jump amount if the player lets go of jump early
         if (context.canceled && rb.velocity.y > 0f)
         {
@@ -104,16 +128,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
-    }
-
-    //Plays landing sound effect when player lands
-    private void HasLanded()
-    {
-        while (!IsGrounded())
-        {
-        }
-
-        landSoundEffect.Play();
     }
 
     //Calculate the and return the player's movement speed
