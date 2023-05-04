@@ -39,6 +39,7 @@ public class PauseMenu : MonoBehaviour
         menu.Disable();
     }
 
+    // Checks if player pressed pause button
     void Pause(InputAction.CallbackContext context)
     {
         isPaused = !isPaused;
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
             ActivateMenu();
         }
 
+        // If player presses escape key in settings menu, open pause menu.
         else if(!isPaused && activeSettings == true)
         {
             isPaused = true;
@@ -82,7 +84,6 @@ public class PauseMenu : MonoBehaviour
     // Returns user to start point and restarts the level
     public void restart()
     {
-        Debug.Log("Restarted");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
         InputSystem.EnableDevice(Keyboard.current);

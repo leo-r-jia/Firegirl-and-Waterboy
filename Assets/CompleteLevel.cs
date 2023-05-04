@@ -37,7 +37,6 @@ public class CompleteLevel : MonoBehaviour
     private void Win()
     {
         Time.timeScale = 0f;
-        Debug.Log("Freeze");
         completeLevelMenu.SetActive(true);
         Cursor.visible = true;
         InputSystem.DisableDevice(Keyboard.current);
