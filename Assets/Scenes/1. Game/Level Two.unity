@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 107104768}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -4625,9 +4625,9 @@ GameObject:
   - component: {fileID: 628445758}
   - component: {fileID: 628445757}
   - component: {fileID: 628445756}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Fire exit
-  m_TagString: Untagged
+  m_TagString: FireDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5903,7 +5903,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076117123}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -6036,7 +6036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBool: {fileID: 628445756}
   waterBool: {fileID: 1354616951}
-  completeLevelMenu: {fileID: 0}
+  completeLevelMenu: {fileID: 783754647}
 --- !u!1 &979484991
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,7 +6121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 107104768}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -6184,7 +6184,7 @@ GameObject:
   - component: {fileID: 992147677}
   m_Layer: 3
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7595,9 +7595,9 @@ GameObject:
   - component: {fileID: 1354616953}
   - component: {fileID: 1354616952}
   - component: {fileID: 1354616951}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Water exit
-  m_TagString: Untagged
+  m_TagString: WaterDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8815,6 +8815,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647730031}
   m_CullTransparentMesh: 1
+--- !u!1 &1668293254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9163336047818629583, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+  m_PrefabInstance: {fileID: 5626656003281857125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668293255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668293254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireWeakness: 1
+  gameOverMenu: {fileID: 1180103192}
 --- !u!1 &1690413452
 GameObject:
   m_ObjectHideFlags: 0
@@ -8828,7 +8847,7 @@ GameObject:
   - component: {fileID: 1690413454}
   m_Layer: 3
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9121,7 +9140,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076117123}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -9672,6 +9691,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772355231}
   m_CullTransparentMesh: 1
+--- !u!1 &1779358522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6035704969792507000, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+  m_PrefabInstance: {fileID: 4914417347495285906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1779358523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779358522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireWeakness: 0
+  gameOverMenu: {fileID: 1180103192}
 --- !u!1 &1782414282
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,11 +11508,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6035704969792506980, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.86
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 6035704969792506980, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: m_LocalPosition.y
       value: -14.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035704969792507000, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+      propertyPath: m_TagString
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 6035704969792507005, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: MinDistance
@@ -11559,7 +11601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163336047818629175, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.93
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 9163336047818629175, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11569,5 +11611,9 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1782414283}
+    - target: {fileID: 9163336047818629583, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}

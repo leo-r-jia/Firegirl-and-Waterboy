@@ -513,7 +513,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 107104768}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -1285,10 +1285,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076117123}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: NextLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4163,7 +4163,7 @@ GameObject:
   - component: {fileID: 628445758}
   - component: {fileID: 628445757}
   - component: {fileID: 628445756}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Fire exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5096,7 +5096,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu
+          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &881186267
@@ -5356,7 +5356,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076117123}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -5365,7 +5365,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu
+          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &929144826
@@ -5572,7 +5572,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 107104768}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -5635,7 +5635,7 @@ GameObject:
   - component: {fileID: 992147677}
   m_Layer: 3
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6663,6 +6663,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180103192}
   m_CullTransparentMesh: 1
+--- !u!1 &1220360951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9163336047818629583, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+  m_PrefabInstance: {fileID: 5626656003281857125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1220360964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220360951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireWeakness: 1
+  gameOverMenu: {fileID: 1180103192}
 --- !u!1 &1224009704
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,7 +7021,7 @@ GameObject:
   - component: {fileID: 1354616953}
   - component: {fileID: 1354616952}
   - component: {fileID: 1354616951}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Water exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7974,7 +7993,7 @@ GameObject:
   - component: {fileID: 1690413454}
   m_Layer: 3
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8267,7 +8286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076117123}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -8276,7 +8295,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu
+          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1737300075
@@ -10087,6 +10106,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2124566392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6035704969792507000, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+  m_PrefabInstance: {fileID: 4914417347495285906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2124566405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124566392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231cd0d3524d3a4f9e460e31090bbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireWeakness: 0
+  gameOverMenu: {fileID: 1180103192}
 --- !u!1001 &4270069025820133258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10223,6 +10261,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -14.87
       objectReference: {fileID: 0}
+    - target: {fileID: 6035704969792507000, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 6035704969792507006, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: MinDistance
       value: 0.2099247
@@ -10312,5 +10354,9 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1782414283}
+    - target: {fileID: 9163336047818629583, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}

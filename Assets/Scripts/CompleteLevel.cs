@@ -28,8 +28,9 @@ public class CompleteLevel : MonoBehaviour
     
         if(atFireDoor && atWaterDoor && !active)
         {
-            Win();
             active = true;
+            Win();
+            
         }
     }
 
