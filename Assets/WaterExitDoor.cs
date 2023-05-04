@@ -8,13 +8,13 @@ public class WaterExitDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player2")
+        if (collision.tag == "Player 2")
             isAtWaterDoor = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player2")
+        if (collision.tag == "Player 2")
             isAtWaterDoor = false;
     }
 
