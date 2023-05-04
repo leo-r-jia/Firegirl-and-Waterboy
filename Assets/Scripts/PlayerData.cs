@@ -13,25 +13,40 @@ public class PlayerData : MonoBehaviour
     public bool[] LevelsUnlocked { get; private set; }
     public int[] HighScores { get; private set; }
 
+    #region Scene persistence
+    //Declare sole instance of PlayerData
+    public static PlayerData Instance;
+
+    //As soon as created
+    private void Awake()
+    {
+        //After first launch, destroy additional instances of PlayerData
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion
+
+    //On first run
     public void Start()
     {
-        if (Username == null)
+        //Ensure the number of levels is valid
+        if (numLevels < 1)
         {
-            //Ensure the number of levels is valid
-            if (numLevels < 1)
-            {
-                numLevels = 1;
-            }
-
-            InitialisePlayer();
+            numLevels = 1;
         }
+
+        InitialisePlayer();
     }
 
     //Initialise the player to default values
     public void InitialisePlayer()
     {
-        Username = string.Empty;
-
         //Set all high scores to 0 and only the first level as unlocked
         HighScores = Enumerable.Repeat(0, numLevels).ToArray();
         LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();

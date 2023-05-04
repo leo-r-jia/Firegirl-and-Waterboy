@@ -17,11 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private float maxSpeed = 12f;
-    [SerializeField] private float jumpAmount = 12f;
+    [SerializeField] private float jumpAmount = 15f;
     private float acceleration = 6f;
     private float decceleration = 6f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
+    private bool landSoundEffectPlayed = false;
     private float dirX;
 
     //For sound effects
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
         rb.AddForce(CalculateMovement() * Vector2.right);
-        
+
         //If the player is trying to jump and is grounded
         if (jumpKeyPressed && IsGrounded())
         {
@@ -180,5 +181,4 @@ public class PlayerMovement : MonoBehaviour
     {
         return state;
     }
-
 }

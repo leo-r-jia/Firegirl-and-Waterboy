@@ -14,10 +14,27 @@ public class PlayFabManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private TMP_InputField usernameInput, passwordInput;
-    [SerializeField] private PlayerData playerData;
 
-    public UnityEvent<string> LoggedIn;
+    public UnityEvent LoggedIn;
     public UnityEvent LoggedOut;
+
+    #region Scene persistence
+    public static PlayFabManager Instance;
+
+    //As soon as created
+    private void Awake()
+    {
+        //After first launch, destroy additional instances of PlayFabManager
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion
 
     #region Login and Sign Up
     public void Start()
@@ -28,14 +45,14 @@ public class PlayFabManager : MonoBehaviour
         if (PlayFabAuthenticationAPI.IsEntityLoggedIn())
         {
             ClearFields();
-            LoggedIn.Invoke(playerData.Username);
+            LoggedIn.Invoke();
         }
     }
 
     //When the register button is clicked
     public void CreateAccountButton()
     {
-        if (!validateInput())
+        if (!ValidateInput())
         {
             return;
         }
@@ -55,7 +72,7 @@ public class PlayFabManager : MonoBehaviour
     //When the login button is clicked
     public void LoginButton()
     {
-        if (!validateInput())
+        if (!ValidateInput())
         {
             return;
         }
@@ -72,7 +89,7 @@ public class PlayFabManager : MonoBehaviour
     }
 
     //Perform basic input validation. Returns true if all checks pass
-    private bool validateInput()
+    private bool ValidateInput()
     {
         if (usernameInput.text.Length < 1)
         {
@@ -105,9 +122,9 @@ public class PlayFabManager : MonoBehaviour
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         SavePlayer();
-        playerData.Username = usernameInput.text;
+        PlayerData.Instance.Username = usernameInput.text;
         ClearFields();
-        LoggedIn.Invoke(playerData.Username);
+        LoggedIn.Invoke();
     }
 
     private void OnLoginSuccess(LoginResult result)
@@ -133,7 +150,7 @@ public class PlayFabManager : MonoBehaviour
     {
         if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("High Scores"))
         {
-            playerData.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["High Scores"].Value);
+            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["High Scores"].Value);
         }
         else
         {
@@ -141,7 +158,7 @@ public class PlayFabManager : MonoBehaviour
         }
 
         ClearFields();
-        LoggedIn.Invoke(playerData.Username);
+        LoggedIn.Invoke();
 
     }
 
@@ -152,9 +169,9 @@ public class PlayFabManager : MonoBehaviour
         {
             Data = new Dictionary<string, string>
             {
-                { "Coins", playerData.Coins.ToString() },
-                { "Unlocked Levels", string.Join(',', playerData.LevelsUnlocked) },
-                { "High Scores", string.Join(',', playerData.HighScores) }
+                { "Coins", PlayerData.Instance.Coins.ToString() },
+                { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
+                { "High Scores", string.Join(',', PlayerData.Instance.HighScores) }
             }
         };
 
@@ -172,7 +189,7 @@ public class PlayFabManager : MonoBehaviour
     {
         //Save and then reset the player
         SavePlayer();
-        playerData.InitialisePlayer();
+        PlayerData.Instance.InitialisePlayer();
 
         //Not an API call, just clears login credentials within Unity. A player's session ticket is valid for 24 hours
         PlayFabClientAPI.ForgetAllCredentials();

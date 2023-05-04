@@ -15,8 +15,8 @@ public class DelayedButtonHandler : SwitchHandler
         state = false;
         previousState = false;
 
-        player1 = GameObject.Find("WB Ground Check").transform;
-        player2 = GameObject.Find("FG Ground Check").transform;
+        player1 = GameObject.Find("P1 Ground Check").transform;
+        player2 = GameObject.Find("P2 Ground Check").transform;
     }
 
     public void Update()
