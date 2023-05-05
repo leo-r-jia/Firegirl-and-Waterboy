@@ -1,14 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEditor.PackageManager;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
-using UnityEditor;
-using System;
 
 public class PlayFabManager : MonoBehaviour
 {
