@@ -21,4 +21,10 @@ public class MainMenu : MonoBehaviour
             ProfileButton.gameObject.SetActive(false);
         }
     }
+
+    //Exit the game
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

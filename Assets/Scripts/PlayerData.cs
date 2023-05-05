@@ -11,7 +11,9 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int numLevels;
     public int Coins { get; private set; }
     public bool[] LevelsUnlocked { get; private set; }
-    public int[] HighScores { get; private set; }
+    public float[] BestTimes { get; private set; }
+
+    private int playingLevel;
 
     #region Scene persistence
     //Declare sole instance of PlayerData
@@ -47,14 +49,21 @@ public class PlayerData : MonoBehaviour
     //Initialise the player to default values
     public void InitialisePlayer()
     {
-        //Set all high scores to 0 and only the first level as unlocked
-        HighScores = Enumerable.Repeat(0, numLevels).ToArray();
+        //Set all best times to 0 and only the first level as unlocked
+        BestTimes = Enumerable.Repeat(-1f, numLevels).ToArray();
         LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();
         LevelsUnlocked[0] = true;
 
         Coins = 0;
     }
 
+    //Sets the level the player is playing (-1 for array functionality)
+    public void SetPlayingLevel(int level)
+    {
+        playingLevel = level - 1;
+    }
+
+    //Add coins to the player
     public void AddCoins(int amount)
     {
         Coins += amount;
@@ -72,18 +81,18 @@ public class PlayerData : MonoBehaviour
         return true;
     }
 
-    //Return the high score of the level 
-    public int GetHighScore(int level)
+    //Return the best time of the level 
+    public float GetBestTime(int level)
     {
-        return HighScores[level];
+        return BestTimes[level];
     }
 
-    //Update a level's high score. Returns true if a new high score is reached
-    public bool UpdateHighScore(int level, int score)
+    //Update a level's best time. Returns true if a new best time is reached
+    public bool UpdateBestTimes(float time)
     {
-        if (HighScores[level] < score)
+        if (BestTimes[playingLevel] == -1f || BestTimes[playingLevel] < time)
         {
-            HighScores[level] = score;
+            BestTimes[playingLevel] = time;
             return true;
         }
 
@@ -109,17 +118,17 @@ public class PlayerData : MonoBehaviour
     }
 
     //Set the player's data to the passed values
-    public void LoadPlayer(string username, string coins, string levelString, string scoreString) 
+    public void LoadPlayer(string username, string coins, string levelString, string timeString) 
     {
         Username = username;
 
         Coins = int.Parse(coins);
         
-        string[] scores = scoreString.Split(',');
+        string[] times = timeString.Split(',');
 
-        for (int i = 0; i < scores.Length; i++)
+        for (int i = 0; i < times.Length; i++)
         {
-            HighScores[i] = int.Parse(scores[i]);
+            BestTimes[i] = float.Parse(times[i]);
         }
 
         string[] levels = levelString.Split(',');
