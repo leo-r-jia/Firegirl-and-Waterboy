@@ -50,6 +50,12 @@ public class Timer : MonoBehaviour
     {
         timerText.text = hasFormat ? currentTime.ToString(timeFormats[format]) : currentTime.ToString();
     }
+
+    //Save the player's time on level complete
+    public void SaveTimeToPlayer()
+    {
+        PlayerData.Instance.UpdateBestTimes(float.Parse(timerText.text));
+    }
 }
 
 public enum TimerFormats

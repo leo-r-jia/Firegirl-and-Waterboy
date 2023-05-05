@@ -70,7 +70,7 @@ public class ObjectMover : MonoBehaviour
     }
 
     //Move the object from the current position to the destination position smoothly
-    private void Move(Vector3 destinationPosition)
+    private void Move(Vector2 destinationPosition)
     {
         elapsedTime += Time.deltaTime;
         float percentageComplete = elapsedTime / scaledDuration;

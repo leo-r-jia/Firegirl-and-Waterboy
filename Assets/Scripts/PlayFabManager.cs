@@ -1,14 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEditor.PackageManager;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
-using UnityEditor;
-using System;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -119,19 +114,22 @@ public class PlayFabManager : MonoBehaviour
         messageText.text = string.Empty;
     }
 
+    //On successfully registering, save the player's data and set their username
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        SavePlayer();
         PlayerData.Instance.Username = usernameInput.text;
+        SavePlayer();
         ClearFields();
         LoggedIn.Invoke();
     }
 
+    //Load the player if they successfully log in
     private void OnLoginSuccess(LoginResult result)
     {
         LoadPlayer();
     }
 
+    //If an error occurs, update the user and also print a detailed report to the console
     private void OnError(PlayFabError error)
     {
         messageText.text = error.ErrorMessage;
@@ -148,9 +146,9 @@ public class PlayFabManager : MonoBehaviour
     //Imports the player data recieved from PlayFab into the PlayerData script
     private void OnDataRecieved(GetUserDataResult result)
     {
-        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("High Scores"))
+        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Best Times"))
         {
-            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["High Scores"].Value);
+            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["Best Times"].Value);
         }
         else
         {
@@ -165,17 +163,20 @@ public class PlayFabManager : MonoBehaviour
     //Save a player's data to PlayFab
     public void SavePlayer()
     {
-        var request = new UpdateUserDataRequest
+        if (PlayerData.Instance.Username != null)
         {
-            Data = new Dictionary<string, string>
+            var request = new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
             {
                 { "Coins", PlayerData.Instance.Coins.ToString() },
                 { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
-                { "High Scores", string.Join(',', PlayerData.Instance.HighScores) }
+                { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) }
             }
-        };
+            };
 
-        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+        }
     }
 
     private void OnDataSend(UpdateUserDataResult result)

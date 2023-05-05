@@ -13,4 +13,10 @@ public class ScoreManager : MonoBehaviour
         coins += 1;
         coinsCollected.text = "Coins: " + coins;
     }
+
+    //Add the coins collected this level to the player
+    public void AddCoinsToPlayer()
+    {
+        PlayerData.Instance.AddCoins(coins);
+    }
 }

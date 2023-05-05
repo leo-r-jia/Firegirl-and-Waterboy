@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Gems
   - Water
   - Fire
   - Player1
@@ -25,7 +24,7 @@ TagManager:
   - Switch Trigger
   - Game UI
   - Background
-  - 
+  - Box
   - 
   - 
   - 
