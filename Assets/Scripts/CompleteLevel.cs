@@ -32,7 +32,6 @@ public class CompleteLevel : MonoBehaviour
         {
             active = true;
             Win();
-            
         }
     }
 
@@ -43,5 +42,7 @@ public class CompleteLevel : MonoBehaviour
         completeLevelMenu.SetActive(true);
         Cursor.visible = true;
         InputSystem.DisableDevice(Keyboard.current);
+        LevelComplete.Invoke();
+        PlayFabManager.Instance.SavePlayer();
     }
 }
