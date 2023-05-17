@@ -149,15 +149,15 @@ public class PlayFabManager : MonoBehaviour
         if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Best Times"))
         {
             PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["Best Times"].Value);
+
+            ClearFields();
+            LoggedIn.Invoke();
         }
         else
         {
+            //Player data format has changed/a new level has been added
             Debug.Log("Player data incomplete and could not be loaded!");
         }
-
-        ClearFields();
-        LoggedIn.Invoke();
-
     }
 
     //Save a player's data to PlayFab
@@ -168,11 +168,11 @@ public class PlayFabManager : MonoBehaviour
             var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
-            {
-                { "Coins", PlayerData.Instance.Coins.ToString() },
-                { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
-                { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) }
-            }
+                {
+                    { "Coins", PlayerData.Instance.Coins.ToString() },
+                    { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
+                    { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) }
+                }
             };
 
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
