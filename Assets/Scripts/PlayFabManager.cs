@@ -146,9 +146,9 @@ public class PlayFabManager : MonoBehaviour
     //Imports the player data recieved from PlayFab into the PlayerData script
     private void OnDataRecieved(GetUserDataResult result)
     {
-        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Best Times") && result.Data.ContainsKey("Scores") && result.Data.ContainsKey("High Scores"))
+        if (result.Data != null && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Level Scores"))
         {
-            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["Best Times"].Value, result.Data["Scores"].Value, result.Data["High Scores"].Value);
+            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Unlocked Levels"].Value, result.Data["Level Scores"].Value);
 
             ClearFields();
             LoggedIn.Invoke();

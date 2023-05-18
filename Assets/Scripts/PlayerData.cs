@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
     public string Username {  get; set; }
-
     [SerializeField] private int numLevels;
-    public int Coins { get; private set; }
-    public bool[] LevelsUnlocked { get; private set; }
-    public float[] BestTimes { get; private set; }
-
-    public List<float>[] Scores { get; private set; }
-    public float[] HighScores { get; private set; }
-
+    public Level[] Levels { get; private set; }
     private int playingLevel;
 
     #region Scene persistence
@@ -54,149 +48,71 @@ public class PlayerData : MonoBehaviour
     {
         Username = null;
 
-        BestTimes = Enumerable.Repeat(-1f, numLevels).ToArray();
-        HighScores = Enumerable.Repeat(0f, numLevels).ToArray();
-        LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();
-        LevelsUnlocked[0] = true;
+        Levels = new Level[numLevels];
 
-        Scores = new List<float>[numLevels];
-
-        Coins = 0;
+        for (int i = 0; i < Levels.Length; i++)
+        {
+            Levels[i].Initialise();
+        }
     }
 
-    //Sets the level the player is playing (-1 for array functionality)
+    //Sets the level the player is playing (- 1 for array functionality)
     public void SetPlayingLevel(int level)
     {
         playingLevel = level - 1;
     }
 
-    //Add coins to the player
-    public void AddCoins(int amount)
-    {
-        Coins += amount;
-    }
-
-    //Remove Coins if possible. Returns true if Coins could be removed
-    public bool RemoveCoins(int amount)
-    {
-        if (amount > Coins)
-        {
-            return false;
-        }
-
-        Coins -= amount;
-        return true;
-    }
-
-    //Return the best time of the level 
-    public float GetBestTime(int level)
-    {
-        return BestTimes[level];
-    }
-
-    //Update a level's best time. Returns true if a new best time is reached
-    public bool UpdateBestTimes(float time)
-    {
-        if (BestTimes[playingLevel] == -1f || BestTimes[playingLevel] < time)
-        {
-            BestTimes[playingLevel] = time;
-            return true;
-        }
-
-        return false;
-    }
-
-    public void AddScore(int level, int score)
-    {
-        Scores[level].Add(score);
-    }
-
-    //Each levels' scores are separated by a hyphen
-    public string ScoresToString()
-    {
-        string stringScores = "";
-
-        for (int i = 0; i < numLevels; i++)
-        {
-            string.Join(',', Scores[i]);
-
-            stringScores += ",-";
-        }
-
-        return stringScores;
-    }
-
-    public float GetHighScore(int level)
-    {
-        return HighScores[level];
-    }
-
-    public bool UpdateHighScores(float score)
-    {
-        if (HighScores[playingLevel] == -1f || HighScores[playingLevel] < score)
-        {
-            HighScores[playingLevel] = score;
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool LevelUnlocked(int level)
-    {
-        return LevelsUnlocked[level];
-    }
-
-    //Unlock the next level -> set the next false to true
+    //Unlock the next level
     public void UnlockNextLevel()
     {
-        for (int i = 0; i < LevelsUnlocked.Length; i++)
+        for (int i = 0; i < Levels.Length; i++)
         {
-            if (!LevelsUnlocked[i])
+            if (!Levels[i].Unlocked)
             {
-                LevelsUnlocked[i] = true;
+                Levels[i].SetUnlocked();
                 return;
             }
         }
     }
 
+    //Levels separated by "|"
+    public string ScoresToString()
+    {
+        string scores = "";
+
+        //For each level
+        for (int i = 0; i < Levels.Length; i++)
+        {
+            scores += Levels[i].ToString() + "|";
+        }
+
+        return scores;
+    }
+
     //Set the player's data to the passed values
-    public void LoadPlayer(string username, string coins, string levelString, string timeString, string highScoreString, string scoresString) 
+    public void LoadPlayer(string username, string unlockedLevelString, string combinedLevelScoresString) 
     {
         Username = username;
 
-        Coins = int.Parse(coins);
-
-        string[] levels = levelString.Split(',');
-
+        string[] levels = unlockedLevelString.Split(',');
         for (int i = 0; i < levels.Length; i++)
         {
-            LevelsUnlocked[i] = bool.Parse(levels[i]);
-        }
-
-        string[] times = timeString.Split(',');
-
-        for (int i = 0; i < times.Length; i++)
-        {
-            BestTimes[i] = float.Parse(times[i]);
-        }
-
-        string[] highScores = highScoreString.Split(',');
-
-        for (int i = 0; i < highScores.Length; i++)
-        {
-            HighScores[i] = float.Parse(highScores[i]);
-        }
-
-        string[] scoresOfEachLevel = timeString.Split('-');
-
-        for (int i = 0; i < scoresOfEachLevel.Length; i++)
-        {
-            string[] levelScores = timeString.Split(',');
-
-            for (int j = 0; j < levelScores.Length; j++)
+            if (bool.Parse(levels[i]))
             {
-                Scores[i].Add(float.Parse(levelScores[j]));
+                Levels[i].SetUnlocked();
+            }
+        }
+
+        string[] levelScoresStrings = combinedLevelScoresString.Split("|");
+        for (int i = 0; i < levelScoresStrings.Length; i++)
+        {
+            string[] wholeScoreStrings = levelScoresStrings[i].Split("-");
+
+            for (int j = 0; j < wholeScoreStrings.Length; j++)
+            {
+                string[] scoreParts = wholeScoreStrings[j].Split(",");
+
+                Levels[i].AddNewScore(int.Parse(scoreParts[0]), float.Parse(scoreParts[1]), int.Parse(scoreParts[2]), int.Parse(scoreParts[3]));
             }
         }
     }
