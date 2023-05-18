@@ -146,9 +146,9 @@ public class PlayFabManager : MonoBehaviour
     //Imports the player data recieved from PlayFab into the PlayerData script
     private void OnDataRecieved(GetUserDataResult result)
     {
-        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Best Times"))
+        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Best Times") && result.Data.ContainsKey("Scores") && result.Data.ContainsKey("High Scores"))
         {
-            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["Best Times"].Value);
+            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Coins"].Value, result.Data["Unlocked Levels"].Value, result.Data["Best Times"].Value, result.Data["Scores"].Value, result.Data["High Scores"].Value);
 
             ClearFields();
             LoggedIn.Invoke();
@@ -171,7 +171,9 @@ public class PlayFabManager : MonoBehaviour
                 {
                     { "Coins", PlayerData.Instance.Coins.ToString() },
                     { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
-                    { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) }
+                    { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) },
+                    { "Scores", PlayerData.Instance.ScoresToString()},
+                    { "High Scores", string.Join(',', PlayerData.Instance.HighScores) }
                 }
             };
 

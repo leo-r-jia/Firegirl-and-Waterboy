@@ -13,6 +13,9 @@ public class PlayerData : MonoBehaviour
     public bool[] LevelsUnlocked { get; private set; }
     public float[] BestTimes { get; private set; }
 
+    public List<float>[] Scores { get; private set; }
+    public float[] HighScores { get; private set; }
+
     private int playingLevel;
 
     #region Scene persistence
@@ -51,10 +54,12 @@ public class PlayerData : MonoBehaviour
     {
         Username = null;
 
-        //Set all best times to 0 and only the first level as unlocked
         BestTimes = Enumerable.Repeat(-1f, numLevels).ToArray();
+        HighScores = Enumerable.Repeat(0f, numLevels).ToArray();
         LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();
         LevelsUnlocked[0] = true;
+
+        Scores = new List<float>[numLevels];
 
         Coins = 0;
     }
@@ -101,6 +106,42 @@ public class PlayerData : MonoBehaviour
         return false;
     }
 
+    public void AddScore(int level, int score)
+    {
+        Scores[level].Add(score);
+    }
+
+    //Each levels' scores are separated by a hyphen
+    public string ScoresToString()
+    {
+        string stringScores = "";
+
+        for (int i = 0; i < numLevels; i++)
+        {
+            string.Join(',', Scores[i]);
+
+            stringScores += ",-";
+        }
+
+        return stringScores;
+    }
+
+    public float GetHighScore(int level)
+    {
+        return HighScores[level];
+    }
+
+    public bool UpdateHighScores(float score)
+    {
+        if (HighScores[playingLevel] == -1f || HighScores[playingLevel] < score)
+        {
+            HighScores[playingLevel] = score;
+            return true;
+        }
+
+        return false;
+    }
+
     public bool LevelUnlocked(int level)
     {
         return LevelsUnlocked[level];
@@ -120,12 +161,19 @@ public class PlayerData : MonoBehaviour
     }
 
     //Set the player's data to the passed values
-    public void LoadPlayer(string username, string coins, string levelString, string timeString) 
+    public void LoadPlayer(string username, string coins, string levelString, string timeString, string highScoreString, string scoresString) 
     {
         Username = username;
 
         Coins = int.Parse(coins);
-        
+
+        string[] levels = levelString.Split(',');
+
+        for (int i = 0; i < levels.Length; i++)
+        {
+            LevelsUnlocked[i] = bool.Parse(levels[i]);
+        }
+
         string[] times = timeString.Split(',');
 
         for (int i = 0; i < times.Length; i++)
@@ -133,11 +181,23 @@ public class PlayerData : MonoBehaviour
             BestTimes[i] = float.Parse(times[i]);
         }
 
-        string[] levels = levelString.Split(',');
+        string[] highScores = highScoreString.Split(',');
 
-        for (int i = 0; i < levels.Length; i++)
+        for (int i = 0; i < highScores.Length; i++)
         {
-            LevelsUnlocked[i] = bool.Parse(levels[i]);
+            HighScores[i] = float.Parse(highScores[i]);
+        }
+
+        string[] scoresOfEachLevel = timeString.Split('-');
+
+        for (int i = 0; i < scoresOfEachLevel.Length; i++)
+        {
+            string[] levelScores = timeString.Split(',');
+
+            for (int j = 0; j < levelScores.Length; j++)
+            {
+                Scores[i].Add(float.Parse(levelScores[j]));
+            }
         }
     }
 }
