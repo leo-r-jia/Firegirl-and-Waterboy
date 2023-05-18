@@ -1,16 +1,18 @@
-using System.Collections;
+using System.Collections; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
     public string Username {  get; set; }
-    [SerializeField] private int numLevels;
+    [SerializeField] Transform levelMenu;
+    private int numLevels;
     public Level[] Levels { get; private set; }
-    private int playingLevel;
+    public int currentLevel { get; private set; }
 
     #region Scene persistence
     //Declare sole instance of PlayerData
@@ -31,14 +33,20 @@ public class PlayerData : MonoBehaviour
     }
     #endregion
 
-    //On first run
+    //On first run set the number of levels and initialise
     public void Start()
     {
-        //Ensure the number of levels is valid
-        if (numLevels < 1)
+        numLevels = 0;
+
+        foreach (Transform child in levelMenu.transform.GetComponentsInChildren<Transform>())
         {
-            numLevels = 1;
+            if (child.gameObject.transform.name.ContainsInsensitive("level"))
+            {
+                numLevels++;
+            }
         }
+
+        numLevels -= 1;
 
         InitialisePlayer();
     }
@@ -57,9 +65,9 @@ public class PlayerData : MonoBehaviour
     }
 
     //Sets the level the player is playing (- 1 for array functionality)
-    public void SetPlayingLevel(int level)
+    public void SetCurrentLevel(int level)
     {
-        playingLevel = level - 1;
+        currentLevel = level - 1;
     }
 
     //Unlock the next level
@@ -73,6 +81,18 @@ public class PlayerData : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public string UnlockedLevelsToString()
+    {
+        string unlockedLevels = "";
+
+        for (int i = 0; i < Levels.Length; i++)
+        {
+            unlockedLevels += Levels[i].Unlocked + ",";
+        }
+
+        return unlockedLevels;
     }
 
     //Levels separated by "|"

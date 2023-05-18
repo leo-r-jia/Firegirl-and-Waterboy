@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LevelData : MonoBehaviour
 {
-    [SerializeField] private int levelNumber = 0;
-
     //Update the playerData on what level is being played on scene start
     void Start()
     {
-        PlayerData.Instance.SetPlayingLevel(levelNumber);
+        int levelNumber = int.Parse(transform.name.Split(' ')[1]);
+
+        PlayerData.Instance.SetCurrentLevel(levelNumber);
     }
 }

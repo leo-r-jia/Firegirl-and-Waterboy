@@ -169,11 +169,8 @@ public class PlayFabManager : MonoBehaviour
             {
                 Data = new Dictionary<string, string>
                 {
-                    { "Coins", PlayerData.Instance.Coins.ToString() },
-                    { "Unlocked Levels", string.Join(',', PlayerData.Instance.LevelsUnlocked) },
-                    { "Best Times", string.Join(',', PlayerData.Instance.BestTimes) },
-                    { "Scores", PlayerData.Instance.ScoresToString()},
-                    { "High Scores", string.Join(',', PlayerData.Instance.HighScores) }
+                    { "Unlocked Levels", PlayerData.Instance.UnlockedLevelsToString() },
+                    { "Scores", PlayerData.Instance.ScoresToString() }
                 }
             };
 

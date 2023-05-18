@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    public int LevelNumber { get; private set; }
     public bool Unlocked {  get; private set; }
     public int HighScore { get; private set; }
     public float BestTime { get; private set; }
@@ -17,6 +18,8 @@ public class Level : MonoBehaviour
 
     public void Initialise()
     {
+        LevelNumber = -1;
+
         Unlocked = false;
 
         HighScore = 0;
@@ -28,6 +31,14 @@ public class Level : MonoBehaviour
         Times = new List<float>();
         Coins = new List<int>();
         Stars = new List<int>();
+    }
+
+    public void SetLevelNumber(int num)
+    {
+        if (LevelNumber == -1)
+        {
+            LevelNumber = num;
+        }
     }
 
     public void SetUnlocked()
