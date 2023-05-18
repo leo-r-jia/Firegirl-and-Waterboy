@@ -49,6 +49,8 @@ public class PlayerData : MonoBehaviour
     //Initialise the player to default values
     public void InitialisePlayer()
     {
+        Username = null;
+
         //Set all best times to 0 and only the first level as unlocked
         BestTimes = Enumerable.Repeat(-1f, numLevels).ToArray();
         LevelsUnlocked = Enumerable.Repeat(false, numLevels).ToArray();
