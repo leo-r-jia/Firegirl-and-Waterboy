@@ -62,14 +62,19 @@ public class Level : ScriptableObject
         return 0;
     }
 
-    //"," separates parts of a score, "-" separates different scores
+    //"," separates parts of a score, ":" separates different scores
     public override string ToString()
     {
         string scores = "";
 
         for (int j = 0; j < Scores.Count; j++)
         {
-            scores += Scores[j] + "," + Times[j] + "," + Coins[j] + "," + Stars[j] + "-";
+            scores += Scores[j] + "," + Times[j] + "," + Coins[j] + "," + Stars[j];
+
+            if (j < Scores.Count - 1)
+            {
+                scores += ":";
+            }
         }
 
         return scores;

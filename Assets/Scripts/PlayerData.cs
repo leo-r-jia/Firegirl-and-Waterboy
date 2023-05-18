@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class PlayerData : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class PlayerData : MonoBehaviour
             Levels[i] = ScriptableObject.CreateInstance<Level>();
             Levels[i].Initialise(i + 1);
         }
+
+        UnlockNextLevel();
     }
 
     //Sets the level the player is playing (- 1 for array functionality)
@@ -86,6 +89,8 @@ public class PlayerData : MonoBehaviour
             unlockedLevels += Levels[i].Unlocked + ",";
         }
 
+        unlockedLevels = unlockedLevels[0..^1];
+
         return unlockedLevels;
     }
 
@@ -97,21 +102,26 @@ public class PlayerData : MonoBehaviour
         //For each level
         for (int i = 0; i < Levels.Length; i++)
         {
-            scores += Levels[i].ToString() + "|";
+            scores += Levels[i].ToString();
+
+            if (i < Levels.Length - 1)
+            {
+                scores += "|";
+            }
         }
 
         return scores;
     }
 
-    //Set the player's data to the passed values
+    //Set the player's data from the passed values
     public void LoadPlayer(string username, string unlockedLevelString, string combinedLevelScoresString) 
     {
         Username = username;
 
-        string[] levels = unlockedLevelString.Split(',');
-        for (int i = 0; i < levels.Length; i++)
+        string[] unlockedLevels = unlockedLevelString.Split(',');
+        for (int i = 0; i < unlockedLevels.Length; i++)
         {
-            if (bool.Parse(levels[i]))
+            if (bool.Parse(unlockedLevels[i]))
             {
                 Levels[i].SetUnlocked();
             }
@@ -120,10 +130,15 @@ public class PlayerData : MonoBehaviour
         string[] levelScoresStrings = combinedLevelScoresString.Split("|");
         for (int i = 0; i < levelScoresStrings.Length; i++)
         {
-            string[] wholeScoreStrings = levelScoresStrings[i].Split("-");
+            string[] wholeScoreStrings = levelScoresStrings[i].Split(":");
 
             for (int j = 0; j < wholeScoreStrings.Length; j++)
             {
+                if (wholeScoreStrings[j].Length == 0)
+                {
+                    continue;
+                }
+
                 string[] scoreParts = wholeScoreStrings[j].Split(",");
 
                 Levels[i].AddNewScore(int.Parse(scoreParts[0]), float.Parse(scoreParts[1]), int.Parse(scoreParts[2]), int.Parse(scoreParts[3]));
