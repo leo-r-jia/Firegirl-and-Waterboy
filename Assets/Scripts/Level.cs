@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class Level : ScriptableObject
 {
     public int LevelNumber { get; private set; }
     public bool Unlocked {  get; private set; }
@@ -16,29 +14,14 @@ public class Level : MonoBehaviour
     public List<int> Coins { get; private set; }
     public List<int> Stars { get; private set; }
 
-    public void Initialise()
+    public void Initialise(int levelNum)
     {
-        LevelNumber = -1;
-
-        Unlocked = false;
-
-        HighScore = 0;
-        BestTime = 0f;
-        MostCoins = 0;
-        MostStars = 0;
+        LevelNumber = levelNum;
 
         Scores = new List<int>();
         Times = new List<float>();
         Coins = new List<int>();
         Stars = new List<int>();
-    }
-
-    public void SetLevelNumber(int num)
-    {
-        if (LevelNumber == -1)
-        {
-            LevelNumber = num;
-        }
     }
 
     public void SetUnlocked()

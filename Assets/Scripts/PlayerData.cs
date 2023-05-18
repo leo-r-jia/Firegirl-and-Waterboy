@@ -1,9 +1,4 @@
-using System.Collections; 
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -36,8 +31,6 @@ public class PlayerData : MonoBehaviour
     //On first run set the number of levels and initialise
     public void Start()
     {
-        numLevels = 0;
-
         foreach (Transform child in levelMenu.transform.GetComponentsInChildren<Transform>())
         {
             if (child.gameObject.transform.name.ContainsInsensitive("level"))
@@ -60,7 +53,8 @@ public class PlayerData : MonoBehaviour
 
         for (int i = 0; i < Levels.Length; i++)
         {
-            Levels[i].Initialise();
+            Levels[i] = ScriptableObject.CreateInstance<Level>();
+            Levels[i].Initialise(i + 1);
         }
     }
 

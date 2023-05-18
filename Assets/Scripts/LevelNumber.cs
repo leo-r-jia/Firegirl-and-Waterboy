@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelData : MonoBehaviour
+public class LevelNumber : MonoBehaviour
 {
     //Update the playerData on what level is being played on scene start
     void Start()
