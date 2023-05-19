@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dylan/Level Four.unity
+    path: Assets/Scenes/Dylan/Level 4.unity
     guid: cbe352887ca5b414fa185cfbe45a87f1
   - enabled: 1
-    path: Assets/Scenes/Dylan/Level One.unity
+    path: Assets/Scenes/Dylan/Level 1.unity
     guid: 9d84032656321634382ad49718f671b6
   - enabled: 1
-    path: Assets/Scenes/Dylan/Level Three.unity
+    path: Assets/Scenes/Dylan/Level 3.unity
     guid: 26d963b739c96bb46a3f8d20a7901485
   - enabled: 1
-    path: Assets/Scenes/Dylan/Level Two.unity
+    path: Assets/Scenes/Dylan/Level 2.unity
     guid: 377482444da348d4db2ba81363893e1d
   - enabled: 1
     path: Assets/Scenes/Dylan/Main Menu.unity

@@ -8,7 +8,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] Transform levelMenu;
     private int numLevels;
     public Level[] Levels { get; private set; }
-    public int currentLevel { get; private set; }
+    //CurrentLevel is in terms of the Levels array
+    public int CurrentLevel { get; private set; }
 
     #region Scene persistence
     //Declare sole instance of PlayerData
@@ -64,7 +65,7 @@ public class PlayerData : MonoBehaviour
     //Sets the level the player is playing (- 1 for array functionality)
     public void SetCurrentLevel(int level)
     {
-        currentLevel = level - 1;
+        CurrentLevel = level - 1;
     }
 
     //Unlock the next level
@@ -118,6 +119,13 @@ public class PlayerData : MonoBehaviour
     {
         Username = username;
 
+        RestoreUnlockedLevels(unlockedLevelString);
+        RestoreScores(combinedLevelScoresString);
+    }
+
+    //Restore what levels the player had unlocked
+    private void RestoreUnlockedLevels(string unlockedLevelString)
+    {
         string[] unlockedLevels = unlockedLevelString.Split(',');
         for (int i = 0; i < unlockedLevels.Length; i++)
         {
@@ -127,6 +135,16 @@ public class PlayerData : MonoBehaviour
             }
         }
 
+        //If a new level has been added and the player had completed all other levels beforehand
+        if (unlockedLevels.Length < Levels.Length && bool.Parse(unlockedLevels[^1]))
+        {
+            UnlockNextLevel();
+        }
+    }
+
+    //Restore the player's scores
+    private void RestoreScores(string combinedLevelScoresString)
+    {
         string[] levelScoresStrings = combinedLevelScoresString.Split("|");
         for (int i = 0; i < levelScoresStrings.Length; i++)
         {
