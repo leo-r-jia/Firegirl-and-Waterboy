@@ -8,10 +8,7 @@ public class LevelUnlocker : MonoBehaviour
 
     public void OnEnable()
     {
-        if (!doLevelLocking)
-        {
-            return;
-        }
+        if (!doLevelLocking) return;
 
         //For every level button, set its state
         foreach (Transform level in transform.GetComponentsInChildren<Transform>())

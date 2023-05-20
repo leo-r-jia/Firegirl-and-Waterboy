@@ -152,10 +152,7 @@ public class PlayerData : MonoBehaviour
 
             for (int j = 0; j < wholeScoreStrings.Length; j++)
             {
-                if (wholeScoreStrings[j].Length == 0)
-                {
-                    continue;
-                }
+                if (wholeScoreStrings[j].Length == 0) continue;
 
                 string[] scoreParts = wholeScoreStrings[j].Split(",");
 
