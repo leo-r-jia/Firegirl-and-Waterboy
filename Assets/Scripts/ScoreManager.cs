@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI coinsCollectedLevelComplete;
     [SerializeField] public TextMeshProUGUI scoreLevelComplete;
 
+    [SerializeField] public TextMeshProUGUI stars;
+
     [SerializeField] public Timer timer;
     private int score = 0;
 
@@ -28,8 +30,27 @@ public class ScoreManager : MonoBehaviour
     public void LevelComplete()
     {
         CalculateFinalScore();
+        CalculateStars();
         coinsCollectedLevelComplete.text = coins + "/6";
         scoreLevelComplete.text = score +"";
+    }
+
+    private void CalculateStars()
+    {
+        if(score < 10000)
+        {
+            stars.text = "☆☆☆";
+        }
+        else if (score <= 22500)
+        {
+            stars.text = "★☆☆";
+        } else if (score > 22000 && score <= 60000)
+        {
+            stars.text = "★★☆";
+        } else
+        {
+            stars.text = "★★★";
+        }
     }
 
     //Calculate score on level complete
@@ -37,7 +58,7 @@ public class ScoreManager : MonoBehaviour
     {
         score = 0;
         //Calculate final score based on coins collected and time taken
-        score = coins * 10000 + (int)((5000 - timer.GetTime()) * (1 + 0.01 * coins));
+        score = coins * 10000 + (5000 - timer.GetTime());
     }
 
     //Add the coins collected this level to the player
