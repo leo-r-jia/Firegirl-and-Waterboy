@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     public string Username {  get; set; }
     [SerializeField] Transform levelMenu;
-    private int numLevels;
+    public int NumLevels { get; private set; }
     public Level[] Levels { get; private set; }
     //CurrentLevel is in terms of the Levels array
     public int CurrentLevel { get; private set; }
@@ -37,11 +37,10 @@ public class PlayerData : MonoBehaviour
         {
             if (child.gameObject.transform.name.ContainsInsensitive("level"))
             {
-                numLevels++;
+                NumLevels++;
             }
         }
-
-        numLevels -= 1;
+        NumLevels -= 1;
 
         InitialisePlayer();
     }
@@ -51,7 +50,7 @@ public class PlayerData : MonoBehaviour
     {
         Username = null;
 
-        Levels = new Level[numLevels];
+        Levels = new Level[NumLevels];
 
         for (int i = 0; i < Levels.Length; i++)
         {
@@ -59,12 +58,19 @@ public class PlayerData : MonoBehaviour
             Levels[i].Initialise(i + 1);
         }
 
+        PlayerData.Instance.Levels[0].AddNewScore(100000, 105.4f, 6, 3);
+
         UnlockNextLevel();
     }
 
     //Sets the level the player is playing (- 1 for array functionality)
     public void SetCurrentLevel(int level)
     {
+        if (level < 1 || level > NumLevels)
+        {
+            return;
+        }
+
         CurrentLevel = level - 1;
     }
 
