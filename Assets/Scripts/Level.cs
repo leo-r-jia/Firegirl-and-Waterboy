@@ -5,23 +5,15 @@ public class Level : ScriptableObject
 {
     public int LevelNumber { get; private set; }
     public bool Unlocked {  get; private set; }
-    public int HighScore { get; private set; }
-    public float BestTime { get; private set; }
-    public int MostStars { get; private set; }
-    public int MostCoins { get; private set; }
-    public List<int> Scores { get; private set; }
-    public List<float> Times { get; private set; }
-    public List<int> Coins { get; private set; }
-    public List<int> Stars { get; private set; }
+    public Score HighScore { get; private set; }
+    public List<Score> Scores { get; private set; }
 
     public void Initialise(int levelNum)
     {
         LevelNumber = levelNum;
 
-        Scores = new List<int>();
-        Times = new List<float>();
-        Coins = new List<int>();
-        Stars = new List<int>();
+        HighScore = ScriptableObject.CreateInstance<Score>();
+        Scores = new List<Score>();
     }
 
     public void SetUnlocked()
@@ -32,16 +24,15 @@ public class Level : ScriptableObject
     //Add a new score to the level. Returns -1 if an error occured
     public int AddNewScore(int score, float time, int coins, int stars)
     {
-        if (score < 0 || time < 0 || coins < 0 || stars < 0 || stars > 3)
+        if (score < 0 || time < 0 || coins < 0 || coins > 6 || stars < 0 || stars > 3)
         {
             Debug.Log("Score could not be added as one or more values were out of bounds!\n Score: " + score + " Time: " + time + " Coins: " + coins + " Stars: " + stars);
             return -1;
         }
 
-        Scores.Add(score);
-        Times.Add(time);
-        Coins.Add(coins);
-        Stars.Add(stars);
+        Scores.Add(ScriptableObject.CreateInstance<Score>());
+        Scores[^1].SetScore(score, time, coins, stars);
+
 
         return UpdateHighScore(score, time, coins, stars);
     }
@@ -49,12 +40,9 @@ public class Level : ScriptableObject
     //Update the level's high score and relevant values. Returns 1 if a new high score was reached
     private int UpdateHighScore(int score, float time, int coins, int stars)
     {
-        if (score > HighScore)
+        if (score > HighScore.ScoreValue)
         {
-            HighScore = score;
-            BestTime = time;
-            MostCoins = coins;
-            MostStars = stars;
+            HighScore.SetScore(score, time, coins, stars);
 
             return 1;
         }
@@ -69,7 +57,7 @@ public class Level : ScriptableObject
 
         for (int j = 0; j < Scores.Count; j++)
         {
-            scores += Scores[j] + "," + Times[j] + "," + Coins[j] + "," + Stars[j];
+            scores += Scores[j].ScoreValue + "," + Scores[j].Time + "," + Scores[j].Coins + "," + Scores[j].Stars;
 
             if (j < Scores.Count - 1)
             {

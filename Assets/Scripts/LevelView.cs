@@ -21,14 +21,21 @@ public class LevelView : MonoBehaviour
 
         levelTitle.text = "LEVEL " + (PlayerData.Instance.CurrentLevel + 1);
 
+        playButton.onClick.RemoveAllListeners();
+        playButton.onClick.AddListener(GoToLevel);
+
         SetHighScore();
+
+
     }
 
+    //Restore to default state
     private void Initialise()
     {
-        noHighScore.gameObject.SetActive(true);
-        highScore.gameObject.SetActive(false);
-        coins.gameObject.SetActive(false);
+        if (highScore.gameObject.activeSelf)
+        {
+            ToggleHighScore();
+        }
 
         for (int i = 0; i < 3; i++)
         {
@@ -36,26 +43,35 @@ public class LevelView : MonoBehaviour
         }
     }
 
+    private void ToggleHighScore()
+    {
+        noHighScore.gameObject.SetActive(!noHighScore.gameObject.activeSelf);
+        highScore.gameObject.SetActive(!highScore.gameObject.activeSelf);
+        coins.gameObject.SetActive(!coins.gameObject.activeSelf);
+    }
+
     private void SetHighScore()
     {
-        if (PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore == 0)
+        if (PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue == 0)
         {
             return;
         }
 
-        playButton.onClick.AddListener(GoToLevel);
+        ToggleHighScore();
 
-        noHighScore.gameObject.SetActive(false);
-        highScore.gameObject.SetActive(true);
-        coins.gameObject.SetActive(true);
+        highScore.text = "" + PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue;
+        coins.text = PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.Coins + "/6";
 
-        highScore.text = "" + PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore;
-        coins.text = PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].MostCoins + "/6";
-
-        for (int i = 0; i < PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].MostStars; i++)
+        for (int i = 0; i < PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.Stars; i++)
         {
             stars.transform.GetChild(i).gameObject.SetActive(true);
         }
+    }
+
+    //Needed as initial reference to PlayerData is lost on scene change
+    public void SetPlayerDataCurrentLevel(int level)
+    {
+        PlayerData.Instance.SetCurrentLevel(level);
     }
 
     private void GoToLevel()

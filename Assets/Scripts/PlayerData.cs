@@ -58,8 +58,6 @@ public class PlayerData : MonoBehaviour
             Levels[i].Initialise(i + 1);
         }
 
-        PlayerData.Instance.Levels[0].AddNewScore(100000, 105.4f, 6, 3);
-
         UnlockNextLevel();
     }
 
