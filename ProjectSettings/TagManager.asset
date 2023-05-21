@@ -12,6 +12,8 @@ TagManager:
   - WaterDoor
   - Coin
   - Gems
+  - Blue Portal
+  - Orange Portal
   layers:
   - Default
   - TransparentFX
