@@ -5,13 +5,15 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine.Events;
 
+
+//WARNING: Do not reference this script by dragging and dropping into a gameobject. Issues will arise
 public class PlayFabManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text messageText;
-    [SerializeField] private TMP_InputField usernameInput, passwordInput;
-
     public UnityEvent LoggedIn;
     public UnityEvent LoggedOut;
+
+    public string LocalUsername { get; private set; }
+    public string ErrorText { get; private set; }
 
     #region Scene persistence
     public static PlayFabManager Instance;
@@ -32,31 +34,17 @@ public class PlayFabManager : MonoBehaviour
     #endregion
 
     #region Login and Sign Up
-    public void Start()
-    {
-        messageText.color = new Color32(231, 112, 112, 255); //Red
-
-        //Log in the player if this canvas is loaded and they've already logged in
-        if (PlayFabAuthenticationAPI.IsEntityLoggedIn())
-        {
-            ClearFields();
-            LoggedIn.Invoke();
-        }
-    }
-
     //When the register button is clicked
-    public void CreateAccountButton()
+    public void CreateAccount(string username, string password)
     {
-        if (!ValidateInput())
-        {
-            return;
-        }
+        ErrorText = null;
+        LocalUsername = username;
 
         //Form request for registration with username + password
         var request = new RegisterPlayFabUserRequest
         {
-            Username = usernameInput.text,
-            Password = passwordInput.text,
+            Username = username,
+            Password = password,
             RequireBothUsernameAndEmail = false
         };
 
@@ -65,61 +53,27 @@ public class PlayFabManager : MonoBehaviour
     }
 
     //When the login button is clicked
-    public void LoginButton()
+    public void Login(string username, string password)
     {
-        if (!ValidateInput())
-        {
-            return;
-        }
+        ErrorText = null;
+        LocalUsername = username;
 
         //Form request for login with username + password
         var request = new LoginWithPlayFabRequest
         {
-            Username = usernameInput.text,
-            Password = passwordInput.text
+            Username = username,
+            Password = password
         };
 
         //Send login request
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnError);
     }
 
-    //Perform basic input validation. Returns true if all checks pass
-    private bool ValidateInput()
-    {
-        if (usernameInput.text.Length < 1)
-        {
-            messageText.text = "Please enter a username";
-            return false;
-        }
-        else if (passwordInput.text.Length < 1)
-        {
-            messageText.text = "Please enter a password";
-            return false;
-        }
-        else if (passwordInput.text.Length < 6)
-        {
-            messageText.text = "Password must be at least 6 characters";
-            return false;
-        }
-
-        return true;
-    }
-
-    //Clear the input fields of data
-    private void ClearFields()
-    {
-        usernameInput.text = string.Empty;
-        passwordInput.text = string.Empty;
-
-        messageText.text = string.Empty;
-    }
-
     //On successfully registering, save the player's data and set their username
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        PlayerData.Instance.Username = usernameInput.text;
+        PlayerData.Instance.Username = LocalUsername;
         SavePlayer();
-        ClearFields();
         LoggedIn.Invoke();
     }
 
@@ -132,7 +86,7 @@ public class PlayFabManager : MonoBehaviour
     //If an error occurs, update the user and also print a detailed report to the console
     private void OnError(PlayFabError error)
     {
-        messageText.text = error.ErrorMessage;
+        ErrorText = error.ErrorMessage;
         Debug.Log(error.GenerateErrorReport());
     }
     #endregion
@@ -148,9 +102,8 @@ public class PlayFabManager : MonoBehaviour
     {
         if (result.Data != null && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Level Scores"))
         {
-            PlayerData.Instance.LoadPlayer(usernameInput.text, result.Data["Unlocked Levels"].Value, result.Data["Level Scores"].Value);
+            PlayerData.Instance.LoadPlayer(LocalUsername, result.Data["Unlocked Levels"].Value, result.Data["Level Scores"].Value);
 
-            ClearFields();
             LoggedIn.Invoke();
         }
         else
@@ -182,7 +135,6 @@ public class PlayFabManager : MonoBehaviour
     {
         //Can add debug if needed
     }
-    #endregion
 
     //Log out the player, saving their data and allowing them to sign in with another account
     public void Logout()
@@ -196,4 +148,6 @@ public class PlayFabManager : MonoBehaviour
 
         LoggedOut.Invoke();
     }
+
+    #endregion
 }

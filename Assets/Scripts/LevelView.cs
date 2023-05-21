@@ -99,6 +99,7 @@ public class LevelView : MonoBehaviour
 
     private void GoToLevel()
     {
+        gameObject.SetActive(false);
         changeScene.LoadScene("Level " + (PlayerData.Instance.CurrentLevel + 1));
     }
 

@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
+//WARNING: Do not reference this script by dragging and dropping into a gameobject. Issues will arise
 public class PlayerData : MonoBehaviour
 {
     public string Username {  get; set; }
