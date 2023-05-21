@@ -19,6 +19,16 @@ public class LoginMenu : MonoBehaviour
         fieldIndexer++;
     }
 
+    public void CreateAccount()
+    {
+        PlayFabManager.Instance.CreateAccountButton();
+    }
+
+    public void Login()
+    {
+        PlayFabManager.Instance.LoginButton();
+    }
+
     private void Update()
     {
         //If tab key is pressed, set the next InputField in the list as selected

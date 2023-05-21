@@ -22,6 +22,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void Logout()
+    {
+        PlayFabManager.Instance.Logout();
+    }
+
     //Exit the game
     public void Quit()
     {

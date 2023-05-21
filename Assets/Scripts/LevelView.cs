@@ -8,11 +8,16 @@ public class LevelView : MonoBehaviour
 {
     [SerializeField] private TMP_Text levelTitle;
     [SerializeField] private TMP_Text noHighScore;
-    [SerializeField] private TMP_Text highScore;
-    [SerializeField] private TMP_Text coins;
+    [SerializeField] private TMP_Text scoreValue;
     [SerializeField] private GameObject stars;
     [SerializeField] private Button playButton;
     [SerializeField] private ChangeScene changeScene;
+
+    [SerializeField] private Button personalButton;
+    [SerializeField] private Button globalButton;
+
+    [SerializeField] private GameObject personalRowPrefab;
+    [SerializeField] private Transform personalRowsParent;
 
 
     private void OnEnable()
@@ -26,13 +31,13 @@ public class LevelView : MonoBehaviour
 
         SetHighScore();
 
-
+        SetPersonalLeaderboard();
     }
 
     //Restore to default state
     private void Initialise()
     {
-        if (highScore.gameObject.activeSelf)
+        if (scoreValue.gameObject.activeSelf)
         {
             ToggleHighScore();
         }
@@ -41,13 +46,17 @@ public class LevelView : MonoBehaviour
         {
             stars.transform.GetChild(i).gameObject.SetActive(false);
         }
+
+        foreach (Transform child in personalRowsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void ToggleHighScore()
     {
         noHighScore.gameObject.SetActive(!noHighScore.gameObject.activeSelf);
-        highScore.gameObject.SetActive(!highScore.gameObject.activeSelf);
-        coins.gameObject.SetActive(!coins.gameObject.activeSelf);
+        scoreValue.gameObject.SetActive(!scoreValue.gameObject.activeSelf);
     }
 
     private void SetHighScore()
@@ -59,12 +68,26 @@ public class LevelView : MonoBehaviour
 
         ToggleHighScore();
 
-        highScore.text = "" + PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue;
-        coins.text = PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.Coins + "/6";
+        scoreValue.text = "" + PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue;
 
         for (int i = 0; i < PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.Stars; i++)
         {
             stars.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    private void SetPersonalLeaderboard()
+    {
+        List<Score> sortedScores = PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].SortScores();
+
+        foreach (Score score in sortedScores)
+        {
+            GameObject newGo = Instantiate(personalRowPrefab, personalRowsParent);
+            TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
+            texts[0].text = score.ScoreValue.ToString();
+            texts[1].text = score.Time.ToString();
+            texts[2].text = score.Coins.ToString() + "/6";
+            texts[3].text = score.Stars.ToString() + "/3";
         }
     }
 
@@ -81,6 +104,7 @@ public class LevelView : MonoBehaviour
 
     public void SwitchLeaderBoards()
     {
-
+        personalButton.interactable = !personalButton.interactable;
+        globalButton.interactable = !globalButton.interactable;
     }
 }

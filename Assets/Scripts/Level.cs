@@ -50,12 +50,16 @@ public class Level : ScriptableObject
         return 0;
     }
 
-    //"," separates parts of a score, ":" separates different scores
-    public override string ToString()
+    //"," separates parts of a score, ":" separates different scores. numberScores is the number of scores to return, sorted
+    public string ToString(int numberScores)
     {
         string scores = "";
 
-        for (int j = 0; j < Scores.Count; j++)
+        numberScores = Scores.Count < numberScores ? Scores.Count : numberScores;
+
+        SortScores();
+
+        for (int j = 0; j < numberScores; j++)
         {
             scores += Scores[j].ScoreValue + "," + Scores[j].Time + "," + Scores[j].Coins + "," + Scores[j].Stars;
 
@@ -66,5 +70,12 @@ public class Level : ScriptableObject
         }
 
         return scores;
+    }
+
+    public List<Score> SortScores()
+    {
+        Scores.Sort((a, b) => b.ScoreValue.CompareTo(a.ScoreValue));
+
+        return Scores;
     }
 }
