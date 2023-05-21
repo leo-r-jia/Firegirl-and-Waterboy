@@ -58,16 +58,6 @@ public class PlayerData : MonoBehaviour
             Levels[i] = ScriptableObject.CreateInstance<Level>();
             Levels[i].Initialise(i + 1);
         }
-
-        System.Random rand = new System.Random();
-
-        /*for (int i = 0; i < Levels.Length; i++)
-        {
-            for (int j = 0; j < rand.Next(5, 20); j++)
-            {
-                Levels[i].AddNewScore(rand.Next(10000, 100000), rand.Next(100, 300), rand.Next(1,7), rand.Next(1, 4));
-            }
-        }*/
         
         UnlockNextLevel();
     }

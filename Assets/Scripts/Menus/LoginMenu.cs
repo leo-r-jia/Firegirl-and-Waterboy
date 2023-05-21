@@ -15,12 +15,9 @@ public class LoginMenu : MonoBehaviour
     public UnityEvent LoggedIn;
     public UnityEvent LoggedOut;
 
-    //On start, set the username field as selected
     private void Start()
     {
-        fieldIndexer = 0;
-        fields[fieldIndexer].Select();
-        fieldIndexer++;
+        ResetTabbing();
     }
 
     private void OnEnable()
@@ -29,8 +26,14 @@ public class LoginMenu : MonoBehaviour
         PlayFabManager.Instance.LoggedOut.RemoveAllListeners();
         PlayFabManager.Instance.LoggedIn.AddListener(LoginSuccessful);
         PlayFabManager.Instance.LoggedOut.AddListener(LogoutSuccessful);
+    }
 
-        ClearFields();
+    //Set tabbing back to the Username field
+    private void ResetTabbing()
+    {
+        fieldIndexer = 0;
+        fields[fieldIndexer].Select();
+        fieldIndexer++;
     }
 
     public void CreateAccount()
@@ -40,21 +43,25 @@ public class LoginMenu : MonoBehaviour
         PlayFabManager.Instance.CreateAccount(usernameInput.text, passwordInput.text);
     }
 
-    private void LoginSuccessful()
-    {
-        LoggedIn.Invoke();
-    }
-
-    private void LogoutSuccessful()
-    {
-        LoggedOut.Invoke();
-    }
-
     public void Login()
     {
         if (!ValidateInput()) return;
 
         PlayFabManager.Instance.Login(usernameInput.text, passwordInput.text);
+    }
+
+    private void LoginSuccessful()
+    {
+        ClearFields();
+        ResetTabbing();
+        LoggedIn.Invoke();
+    }
+
+    private void LogoutSuccessful()
+    {
+        ClearFields();
+        ResetTabbing();
+        LoggedOut.Invoke();
     }
 
     //Perform basic input validation. Returns true if all checks pass
