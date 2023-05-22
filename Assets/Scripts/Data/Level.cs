@@ -44,6 +44,7 @@ public class Level : ScriptableObject
         {
             HighScore.SetScore(score, time, coins, stars);
 
+            PlayFabManager.Instance.SendLeaderboard(score, LevelNumber);
             return 1;
         }
 

@@ -16,8 +16,12 @@ public class LevelView : MonoBehaviour
     [SerializeField] private Button personalButton;
     [SerializeField] private Button globalButton;
 
+    [SerializeField] private GameObject personalLeaderboard;
     [SerializeField] private GameObject personalRowPrefab;
     [SerializeField] private Transform personalRowsParent;
+    [SerializeField] private GameObject globalLeaderboard;
+    [SerializeField] private GameObject globalRowPrefab;
+    [SerializeField] private Transform globalRowsParent;
 
 
     private void OnEnable()
@@ -27,7 +31,10 @@ public class LevelView : MonoBehaviour
         levelTitle.text = "LEVEL " + (PlayerData.Instance.CurrentLevel + 1);
 
         playButton.onClick.RemoveAllListeners();
-        playButton.onClick.AddListener(GoToLevel);
+        playButton.onClick.AddListener(PlayLevel);
+
+        PlayFabManager.Instance.LeaderboardGet.RemoveAllListeners();
+        PlayFabManager.Instance.LeaderboardGet.AddListener(SetGlobalLeaderboard);
 
         SetHighScore();
 
@@ -91,21 +98,42 @@ public class LevelView : MonoBehaviour
         }
     }
 
+    //Request the global leaderboard from the PlayFabManager
+    public void GetGlobalLeaderboard()
+    {
+        PlayFabManager.Instance.GetLeaderboard(PlayerData.Instance.CurrentLevel + 1);
+    }
+
+    //Invoked when PlayFabManager retrieves a leaderboard successfully
+    private void SetGlobalLeaderboard()
+    {
+        foreach (GlobalScore score in PlayFabManager.Instance.GlobalLevelLeaderboard)
+        {
+            GameObject newGo = Instantiate(globalRowPrefab, globalRowsParent);
+            TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
+            texts[0].text = score.ScoreValue.ToString();
+            texts[1].text = score.PlayerName;
+        }
+    }
+
     //Needed as initial reference to PlayerData is lost on scene change
     public void SetPlayerDataCurrentLevel(int level)
     {
         PlayerData.Instance.SetCurrentLevel(level);
     }
 
-    private void GoToLevel()
+    private void PlayLevel()
     {
         gameObject.SetActive(false);
         changeScene.LoadScene("Level " + (PlayerData.Instance.CurrentLevel + 1));
     }
 
-    public void SwitchLeaderBoards()
+    public void SwitchLeaderboards()
     {
         personalButton.interactable = !personalButton.interactable;
         globalButton.interactable = !globalButton.interactable;
+
+        personalLeaderboard.SetActive(!personalLeaderboard.activeSelf);
+        globalLeaderboard.SetActive(!globalLeaderboard.activeSelf);
     }
 }

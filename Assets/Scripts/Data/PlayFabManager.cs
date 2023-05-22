@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using TMPro;
 using UnityEngine.Events;
-
 
 //WARNING: Do not reference this script by dragging and dropping into a gameobject. Issues will arise
 public class PlayFabManager : MonoBehaviour
 {
     public UnityEvent LoggedIn;
     public UnityEvent LoggedOut;
+    public UnityEvent LeaderboardGet;
 
     public string LocalUsername { get; private set; }
     public string ErrorText { get; private set; }
+    public List<GlobalScore> GlobalLevelLeaderboard { get; private set; }
 
     #region Scene persistence
     public static PlayFabManager Instance;
@@ -147,6 +147,54 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.ForgetAllCredentials();
 
         LoggedOut.Invoke();
+    }
+
+    #endregion
+
+    #region Leaderboards
+    public void SendLeaderboard(int score, int level)
+    {
+        var request = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate> {
+                new StatisticUpdate {
+                    StatisticName = "Level" + level,
+                    Value = score
+                }
+            }
+        };
+
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
+    }
+
+    public void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
+    {
+        //Add debug if needed
+    }
+
+    public void GetLeaderboard(int level)
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "Level" + level,
+            StartPosition = 0,
+            MaxResultsCount = 20
+        };
+
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
+    }
+
+    public void OnLeaderboardGet(GetLeaderboardResult result)
+    {
+        GlobalLevelLeaderboard.Clear();
+
+        foreach (var item in result.Leaderboard)
+        {
+            GlobalScore score = ScriptableObject.CreateInstance<GlobalScore>();
+            score.SetScore(item.StatValue, item.DisplayName);
+
+            LeaderboardGet.Invoke();
+        }
     }
 
     #endregion
