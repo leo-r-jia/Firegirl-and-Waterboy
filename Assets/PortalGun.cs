@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Shoot : MonoBehaviour
+public class PortalGun : MonoBehaviour
 {
     public Transform shootingPoint;
     public GameObject bulletPrefab;

@@ -12,6 +12,10 @@ public class Portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    void Update()
+    {
         gameObject.transform.rotation = Quaternion.identity;
         if (isOrange == false)
         {
