@@ -16,19 +16,6 @@ public class Timer : MonoBehaviour
     public bool hasLimit;
     public float timerLimit;
 
-    [Header("Format Settings")]
-    public bool hasFormat;
-    public TimerFormats format;
-    private Dictionary<TimerFormats, string> timeFormats = new Dictionary<TimerFormats, string>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        timeFormats.Add(TimerFormats.Whole, "0");
-        timeFormats.Add(TimerFormats.TenthDecimal, "0.0");
-        timeFormats.Add(TimerFormats.HundredthsDecimal, "0.00");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,9 +33,14 @@ public class Timer : MonoBehaviour
         SetTimerText();
     }
 
+    public int GetTime()
+    {
+        return (int)currentTime;
+    }
+
     private void SetTimerText()
     {
-        timerText.text = hasFormat ? currentTime.ToString(timeFormats[format]) : currentTime.ToString();
+        timerText.text = currentTime.ToString("0.00");
     }
 }
 

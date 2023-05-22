@@ -9,6 +9,10 @@ public class CompleteLevel : MonoBehaviour
 {
     [SerializeField] FireExitDoor fireBool;
     [SerializeField] WaterExitDoor waterBool;
+
+    //Score manager called upon level completion
+    [SerializeField] ScoreManager scoreManager;
+
     public GameObject completeLevelMenu;
 
     private bool atWaterDoor = false;
@@ -40,6 +44,7 @@ public class CompleteLevel : MonoBehaviour
     {
         Time.timeScale = 0f;
         completeLevelMenu.SetActive(true);
+        scoreManager.LevelComplete();
         Cursor.visible = true;
         InputSystem.DisableDevice(Keyboard.current);
         LevelComplete.Invoke();
