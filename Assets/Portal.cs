@@ -12,7 +12,8 @@ public class Portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(isOrange == false)
+        gameObject.transform.rotation = Quaternion.identity;
+        if (isOrange == false)
         {
             destination = GameObject.FindGameObjectWithTag("Orange Portal").GetComponent<Transform>();
         }
