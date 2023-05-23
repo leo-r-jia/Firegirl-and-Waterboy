@@ -26,6 +26,7 @@ public class ScoreManager : MonoBehaviour
         scoreLevelComplete.text = score + "";
 
         PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].AddNewScore(score, timer.GetTime(), coins, starsValue);
+        PlayerData.Instance.UnlockNextLevel();
         PlayFabManager.Instance.SavePlayer();
     }
 

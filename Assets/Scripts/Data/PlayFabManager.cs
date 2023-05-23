@@ -8,17 +8,18 @@ using UnityEngine.Events;
 public class PlayFabManager : MonoBehaviour
 {
     public UnityEvent LoggedIn;
+    public UnityEvent GuestLoggedIn;
     public UnityEvent LoggedOut;
     public UnityEvent LeaderboardGet;
 
     public string LocalUsername { get; private set; }
-    public bool IsGuest { get; private set; }
+    public bool LoggedInAsGuest { get; private set; }
     public string ErrorText { get; private set; }
     public List<GlobalScore> GlobalLevelLeaderboard { get; private set; }
 
     private void Start()
     {
-        IsGuest = true;
+        LoggedInAsGuest = false;
         GlobalLevelLeaderboard = new List<GlobalScore>();
     }
 
@@ -82,7 +83,7 @@ public class PlayFabManager : MonoBehaviour
     //Guest login to allow access to global leaderboards
     public void LoginAsGuest()
     {
-        if (PlayerData.Instance.Username != null || !IsGuest) return;
+        if (PlayerData.Instance.Username != null || LoggedInAsGuest) return;
 
         var request = new LoginWithCustomIDRequest
         {
@@ -97,7 +98,7 @@ public class PlayFabManager : MonoBehaviour
     //On successfully registering, save the player's data and set their username
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        IsGuest = false;
+        LoggedInAsGuest = false;
         PlayerData.Instance.Username = LocalUsername;
         SavePlayer();
         LoggedIn.Invoke();
@@ -108,8 +109,13 @@ public class PlayFabManager : MonoBehaviour
     {
         if (LocalUsername != null)
         {
-            IsGuest = false;
+            LoggedInAsGuest = false;
             LoadPlayer();
+        }
+        else
+        {
+            LoggedInAsGuest = true;
+            GuestLoggedIn.Invoke();
         }
     }
 
@@ -123,7 +129,7 @@ public class PlayFabManager : MonoBehaviour
 
     #region Player data
     //See OnDataRecieved
-    public void LoadPlayer() {
+    private void LoadPlayer() {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
     }
 
@@ -133,14 +139,14 @@ public class PlayFabManager : MonoBehaviour
         if (result.Data != null && result.Data.ContainsKey("Unlocked Levels") && result.Data.ContainsKey("Level Scores"))
         {
             PlayerData.Instance.LoadPlayer(LocalUsername, result.Data["Unlocked Levels"].Value, result.Data["Level Scores"].Value);
-
-            LoggedIn.Invoke();
         }
         else
         {
             //Player data format has changed/a new level has been added
             Debug.Log("Player data incomplete and could not be loaded!");
         }
+
+        LoggedIn.Invoke();
     }
 
     //Save a player's data to PlayFab
@@ -174,7 +180,10 @@ public class PlayFabManager : MonoBehaviour
         
         foreach (Level level in PlayerData.Instance.Levels)
         {
-            SendLeaderboard(level.HighScore.ScoreValue, level.LevelNumber);
+            if (level.HighScore.ScoreValue > 0)
+            {
+                SendLeaderboard(level.HighScore.ScoreValue, level.LevelNumber);
+            }
         }
 
         PlayerData.Instance.InitialisePlayer();
@@ -182,7 +191,7 @@ public class PlayFabManager : MonoBehaviour
         //Not an API call, just clears login credentials within Unity. A player's session ticket is valid for 24 hours
         PlayFabClientAPI.ForgetAllCredentials();
         LocalUsername = null;
-        IsGuest = true;
+        LoggedInAsGuest = false;
 
         LoggedOut.Invoke();
     }
@@ -205,7 +214,7 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
     }
 
-    public void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
+    private void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
     {
         //Add debug if needed
     }
@@ -222,7 +231,7 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
 
-    public void OnLeaderboardGet(GetLeaderboardResult result)
+    private void OnLeaderboardGet(GetLeaderboardResult result)
     {
         GlobalLevelLeaderboard.Clear();
 

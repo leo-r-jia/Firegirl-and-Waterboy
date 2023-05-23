@@ -22,40 +22,31 @@ public class LevelView : MonoBehaviour
     [SerializeField] private GameObject globalRowPrefab;
     [SerializeField] private Transform globalRowsParent;
 
-
     private void OnEnable()
     {
         Initialise();
 
         levelTitle.text = "LEVEL " + (PlayerData.Instance.CurrentLevel + 1);
 
-        playButton.onClick.RemoveAllListeners();
-        playButton.onClick.AddListener(PlayLevel);
-
         PlayFabManager.Instance.LeaderboardGet.RemoveAllListeners();
         PlayFabManager.Instance.LeaderboardGet.AddListener(SetGlobalLeaderboard);
+        PlayFabManager.Instance.GuestLoggedIn.RemoveAllListeners();
+        PlayFabManager.Instance.GuestLoggedIn.AddListener(GetGlobalLeaderboard);
 
         SetHighScore();
 
         SetPersonalLeaderboard();
 
-        GetGlobalLeaderboard();
+        if (PlayFabManager.Instance.LoggedInAsGuest || PlayerData.Instance.Username != null)
+        {
+            GetGlobalLeaderboard();
+        }
     }
 
     //Restore to default state
     private void Initialise()
     {
         if (scoreValue.gameObject.activeSelf) ToggleHighScore();
-
-        foreach (Transform child in personalRowsParent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (Transform child in globalRowsParent.transform)
-        {
-            Destroy(child.gameObject);
-        }
 
         if (!personalLeaderboard.activeSelf) SwitchLeaderboards();
     }
@@ -77,6 +68,8 @@ public class LevelView : MonoBehaviour
 
     private void SetPersonalLeaderboard()
     {
+        ClearLeaderboard(personalRowsParent);
+
         List<Score> sortedScores = PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].SortScores();
 
         foreach (Score score in sortedScores)
@@ -99,6 +92,8 @@ public class LevelView : MonoBehaviour
     //Invoked when PlayFabManager retrieves a leaderboard successfully
     private void SetGlobalLeaderboard()
     {
+        ClearLeaderboard(globalRowsParent);
+
         int rank = 1;
 
         foreach (GlobalScore score in PlayFabManager.Instance.GlobalLevelLeaderboard)
@@ -108,6 +103,14 @@ public class LevelView : MonoBehaviour
             texts[0].text = rank++.ToString();
             texts[1].text = score.PlayerName;
             texts[2].text = score.ScoreValue.ToString();
+        }
+    }
+
+    private void ClearLeaderboard(Transform rowParent)
+    {
+        foreach (Transform child in rowParent.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
@@ -126,9 +129,8 @@ public class LevelView : MonoBehaviour
         PlayerData.Instance.SetCurrentLevel(level);
     }
 
-    private void PlayLevel()
+    public void PlayLevel()
     {
-        gameObject.SetActive(false);
         changeScene.LoadScene("Level " + (PlayerData.Instance.CurrentLevel + 1));
     }
 }

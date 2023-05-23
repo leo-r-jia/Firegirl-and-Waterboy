@@ -9,6 +9,7 @@ public class LoginMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private TMP_InputField usernameInput, passwordInput;
+    [SerializeField] private UnityEngine.UI.Button backButton, loginButton, createAccountButton;
     [SerializeField] private List<TMP_InputField> fields;
     private int fieldIndexer;
 
@@ -26,6 +27,8 @@ public class LoginMenu : MonoBehaviour
         PlayFabManager.Instance.LoggedOut.RemoveAllListeners();
         PlayFabManager.Instance.LoggedIn.AddListener(LoginSuccessful);
         PlayFabManager.Instance.LoggedOut.AddListener(LogoutSuccessful);
+
+        SetButtonsInteractable(true);
     }
 
     //Set tabbing back to the Username field
@@ -36,10 +39,18 @@ public class LoginMenu : MonoBehaviour
         fieldIndexer++;
     }
 
+    private void SetButtonsInteractable(bool interactable)
+    {
+        loginButton.interactable = interactable;
+        createAccountButton.interactable = interactable;
+        backButton.interactable = interactable;
+    }
+
     public void CreateAccount()
     {
         if (!ValidateInput()) return;
 
+        SetButtonsInteractable(false);
         PlayFabManager.Instance.CreateAccount(usernameInput.text, passwordInput.text);
     }
 
@@ -47,6 +58,7 @@ public class LoginMenu : MonoBehaviour
     {
         if (!ValidateInput()) return;
 
+        SetButtonsInteractable(false);
         PlayFabManager.Instance.Login(usernameInput.text, passwordInput.text);
     }
 
@@ -100,6 +112,7 @@ public class LoginMenu : MonoBehaviour
         if (PlayFabManager.Instance.ErrorText != null)
         {
             messageText.text = PlayFabManager.Instance.ErrorText;
+            SetButtonsInteractable(true);
         }
 
         //If tab key is pressed, set the next InputField in the list as selected
