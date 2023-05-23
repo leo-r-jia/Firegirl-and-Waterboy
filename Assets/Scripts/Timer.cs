@@ -42,12 +42,6 @@ public class Timer : MonoBehaviour
     {
         timerText.text = currentTime.ToString("0.00");
     }
-
-    //Save the player's time on level complete
-    public void SaveTimeToPlayer()
-    {
-        PlayerData.Instance.UpdateBestTimes(float.Parse(timerText.text));
-    }
 }
 
 public enum TimerFormats

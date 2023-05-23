@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
@@ -15,9 +12,23 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI scoreLevelComplete;
 
     [SerializeField] public TextMeshProUGUI stars;
+    private int starsValue;
 
     [SerializeField] public Timer timer;
     private int score = 0;
+
+    //Level complete
+    public void LevelComplete()
+    {
+        CalculateFinalScore();
+        CalculateStars();
+        coinsCollectedLevelComplete.text = coins + "/6";
+        scoreLevelComplete.text = score + "";
+
+        PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].AddNewScore(score, timer.GetTime(), coins, starsValue);
+        PlayerData.Instance.UnlockNextLevel();
+        PlayFabManager.Instance.SavePlayer();
+    }
 
     //Update coins collected
     public void UpdateScore()
@@ -26,30 +37,27 @@ public class ScoreManager : MonoBehaviour
         coinsCollected.text = "Coins: " + coins;
     }
 
-    //Level complete
-    public void LevelComplete()
-    {
-        CalculateFinalScore();
-        CalculateStars();
-        coinsCollectedLevelComplete.text = coins + "/6";
-        scoreLevelComplete.text = score +"";
-    }
-
     private void CalculateStars()
     {
-        if(score < 10000)
+        if (score < 10000)
         {
             stars.text = "☆☆☆";
+            starsValue = 0;
         }
         else if (score <= 22500)
         {
             stars.text = "★☆☆";
-        } else if (score > 22000 && score <= 60000)
+            starsValue = 1;
+        }
+        else if (score > 22000 && score <= 60000)
         {
             stars.text = "★★☆";
-        } else
+            starsValue = 2;
+        }
+        else
         {
             stars.text = "★★★";
+            starsValue = 3;
         }
     }
 
@@ -59,11 +67,5 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         //Calculate final score based on coins collected and time taken
         score = coins * 10000 + (5000 - timer.GetTime());
-    }
-
-    //Add the coins collected this level to the player
-    public void AddCoinsToPlayer()
-    {
-        PlayerData.Instance.AddCoins(coins);
     }
 }
