@@ -2,20 +2,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUnlocker : MonoBehaviour
+public class LevelMenu : MonoBehaviour
 {
     [SerializeField] private bool doLevelLocking = false;
 
-    public void OnEnable()
+    private void OnEnable()
     {
-        if (!doLevelLocking) return;
+        if (doLevelLocking) UnlockLevels();
+    }
 
+    private void UnlockLevels()
+    {
         //For every level button, set its state
         foreach (Transform level in transform.GetComponentsInChildren<Transform>())
         {
             if (level.name.ContainsInsensitive("level "))
             {
-                Button btn = (Button) level.GetComponent<Button>();
+                Button btn = (Button)level.GetComponent<Button>();
 
                 btn.interactable = GetUnlocked(level);
             }

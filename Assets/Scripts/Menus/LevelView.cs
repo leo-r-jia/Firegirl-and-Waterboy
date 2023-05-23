@@ -9,7 +9,6 @@ public class LevelView : MonoBehaviour
     [SerializeField] private TMP_Text levelTitle;
     [SerializeField] private TMP_Text noHighScore;
     [SerializeField] private TMP_Text scoreValue;
-    [SerializeField] private GameObject stars;
     [SerializeField] private Button playButton;
     [SerializeField] private ChangeScene changeScene;
 
@@ -39,25 +38,26 @@ public class LevelView : MonoBehaviour
         SetHighScore();
 
         SetPersonalLeaderboard();
+
+        GetGlobalLeaderboard();
     }
 
     //Restore to default state
     private void Initialise()
     {
-        if (scoreValue.gameObject.activeSelf)
-        {
-            ToggleHighScore();
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            stars.transform.GetChild(i).gameObject.SetActive(false);
-        }
+        if (scoreValue.gameObject.activeSelf) ToggleHighScore();
 
         foreach (Transform child in personalRowsParent.transform)
         {
             Destroy(child.gameObject);
         }
+
+        foreach (Transform child in globalRowsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        if (!personalLeaderboard.activeSelf) SwitchLeaderboards();
     }
 
     private void ToggleHighScore()
@@ -68,19 +68,11 @@ public class LevelView : MonoBehaviour
 
     private void SetHighScore()
     {
-        if (PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue == 0)
-        {
-            return;
-        }
+        if (PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue == 0) return;
 
         ToggleHighScore();
 
         scoreValue.text = "" + PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.ScoreValue;
-
-        for (int i = 0; i < PlayerData.Instance.Levels[PlayerData.Instance.CurrentLevel].HighScore.Stars; i++)
-        {
-            stars.transform.GetChild(i).gameObject.SetActive(true);
-        }
     }
 
     private void SetPersonalLeaderboard()
@@ -107,13 +99,25 @@ public class LevelView : MonoBehaviour
     //Invoked when PlayFabManager retrieves a leaderboard successfully
     private void SetGlobalLeaderboard()
     {
+        int rank = 1;
+
         foreach (GlobalScore score in PlayFabManager.Instance.GlobalLevelLeaderboard)
         {
             GameObject newGo = Instantiate(globalRowPrefab, globalRowsParent);
             TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
-            texts[0].text = score.ScoreValue.ToString();
+            texts[0].text = rank++.ToString();
             texts[1].text = score.PlayerName;
+            texts[2].text = score.ScoreValue.ToString();
         }
+    }
+
+    public void SwitchLeaderboards()
+    {
+        personalButton.interactable = !personalButton.interactable;
+        globalButton.interactable = !globalButton.interactable;
+
+        personalLeaderboard.SetActive(!personalLeaderboard.activeSelf);
+        globalLeaderboard.SetActive(!globalLeaderboard.activeSelf);
     }
 
     //Needed as initial reference to PlayerData is lost on scene change
@@ -126,14 +130,5 @@ public class LevelView : MonoBehaviour
     {
         gameObject.SetActive(false);
         changeScene.LoadScene("Level " + (PlayerData.Instance.CurrentLevel + 1));
-    }
-
-    public void SwitchLeaderboards()
-    {
-        personalButton.interactable = !personalButton.interactable;
-        globalButton.interactable = !globalButton.interactable;
-
-        personalLeaderboard.SetActive(!personalLeaderboard.activeSelf);
-        globalLeaderboard.SetActive(!globalLeaderboard.activeSelf);
     }
 }

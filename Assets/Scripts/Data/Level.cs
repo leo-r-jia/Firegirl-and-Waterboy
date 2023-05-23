@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : ScriptableObject
@@ -44,7 +44,11 @@ public class Level : ScriptableObject
         {
             HighScore.SetScore(score, time, coins, stars);
 
-            PlayFabManager.Instance.SendLeaderboard(score, LevelNumber);
+            if (PlayerData.Instance.Username != null)
+            {
+                PlayFabManager.Instance.SendLeaderboard(score, LevelNumber);
+            }
+
             return 1;
         }
 

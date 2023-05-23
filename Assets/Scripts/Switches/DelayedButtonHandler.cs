@@ -34,7 +34,7 @@ public class DelayedButtonHandler : SwitchHandler
         }
         else if (!Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer))
         {
-            state = false;
+            state = false;  
         }
 
         //If the button's value has changed

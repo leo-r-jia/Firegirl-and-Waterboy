@@ -12,8 +12,15 @@ public class PlayFabManager : MonoBehaviour
     public UnityEvent LeaderboardGet;
 
     public string LocalUsername { get; private set; }
+    public bool IsGuest { get; private set; }
     public string ErrorText { get; private set; }
     public List<GlobalScore> GlobalLevelLeaderboard { get; private set; }
+
+    private void Start()
+    {
+        IsGuest = true;
+        GlobalLevelLeaderboard = new List<GlobalScore>();
+    }
 
     #region Scene persistence
     public static PlayFabManager Instance;
@@ -37,6 +44,7 @@ public class PlayFabManager : MonoBehaviour
     //When the register button is clicked
     public void CreateAccount(string username, string password)
     {
+        PlayFabClientAPI.ForgetAllCredentials();
         ErrorText = null;
         LocalUsername = username;
 
@@ -45,6 +53,7 @@ public class PlayFabManager : MonoBehaviour
         {
             Username = username,
             Password = password,
+            DisplayName = username,
             RequireBothUsernameAndEmail = false
         };
 
@@ -55,6 +64,7 @@ public class PlayFabManager : MonoBehaviour
     //When the login button is clicked
     public void Login(string username, string password)
     {
+        PlayFabClientAPI.ForgetAllCredentials();
         ErrorText = null;
         LocalUsername = username;
 
@@ -69,18 +79,38 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnError);
     }
 
+    //Guest login to allow access to global leaderboards
+    public void LoginAsGuest()
+    {
+        if (PlayerData.Instance.Username != null || !IsGuest) return;
+
+        var request = new LoginWithCustomIDRequest
+        {
+            TitleId = "AB628",
+            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CreateAccount = true
+        };
+
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
+    }
+
     //On successfully registering, save the player's data and set their username
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
+        IsGuest = false;
         PlayerData.Instance.Username = LocalUsername;
         SavePlayer();
         LoggedIn.Invoke();
     }
 
-    //Load the player if they successfully log in
+    //On success of logging in as either guest or with credentials
     private void OnLoginSuccess(LoginResult result)
     {
-        LoadPlayer();
+        if (LocalUsername != null)
+        {
+            IsGuest = false;
+            LoadPlayer();
+        }
     }
 
     //If an error occurs, update the user and also print a detailed report to the console
@@ -141,10 +171,18 @@ public class PlayFabManager : MonoBehaviour
     {
         //Save and then reset the player
         SavePlayer();
+        
+        foreach (Level level in PlayerData.Instance.Levels)
+        {
+            SendLeaderboard(level.HighScore.ScoreValue, level.LevelNumber);
+        }
+
         PlayerData.Instance.InitialisePlayer();
 
         //Not an API call, just clears login credentials within Unity. A player's session ticket is valid for 24 hours
         PlayFabClientAPI.ForgetAllCredentials();
+        LocalUsername = null;
+        IsGuest = true;
 
         LoggedOut.Invoke();
     }
@@ -178,7 +216,7 @@ public class PlayFabManager : MonoBehaviour
         {
             StatisticName = "Level" + level,
             StartPosition = 0,
-            MaxResultsCount = 20
+            MaxResultsCount = 100
         };
 
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
@@ -192,10 +230,10 @@ public class PlayFabManager : MonoBehaviour
         {
             GlobalScore score = ScriptableObject.CreateInstance<GlobalScore>();
             score.SetScore(item.StatValue, item.DisplayName);
-
-            LeaderboardGet.Invoke();
+            GlobalLevelLeaderboard.Add(score);
         }
-    }
 
+        LeaderboardGet.Invoke();
+    }
     #endregion
 }

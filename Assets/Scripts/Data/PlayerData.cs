@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using System;
 
 //WARNING: Do not reference this script by dragging and dropping into a gameobject. Issues will arise
 public class PlayerData : MonoBehaviour
@@ -32,7 +31,7 @@ public class PlayerData : MonoBehaviour
     #endregion
 
     //On first run set the number of levels and initialise
-    public void Start()
+    void Start()
     {
         foreach (Transform child in levelMenu.transform.GetComponentsInChildren<Transform>())
         {
