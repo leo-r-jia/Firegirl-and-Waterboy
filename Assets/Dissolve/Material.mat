@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DissolveMaterial
+  m_Name: Material
   m_Shader: {fileID: -6465566751694194690, guid: 828fe53419c1c314681783be5a378fa9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -38,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Fade: 0.61
+    - _Fade: 1
     - _Scale: 29.45
     m_Colors:
     - _Color: {r: 145.31857, g: 18.259926, b: 2.2824907, a: 0}

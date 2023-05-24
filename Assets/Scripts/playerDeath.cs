@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Threading;
 
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] public bool fireWeakness = false;
+    private Material material;
+    private float fade = 1f;
+    private bool animationComplete = false;
     public GameObject gameOverMenu;
 
     public UnityEvent OnDeath;
@@ -27,10 +31,29 @@ public class PlayerDeath : MonoBehaviour
     // Opens game over menu and invokes the death event
     private void Die()
     {
-        Time.timeScale = 0f;
-        gameOverMenu.SetActive(true);
-        Cursor.visible = true;
-        InputSystem.DisableDevice(Keyboard.current);
-        OnDeath.Invoke();
+        DeathAnimation();
+        if (animationComplete)
+        {
+            Time.timeScale = 0f;
+            gameOverMenu.SetActive(true);
+            Cursor.visible = true;
+            InputSystem.DisableDevice(Keyboard.current);
+            OnDeath.Invoke();
+            material.SetFloat("_Fade", 1f);
+        }
+    }
+
+    //Death animation
+    private void DeathAnimation()
+    {
+        material = GetComponent<SpriteRenderer>().material;
+        
+        while (fade > 0)
+        {
+            fade -= 0.05f;
+            Thread.Sleep(50);
+            material.SetFloat("_Fade", fade);
+        }
+        animationComplete = true;
     }
 }
