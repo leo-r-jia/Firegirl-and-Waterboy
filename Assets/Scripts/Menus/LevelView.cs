@@ -26,13 +26,6 @@ public class LevelView : MonoBehaviour
     {
         Initialise();
 
-        levelTitle.text = "LEVEL " + (PlayerData.Instance.CurrentLevel + 1);
-
-        PlayFabManager.Instance.LeaderboardGet.RemoveAllListeners();
-        PlayFabManager.Instance.LeaderboardGet.AddListener(SetGlobalLeaderboard);
-        PlayFabManager.Instance.GuestLoggedIn.RemoveAllListeners();
-        PlayFabManager.Instance.GuestLoggedIn.AddListener(GetGlobalLeaderboard);
-
         SetHighScore();
 
         SetPersonalLeaderboard();
@@ -49,6 +42,13 @@ public class LevelView : MonoBehaviour
         if (scoreValue.gameObject.activeSelf) ToggleHighScore();
 
         if (!personalLeaderboard.activeSelf) SwitchLeaderboards();
+
+        levelTitle.text = "LEVEL " + (PlayerData.Instance.CurrentLevel + 1);
+
+        PlayFabManager.Instance.LeaderboardGet.RemoveAllListeners();
+        PlayFabManager.Instance.LeaderboardGet.AddListener(SetGlobalLeaderboard);
+        PlayFabManager.Instance.GuestLoggedIn.RemoveAllListeners();
+        PlayFabManager.Instance.GuestLoggedIn.AddListener(GetGlobalLeaderboard);
     }
 
     private void ToggleHighScore()
