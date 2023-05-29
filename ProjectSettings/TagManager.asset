@@ -61,3 +61,6 @@ TagManager:
   - name: Switch Base
     uniqueID: 3658711493
     locked: 0
+  - name: Obstacles
+    uniqueID: 1978062201
+    locked: 0
