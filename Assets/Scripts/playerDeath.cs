@@ -11,6 +11,8 @@ public class PlayerDeath : MonoBehaviour
     [SerializeField] public bool fireWeakness = false;
     public GameObject gameOverMenu;
 
+    [SerializeField] private AudioSource deathSoundEffect;
+
     public UnityEvent OnDeath;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,6 +29,7 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
+        deathSoundEffect.Play();
         DissolveManager dissolveManager = GetComponent<DissolveManager>();
         dissolveManager.Dissolve(3.5f);
         InputSystem.DisableDevice(Keyboard.current);
