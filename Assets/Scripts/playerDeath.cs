@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Threading;
 
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] public bool fireWeakness = false;
     public GameObject gameOverMenu;
+
+    [SerializeField] private AudioSource deathSoundEffect;
 
     public UnityEvent OnDeath;
 
@@ -24,13 +27,24 @@ public class PlayerDeath : MonoBehaviour
         }
     }
 
-    // Opens game over menu and invokes the death event
-    private void Die()
+    private IEnumerator DieCoroutine()
     {
+        deathSoundEffect.Play();
+        DissolveManager dissolveManager = GetComponent<DissolveManager>();
+        dissolveManager.Dissolve(3.5f);
+        InputSystem.DisableDevice(Keyboard.current);
+
+        yield return new WaitForSeconds(0.5f); // Wait for 0.6 second
+
         Time.timeScale = 0f;
         gameOverMenu.SetActive(true);
         Cursor.visible = true;
-        InputSystem.DisableDevice(Keyboard.current);
         OnDeath.Invoke();
+    }
+
+    // Opens game over menu and invokes the death event
+    private void Die()
+    {
+        StartCoroutine(DieCoroutine());
     }
 }
