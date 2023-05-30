@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6326246887780154229}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -54.03, y: -9.67, z: 0}
   m_LocalScale: {x: 0.5175664, y: 2.8469, z: 2.8469}
   m_ConstrainProportionsScale: 0
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 3
 --- !u!70 &6326246887780154233
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOrange: 1
   distance: 0.2
+  isLeft: 0
+  isRight: 0
+  player: {fileID: 0}
+  portalThrust: 1000

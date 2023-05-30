@@ -16,6 +16,8 @@ TagManager:
   - Orange Portal
   - HorizontalWall
   - VerticalWall
+  - OrangeShot
+  - BlueShot
   layers:
   - Default
   - TransparentFX
