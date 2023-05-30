@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ public class PlayerData : MonoBehaviour
     {
         foreach (Transform child in levelMenu.transform.GetComponentsInChildren<Transform>())
         {
-            if (child.gameObject.transform.name.ContainsInsensitive("level"))
+            if (child.gameObject.transform.name.Contains("Level"))
             {
                 NumLevels++;
             }
@@ -66,7 +67,7 @@ public class PlayerData : MonoBehaviour
     {
         if (level < 1 || level > NumLevels)
         {
-            return;
+            throw new ArgumentException("Invalid level");
         }
 
         CurrentLevel = level - 1;
