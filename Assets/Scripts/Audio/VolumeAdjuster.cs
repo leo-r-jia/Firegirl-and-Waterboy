@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 //Set volumes in AudioManager from sliders on value changed
 public class VolumeAdjuster : MonoBehaviour
 {
-    public void SetSFXVolume(float volume)
+    [SerializeField] Slider sfxSlider;
+    [SerializeField] Slider musicSlider;
+
+    public void SetSFXVolume()
     {
-        AudioManager.Instance.SFXVolume = volume;
+        AudioManager.Instance.SFXVolume = sfxSlider.normalizedValue;
     }
 
-    public void SetMusicVolume(float volume)
+    public void SetMusicVolume()
     {
-        AudioManager.Instance.MusicVolume = volume;
+        AudioManager.Instance.MusicVolume = musicSlider.normalizedValue;
     }
 }

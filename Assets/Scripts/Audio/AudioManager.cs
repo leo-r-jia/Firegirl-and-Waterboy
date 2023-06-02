@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
-            s.source.loop = s.isMusic;
+            s.source.loop = s.loop;
         }
     }
 
@@ -65,8 +65,11 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.volume = SFXVolume;
-            s.source.volume = SFXVolume;
+            if (!s.isMusic)
+            {
+                s.volume = SFXVolume;
+                s.source.volume = SFXVolume;
+            }
         }
     }
 
@@ -74,8 +77,11 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.volume = SFXVolume;
-            s.source.volume = SFXVolume;
+            if (s.isMusic)
+            {
+                s.volume = MusicVolume;
+                s.source.volume = MusicVolume;
+            }
         }
     }
 

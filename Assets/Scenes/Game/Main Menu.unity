@@ -3155,60 +3155,70 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f0c8566a977a1f24e9948bbb4c424c30, type: 3}
     volume: 1
     pitch: 1.8
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Jump P1
     clip: {fileID: 8300000, guid: b6ce84f72912bae4eb5de7a15b62254e, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Jump P2
     clip: {fileID: 8300000, guid: 052faf18d71b53b48ac9a6bbae17443d, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Land P1
     clip: {fileID: 8300000, guid: 44c9ad01139146244ae9330b25c2d29a, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Land P2
     clip: {fileID: 8300000, guid: adafeda5abcf2084eb91194d626ced60, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Run P1
     clip: {fileID: 8300000, guid: a4b1737a458442144b7a662814e0c9c9, type: 3}
     volume: 1
     pitch: 1
+    loop: 1
     isMusic: 0
     source: {fileID: 0}
   - name: Run P2
     clip: {fileID: 8300000, guid: 42fb1b0ad6c08db45a5cb5f3bae3bd2e, type: 3}
     volume: 1
     pitch: 1
+    loop: 1
     isMusic: 0
     source: {fileID: 0}
   - name: Collected P1
     clip: {fileID: 8300000, guid: 9c84f009991081d429c0b832a5d5ad30, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Collected P2
     clip: {fileID: 8300000, guid: f9bb21814aa8549488f36126ae7e70f3, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
   - name: Switch
     clip: {fileID: 8300000, guid: cd34f51360ddabc4d948ecd80d517ccf, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     isMusic: 0
     source: {fileID: 0}
 --- !u!1 &469913528
@@ -8404,6 +8414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d70f3b4551e65c498d41420d0fa5922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxSlider: {fileID: 1535157020}
+  musicSlider: {fileID: 1821427763}
 --- !u!1 &1228822322
 GameObject:
   m_ObjectHideFlags: 0
@@ -11002,16 +11014,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 174098017}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1185708924}
         m_TargetAssemblyTypeName: VolumeAdjuster, Scripts
         m_MethodName: SetSFXVolume
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12675,16 +12687,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1779444894}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1185708924}
         m_TargetAssemblyTypeName: VolumeAdjuster, Scripts
         m_MethodName: SetMusicVolume
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
