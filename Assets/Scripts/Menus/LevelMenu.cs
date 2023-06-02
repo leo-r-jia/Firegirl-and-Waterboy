@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class LevelMenu : MonoBehaviour
 {
     [SerializeField] private bool doLevelLocking = false;
+    [SerializeField] private GameObject levelView;
 
     private void OnEnable()
     {
+        levelView.SetActive(false);
         if (doLevelLocking) UnlockLevels();
     }
 

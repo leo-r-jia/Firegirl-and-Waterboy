@@ -9,20 +9,29 @@ public class ObjectMover : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private AnimationCurve curve;
 
+    [SerializeField] private SwitchHandler[] andSwitches;
+    [SerializeField] private SwitchHandler[] orSwitches;
+    [SerializeField] private bool useOrSwitches;
+
     private Vector2 initialPosition, currentPosition, calledPosition;
     private float elapsedTime, scaledDuration;
     private bool movingToFinal;
 
     //Set the object's initial position to where it is on Start and scaledDuration to duration
-    void Start()
+    private void Start()
     {
         initialPosition = transform.position;
         scaledDuration = duration;
     }
 
     //Move the object to its destination if it isn't already there
-    public void Update()
+    private void Update()
     {
+        if (andSwitches.Length != 0 && !useOrSwitches || orSwitches.Length != 0 && useOrSwitches)
+        {
+            DoMovementWithSwitchArrays();
+        }
+
         currentPosition = transform.position;
 
         if (movingToFinal && currentPosition != finalPosition)
@@ -33,6 +42,45 @@ public class ObjectMover : MonoBehaviour
         {
             Move(initialPosition);
         }
+    }
+
+    //Set whether the object is moving to which position dependant on arrays of switches
+    private void DoMovementWithSwitchArrays()
+    {
+        if (useOrSwitches && OneOrSwitchTrue() || !useOrSwitches && AndSwitchesTrue())
+        {
+            if (!movingToFinal && currentPosition != finalPosition) 
+            {
+                MoveToFinal();
+            } 
+        }
+        else
+        {
+            if (movingToFinal && currentPosition != initialPosition) 
+            {
+                MoveToInitial();
+            }
+        }
+    }
+
+    private bool AndSwitchesTrue()
+    {
+        for (int i = 0; i < andSwitches.Length; i++)
+        {
+            if (!andSwitches[i].IsOn()) return false;
+        }
+
+        return true;
+    }
+
+    private bool OneOrSwitchTrue()
+    {
+        for (int i = 0; i < orSwitches.Length; i++)
+        {
+            if (orSwitches[i].IsOn()) return true;
+        }
+
+        return false;
     }
 
     //Call this method to send the object back to its starting position 
@@ -62,7 +110,7 @@ public class ObjectMover : MonoBehaviour
     }
 
     //Custom InverseLerp function for dealing with vectors. Returns the percentage of how far the currentPoint is from start to end
-    public static float InverseLerp(Vector2 a, Vector2 b, Vector2 value)
+    private static float InverseLerp(Vector2 a, Vector2 b, Vector2 value)
     {
         Vector2 AB = b - a;
         Vector2 AV = value - a;
