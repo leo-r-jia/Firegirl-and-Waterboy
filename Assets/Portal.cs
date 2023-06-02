@@ -45,7 +45,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "Orange Portal" && other.tag != "Blue Portal") { 
+        if(other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "PortalWall"&& other.tag != "Orange Portal" && other.tag != "Blue Portal") { 
             if (Vector2.Distance(transform.position, other.transform.position) > distance)
             {
                 StartCoroutine(Waiter(other));
