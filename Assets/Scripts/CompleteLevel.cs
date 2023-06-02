@@ -9,6 +9,8 @@ public class CompleteLevel : MonoBehaviour
 {
     [SerializeField] FireExitDoor fireBool;
     [SerializeField] WaterExitDoor waterBool;
+    [SerializeField] PlayerMovement player1;
+    [SerializeField] PlayerMovement player2;
 
     //Score manager called upon level completion
     [SerializeField] ScoreManager scoreManager;
@@ -29,14 +31,22 @@ public class CompleteLevel : MonoBehaviour
     // Checks if both players are at their exits.
     private void CompleteLevelCheck()
     { 
-        atWaterDoor = waterBool.getIsAtDoor();
-        atFireDoor = fireBool.getIsAtDoor();
+        atWaterDoor = waterBool.IsAtDoor();
+        atFireDoor = fireBool.IsAtDoor();
     
-        if(atFireDoor && atWaterDoor && !active)
+        if(atFireDoor && atWaterDoor && !active && BothPlayersAreGrounded())
         {
             active = true;
             Win();
         }
+    }
+
+    private bool BothPlayersAreGrounded()
+    {
+        if (!player1.IsGrounded() || !player2.IsGrounded())
+            return false;
+
+        return true;
     }
 
     // Opens level complete menu

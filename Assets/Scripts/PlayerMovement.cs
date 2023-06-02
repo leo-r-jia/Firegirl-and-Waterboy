@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Returns true if the player is touching the ground layer (or the top of a switch)
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
     }
