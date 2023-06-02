@@ -17,7 +17,7 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Fire") && fireWeakness == true)
+        if (collision.gameObject.CompareTag("Fire") && fireWeakness == true || collision.gameObject.CompareTag("Acid"))
         {
             Die();
         }
@@ -34,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
         dissolveManager.Dissolve(3.5f);
         InputSystem.DisableDevice(Keyboard.current);
 
-        yield return new WaitForSeconds(0.5f); // Wait for 0.6 second
+        yield return new WaitForSeconds(0.4f); // Wait for 0.4 second
 
         Time.timeScale = 0f;
         gameOverMenu.SetActive(true);
