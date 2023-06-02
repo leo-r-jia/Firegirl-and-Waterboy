@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //WARNING: Do not reference this script by dragging and dropping into a gameobject. Issues will arise

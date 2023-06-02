@@ -1,15 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
-    #region Scene persistence
-    //Declare sole instance of PlayerData
+    public Sound[] sounds;
+
+    //Declare sole instance of AudioManager
     public static AudioManager Instance;
 
-    //As soon as created
     private void Awake()
+    {
+        SetupInstance();
+
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.isMusic;
+        }
+    }
+
+    #region Scene persistence
+    void SetupInstance()
     {
         //After first launch, destroy additional instances of PlayerData
         if (Instance != null)
@@ -21,8 +36,19 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
     #endregion
 
-    public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    public void Play(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s is null)
+        {
+            Debug.Log("Sound \"" + name + "\" was not found!");
+            return;
+        }
+
+        s.source.Play();
+    }
 }
