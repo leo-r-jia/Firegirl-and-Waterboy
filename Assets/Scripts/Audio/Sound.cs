@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
+//Class for storing a sound
 [System.Serializable]
 public class Sound
 {
@@ -9,9 +10,9 @@ public class Sound
     public AudioClip clip;
 
     [Range(0f, 1f)]
-    public float volume;
+    public float volume = 1;
     [Range(.1f, 3f)]
-    public float pitch;
+    public float pitch = 1;
 
     public bool isMusic;
 

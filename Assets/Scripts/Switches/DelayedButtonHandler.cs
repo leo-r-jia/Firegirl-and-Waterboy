@@ -9,8 +9,6 @@ public class DelayedButtonHandler : SwitchHandler
     private Transform player1;
     private Transform player2;
 
-    [SerializeField] private AudioSource clickSound;
-
     //Set the button's initial states and set player ground checking objects
     public void Start()
     {
@@ -75,7 +73,7 @@ public class DelayedButtonHandler : SwitchHandler
         if (state)
         {
             //Play click sound
-            clickSound.Play();
+            AudioManager.Instance.Play("Switch");
 
             //Broadcast the button is on
             switchedOn.Invoke();

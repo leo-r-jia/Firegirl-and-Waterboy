@@ -12,6 +12,7 @@ TagManager:
   - WaterDoor
   - Coin
   - Gems
+  - Acid
   layers:
   - Default
   - TransparentFX

@@ -35,6 +35,22 @@ public class PlayerMovement : MonoBehaviour
         state = MovementState.Idle;
         anim = GetComponent<Animator>();
         InputSystem.EnableDevice(Keyboard.current);
+
+        jumpSoundEffect = GetSoundForThisPlayer("Jump");
+        landSoundEffect = GetSoundForThisPlayer("Land");
+        runSoundEffect = GetSoundForThisPlayer("Run");
+    }
+
+    AudioSource GetSoundForThisPlayer(string name)
+    {
+        AudioSource sound;
+
+        if (gameObject.name == "Player 1")
+            sound = AudioManager.Instance.GetSound(name + " P1").source;
+        else
+            sound = AudioManager.Instance.GetSound(name + " P2").source;
+
+        return sound;
     }
 
     //FixedUpdate is synced with Unity physics
