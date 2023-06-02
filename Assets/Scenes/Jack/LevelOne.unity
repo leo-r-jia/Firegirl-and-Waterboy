@@ -1990,6 +1990,7 @@ GameObject:
   - component: {fileID: 499693800}
   - component: {fileID: 499693801}
   - component: {fileID: 499693802}
+  - component: {fileID: 499693803}
   m_Layer: 6
   m_Name: Portal Gun
   m_TagString: Untagged
@@ -2078,6 +2079,100 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 767293220}
   bulletPrefab: {fileID: 5816752484465557610, guid: 297063ea323f7a84a93ebf60d273a567, type: 3}
+--- !u!114 &499693803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 795327bbb62c4ae498072b404a73279f, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e5e0b799-694c-4187-8752-73bb95e02e1a
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 029c374e-2a88-4418-ae5c-94c792b94fc9
+    m_ActionName: Player/Jump[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 132135cc253e0ce4a847eeacbd04d018, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 414713e9-ac27-4644-b34c-9908372dc3d9
+    m_ActionName: Player/Shoot[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a469a2fd-5d14-4a9f-bc49-67e2b5065ffe
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0dca24b-a202-4d1f-9be8-d9106f2652c8
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33d3b342-443e-49b8-8f13-0aa6691b7673
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f3c7ef0b-0ec9-4d2c-9732-8a304f16e7cf
+    m_ActionName: UI/Point
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 099b7eb6-13f6-4b0f-8b16-8d5398d31fed
+    m_ActionName: UI/Click
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05c2da1e-458f-4c9a-8248-c18f375bc9f8
+    m_ActionName: UI/ScrollWheel
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ca52918-ddb8-4bae-8eec-b5d259eed96b
+    m_ActionName: UI/MiddleClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c4f964df-3f67-4dbc-b307-fc839a5cbe0e
+    m_ActionName: UI/RightClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0915015b-6643-4034-bd3f-0e60161719e1
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 25ea12f2-4f9c-47c1-ae64-b7e9903cc699
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,7 +2403,7 @@ GameObject:
   m_Layer: 6
   m_Name: Shooting Point
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2320,7 +2415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538317140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -0.52, z: 0}
+  m_LocalPosition: {x: 0.54, y: -0.52, z: 0}
   m_LocalScale: {x: 0.63269997, y: 0.2654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2752,6 +2847,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 25ea12f2-4f9c-47c1-ae64-b7e9903cc699
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12c1d069-1543-404d-bc6f-482e02839bd3
+    m_ActionName: Player/Shoot[/Keyboard/rightCtrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3131,7 +3230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767293219}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.16, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0.45, y: -0.49, z: 0}
   m_LocalScale: {x: 0.6327, y: 0.2654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6501,6 +6600,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 25ea12f2-4f9c-47c1-ae64-b7e9903cc699
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 414713e9-ac27-4644-b34c-9908372dc3d9
+    m_ActionName: Player/Shoot[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -8634,7 +8737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950597, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950597, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8646,7 +8749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950597, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950597, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8658,7 +8761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950597, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3849896097595950599, guid: a116d3befd06a894392bee6c85006918, type: 3}
       propertyPath: m_Name

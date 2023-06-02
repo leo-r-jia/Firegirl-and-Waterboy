@@ -18,14 +18,14 @@ public class Portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isRight)
+        /*if (isRight)
         {
             transform.Rotate(0, 0, 180);
         }
         else if (isLeft)
         {
             transform.Rotate(0, 0, -180);
-        }
+        }*/
     }
 
     void Update()
