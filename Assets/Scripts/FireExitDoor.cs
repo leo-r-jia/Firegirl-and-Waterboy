@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class FireExitDoor : MonoBehaviour
 {
-    [SerializeField] public bool isAtFireDoor = false;
+    [SerializeField] private bool isAtFireDoor = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player1")
+        if (collision.CompareTag("Player1"))
             isAtFireDoor = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player1")
+        if (collision.CompareTag("Player1"))
             isAtFireDoor = false;
     }
 
-    public bool getIsAtDoor()
+    public bool IsAtDoor()
     {
         return isAtFireDoor;
     }

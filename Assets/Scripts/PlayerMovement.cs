@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Returns true if the player is touching the ground layer (or the top of a switch)
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
     }
@@ -167,15 +167,15 @@ public class PlayerMovement : MonoBehaviour
     //Update the player's state so that appropriate animations can be played
     private void UpdateAnimationState()
     {
-        //Set to running if the player is not touching their controls
+        //Set to idle if the player is not touching their controls
         state = (dirX == 0f) ? MovementState.Idle : MovementState.Running;
 
         if (rb.velocity.y > 1.5f)
         {
             state = MovementState.Jumping;
         }
-        else if (rb.velocity.y < -.1f)
-        {
+        else if (rb.velocity.y < -1.6f)
+        {   
             state = MovementState.Falling;
         }
 
