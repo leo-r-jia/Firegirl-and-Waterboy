@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 538317141}
-  bulletPrefab: {fileID: 5816752484465557610, guid: f534035dbc896f1469d928bcac37797e, type: 3}
+  bulletPrefab: {fileID: 5816752484465557610, guid: 297063ea323f7a84a93ebf60d273a567, type: 3}
   reloadTime: 0.5
   groundLayer:
     serializedVersion: 2
@@ -2082,7 +2082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 767293220}
-  bulletPrefab: {fileID: 5816752484465557610, guid: 297063ea323f7a84a93ebf60d273a567, type: 3}
+  bulletPrefab: {fileID: 5816752484465557610, guid: f534035dbc896f1469d928bcac37797e, type: 3}
   reloadTime: 0.5
   groundLayer:
     serializedVersion: 2

@@ -16,7 +16,7 @@ public class PortalGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isReloading)
+        if (isReloading)
         {
             return;
         }
@@ -56,45 +56,13 @@ public class PortalGun : MonoBehaviour
     }
 
 
+    // Reloads the portal gun
     IEnumerator Reload()
     {
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        
+
         currentAmmo = maxAmmo;
         isReloading = false;
     }
 }
-
-/*
- * void Start()
-    {
-        StartCoroutine(reload());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        PlayerOneShot();
-        PlayerTwoShot();
-    }
-
-    void PlayerOneShot()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && transform.parent.tag == "Player1" && blueReloaded == true)
-        {
-            reload();
-
-        }
-    }
-
-    void PlayerTwoShot()
-    {
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame && transform.parent.tag == "Player2" && orangeReloaded == true)
-        {
-            //reload(orangeReloaded);
-        }
-    }
-}
-
-*/
