@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] sounds;
 
-    private float _sfxVolume;
+    public bool SFXIsMuted { get; private set; }
+    private float _sfxVolume = 1;
     public float SFXVolume
     {
         get => _sfxVolume;
@@ -26,7 +27,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private float _musicVolume;
+    public bool MusicIsMuted { get; private set; }
+    private float _musicVolume = 1;
     public float MusicVolume
     {
         get => _musicVolume;
@@ -47,7 +49,7 @@ public class AudioManager : MonoBehaviour
     //Declare sole instance of AudioManager
     public static AudioManager Instance;
 
-    private void Awake()
+    void Awake()
     {
         SetupInstance();
 
@@ -59,6 +61,12 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+    }
+
+    void Start()
+    {
+        SFXIsMuted = false;
+        MusicIsMuted = false;
     }
 
     void AdjustSFXVolumes()
@@ -81,6 +89,32 @@ public class AudioManager : MonoBehaviour
             {
                 s.volume = MusicVolume;
                 s.source.volume = MusicVolume;
+            }
+        }
+    }
+
+    public void ToggleMuteSFX()
+    {
+        SFXIsMuted = !SFXIsMuted;
+
+        foreach (Sound s in sounds)
+        {
+            if (!s.isMusic)
+            {
+                s.source.mute = SFXIsMuted;
+            }
+        }
+    }
+
+    public void ToggleMuteMusic()
+    {
+        MusicIsMuted = !MusicIsMuted;
+
+        foreach (Sound s in sounds)
+        {
+            if (s.isMusic)
+            {
+                s.source.mute = MusicIsMuted;
             }
         }
     }

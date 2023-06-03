@@ -215,6 +215,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   delay: 5
+  switchTriggerColiider: {fileID: 7928112075154076273}
 --- !u!1 &7928112075154076275
 GameObject:
   m_ObjectHideFlags: 0

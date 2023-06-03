@@ -8,6 +8,9 @@ public class DelayedButtonHandler : SwitchHandler
     private float elapsedTime;
     private Transform player1;
     private Transform player2;
+    GameObject[] boxes;
+
+    [SerializeField] Collider2D switchTriggerColiider;
 
     //Set the button's initial states and set player ground checking objects
     public void Start()
@@ -17,12 +20,14 @@ public class DelayedButtonHandler : SwitchHandler
 
         player1 = GameObject.Find("P1 Ground Check").transform;
         player2 = GameObject.Find("P2 Ground Check").transform;
+
+        boxes = GameObject.FindGameObjectsWithTag("Box");
     }
 
     public void Update()
     {
         //Check and set the button's state
-        if (PlayerIsTouching() && Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer))
+        if ((PlayerIsTouching() || BoxIsTouching()) && Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer))
         {
             state = true;
 
@@ -65,6 +70,18 @@ public class DelayedButtonHandler : SwitchHandler
     private bool PlayerIsTouching()
     {
         return (Physics2D.OverlapCircle(player1.position, 0.3f, switchInteractionLayer) || Physics2D.OverlapCircle(player2.position, 0.3f, switchInteractionLayer));
+    }
+
+    //Check if a box is touching the switch
+    bool BoxIsTouching()
+    {
+        foreach (GameObject box in boxes)
+        {
+            if (Physics2D.IsTouching(box.GetComponent<BoxCollider2D>(), switchTriggerColiider))
+                return true;
+        }
+
+        return false;
     }
 
     //Broadcast the button's state
