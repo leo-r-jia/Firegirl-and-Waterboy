@@ -6,7 +6,7 @@ public class Shot : MonoBehaviour
 { 
     public float speed;
     public bool isRightShot;
-    public Portal bluePortal, orangePortal;
+    public Portal playerPortal;
     private GameObject player;
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -41,7 +41,7 @@ public class Shot : MonoBehaviour
 
                 // Creates portal at bullet position.
                 var portalPosition = new Vector3(transform.position.x + spacialAdjust, transform.position.y, transform.position.z); // creates new portal
-                Portal portal = Instantiate(bluePortal, portalPosition, transform.rotation) as Portal;
+                Portal portal = Instantiate(playerPortal, portalPosition, transform.rotation) as Portal;
 
                 // Checks if portal is left or right.
                 if (portal.transform.position.x > 0)
@@ -57,7 +57,7 @@ public class Shot : MonoBehaviour
 
                 // Creates portal at bullet position.
                 var portalPosition = new Vector3(transform.position.x + spacialAdjust, transform.position.y, transform.position.z); // creates new portal
-                Portal portal = Instantiate(orangePortal, portalPosition, transform.rotation) as Portal;
+                Portal portal = Instantiate(playerPortal, portalPosition, transform.rotation) as Portal;
 
                 // Checks if portal is left or right.
                 if (portal.transform.position.x > 0)

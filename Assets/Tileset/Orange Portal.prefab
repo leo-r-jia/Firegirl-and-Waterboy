@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6326246887780154229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.03, y: -9.67, z: 0}
-  m_LocalScale: {x: 0.5175664, y: 2.8469, z: 2.8469}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 2.85, z: 2.8469}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,8 +121,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.034599166, y: 0}
-  m_Size: {x: 0.3772813, y: 1.0000001}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.45, y: 1}
   m_Direction: 0
 --- !u!114 &6326246887780154234
 MonoBehaviour:
@@ -136,9 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d184a33bbccd2a34fb7682b9ab60ba6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOrange: 1
-  distance: 0.2
   isLeft: 0
   isRight: 0
-  player: {fileID: 0}
-  portalThrust: 1000
+  distance: 0.2
+  portalThrust: 500
+  teleportCooldown: 0.5
