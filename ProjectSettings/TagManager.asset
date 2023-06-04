@@ -18,6 +18,8 @@ TagManager:
   - VerticalWall
   - OrangeShot
   - BlueShot
+  - Acid
+  - Box
   layers:
   - Default
   - TransparentFX

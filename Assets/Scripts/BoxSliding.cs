@@ -5,10 +5,15 @@ using UnityEngine;
 public class BoxSliding : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private AudioSource slideSoundEffect;
+    private AudioSource slideSoundEffect;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        slideSoundEffect = AudioManager.Instance.GetSound("Box Slide").source;
+    }
+
+    //Commented as cannot find a good sound effect
+    /*void Update()
     {
         if (rb.velocity.x != 0)
         {
@@ -18,5 +23,5 @@ public class BoxSliding : MonoBehaviour
         {
             slideSoundEffect.enabled = false;
         }
-    }
+    }*/
 }

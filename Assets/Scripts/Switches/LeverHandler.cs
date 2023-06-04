@@ -5,7 +5,6 @@ using UnityEngine;
 public class LeverHandler : SwitchHandler
 {
     [SerializeField] protected Transform offCheck;
-    [SerializeField] private AudioSource clickSound;
 
     private void Start()
     {
@@ -31,14 +30,14 @@ public class LeverHandler : SwitchHandler
         {
             if (state)
             {
-                clickSound.Play();
                 switchedOn.Invoke();
             }
             else
             {
-                clickSound.Play();
                 switchedOff.Invoke();
             }
+
+            AudioManager.Instance.PlaySFX("Switch");
 
             previousState = state;
         }
