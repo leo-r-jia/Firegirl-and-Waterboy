@@ -133,13 +133,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
-    private void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
         dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
-    private void Jump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
         jumpKeyPressed = context.performed;
 

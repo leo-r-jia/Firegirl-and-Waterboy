@@ -69,7 +69,7 @@ public class PortalGun : MonoBehaviour
     }
 
     //Shoot method
-    private void Shoot(InputAction.CallbackContext context)
+    public void Shoot(InputAction.CallbackContext context)
     {
         Debug.Log("shoot");
         shootKeyPressed = context.performed;
