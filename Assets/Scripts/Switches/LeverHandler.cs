@@ -37,7 +37,7 @@ public class LeverHandler : SwitchHandler
                 switchedOff.Invoke();
             }
 
-            AudioManager.Instance.Play("Switch");
+            AudioManager.Instance.PlaySFX("Switch");
 
             previousState = state;
         }

@@ -17,9 +17,9 @@ public class ItemCollector : MonoBehaviour
             scoreManager.UpdateScore();
 
             if (gameObject.name == "Player 1")
-                AudioManager.Instance.Play("Collected P1");
+                AudioManager.Instance.PlaySFX("Collected P1");
             else
-                AudioManager.Instance.Play("Collected P2");
+                AudioManager.Instance.PlaySFX("Collected P2");
         }
     }
 }

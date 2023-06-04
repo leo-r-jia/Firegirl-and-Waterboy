@@ -23,7 +23,7 @@ public class ButtonHandler : SwitchHandler
             {
                 switchedOn.Invoke();
 
-                AudioManager.Instance.Play("Switch");
+                AudioManager.Instance.PlaySFX("Switch");
             } 
             else
             {

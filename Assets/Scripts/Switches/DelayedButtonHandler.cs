@@ -90,7 +90,7 @@ public class DelayedButtonHandler : SwitchHandler
         if (state)
         {
             //Play click sound
-            AudioManager.Instance.Play("Switch");
+            AudioManager.Instance.PlaySFX("Switch");
 
             //Broadcast the button is on
             switchedOn.Invoke();

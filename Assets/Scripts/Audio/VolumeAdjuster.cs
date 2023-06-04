@@ -34,7 +34,7 @@ public class VolumeAdjuster : MonoBehaviour
 
         if (AudioManager.Instance.MusicIsMuted)
             musicMuteButton.GetComponent<Image>().sprite = mutedSprite;
-        else if (AudioManager.Instance.MusicVolume < .5f)
+        else if (AudioManager.Instance.MusicVolume < .05f)
             musicMuteButton.GetComponent<Image>().sprite = halfVolumeSprite;
         else
             musicMuteButton.GetComponent<Image>().sprite = unmutedSprite;
