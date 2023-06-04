@@ -8,14 +8,12 @@ public class PlayerData : MonoBehaviour
     [SerializeField] Transform levelMenu;
     public int NumLevels { get; private set; }
     public Level[] Levels { get; private set; }
-    //CurrentLevel is in terms of the Levels array
     public int CurrentLevel { get; private set; }
 
     #region Scene persistence
     //Declare sole instance of PlayerData
     public static PlayerData Instance;
 
-    //As soon as created
     private void Awake()
     {
         //After first launch, destroy additional instances of PlayerData
@@ -85,6 +83,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    //Return the unlocked levels as a string
     public string UnlockedLevelsToString()
     {
         string unlockedLevels = "";
@@ -146,7 +145,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    //Restore the player's scores
+    //Restore the player's scores (string essentially a 3d array)
     private void RestoreScores(string combinedLevelScoresString)
     {
         string[] levelScoresStrings = combinedLevelScoresString.Split("|");

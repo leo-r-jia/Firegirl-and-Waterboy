@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float jumpAmount = 15f;
-    private float acceleration = 6f;
-    private float decceleration = 6f;
+    private readonly float acceleration = 6f;
+    private readonly float decceleration = 6f;
     private bool isFacingRight = true;
     private bool jumpKeyPressed;
     private float dirX;
@@ -37,12 +33,12 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         InputSystem.EnableDevice(Keyboard.current);
 
-        //Get sounds from the sound manager
         jumpSoundEffect = GetSoundForThisPlayer("Jump");
         landSoundEffect = GetSoundForThisPlayer("Land");
         runSoundEffect = GetSoundForThisPlayer("Run");
     }
 
+    //Sounds are different dependant on whether the object is Player 1 or 2
     AudioSource GetSoundForThisPlayer(string name)
     {
         AudioSource sound;
@@ -58,10 +54,9 @@ public class PlayerMovement : MonoBehaviour
     //FixedUpdate is synced with Unity physics
     private void FixedUpdate()
     {
-        //Add force to the player to move them. * by Vector2.right to only affect them in the x direction
+        //Add force to the player to move them, though only in the x direction
         rb.AddForce(CalculateMovement() * Vector2.right);
 
-        //If the player is trying to jump and is grounded
         if (jumpKeyPressed && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
