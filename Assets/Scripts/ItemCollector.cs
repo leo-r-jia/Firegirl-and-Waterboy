@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     //Score manager that manages the scene score
-    [SerializeField] public ScoreManager scoreManager;
-
-    //Collect sound effect
-    [SerializeField] private AudioSource collectionSoundEffect;
+    [SerializeField] private ScoreManager scoreManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +15,11 @@ public class ItemCollector : MonoBehaviour
         {
             Destroy(collision.gameObject);
             scoreManager.UpdateScore();
-            collectionSoundEffect.Play();
+
+            if (gameObject.name == "Player 1")
+                AudioManager.Instance.PlaySFX("Collected P1");
+            else
+                AudioManager.Instance.PlaySFX("Collected P2");
         }
     }
 }
