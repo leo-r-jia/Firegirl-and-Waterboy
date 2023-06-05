@@ -3250,6 +3250,30 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Run In Water P1
+    clip: {fileID: 8300000, guid: 0cb0f3f90a02cac4395b33220b57cd58, type: 3}
+    volume: 0.8
+    pitch: 1.2
+    loop: 1
+    source: {fileID: 0}
+  - name: Run In Water P2
+    clip: {fileID: 8300000, guid: 0cb0f3f90a02cac4395b33220b57cd58, type: 3}
+    volume: 0.8
+    pitch: 1.2
+    loop: 1
+    source: {fileID: 0}
+  - name: Land In Water P1
+    clip: {fileID: 8300000, guid: 5350c4b6c011f854aa0a517b8f5d3617, type: 3}
+    volume: 0.8
+    pitch: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: Land In Water P2
+    clip: {fileID: 8300000, guid: 5350c4b6c011f854aa0a517b8f5d3617, type: 3}
+    volume: 0.8
+    pitch: 1.2
+    loop: 0
+    source: {fileID: 0}
   musicTracks:
   - name: Menu Theme
     clip: {fileID: 8300000, guid: 41e627e56bbf7de4a81296be3162226f, type: 3}
