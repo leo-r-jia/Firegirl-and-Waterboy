@@ -27,7 +27,10 @@ Tested to work on Windows 10 and 11.
 Navigation of menus is completed with a mouse. Players are controlled through the keyboard.
 
 ### Controls
-Firegirl is controlled with the WASD keys. Waterboy's controls are the arrow keys.
+Firegirl:
+Moved with WASD. Press space to shoot if you have a portal gun.
+
+Waterboy: Move with the arrow keys. Press period to shoot if you have a portal gun.
 
 ## Dependancies
 Reliant on [Azure PlayFab](https://playfab.com/) for saving and leaderboard functionality.
