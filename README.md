@@ -12,5 +12,5 @@ Controls are WASD and the arrow keys.
 
 ### Authors ###
 Leo Jia
-Dylan Logan
-Jack Waitoa
+<br>Dylan Logan
+<br>Jack Waitoa
