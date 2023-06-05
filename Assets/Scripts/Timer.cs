@@ -33,14 +33,33 @@ public class Timer : MonoBehaviour
         SetTimerText();
     }
 
+    public void UpdateTimer(float deltaTime)
+    {
+        currentTime = countDown ? currentTime - deltaTime : currentTime + deltaTime;
+
+        if (hasLimit && ((countDown && currentTime <= timerLimit) || (!countDown && currentTime >= timerLimit)))
+        {
+            currentTime = timerLimit;
+            SetTimerText();
+            timerText.color = Color.red;
+            enabled = false;
+        }
+
+        SetTimerText();
+    }
+
+
     public int GetTime()
     {
         return (int)currentTime;
     }
 
-    private void SetTimerText()
+    public void SetTimerText()
     {
-        timerText.text = currentTime.ToString("0.00");
+        if (timerText != null)
+        {
+            timerText.text = currentTime.ToString("0.00");
+        }
     }
 }
 
