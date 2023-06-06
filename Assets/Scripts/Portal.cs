@@ -13,7 +13,7 @@ public class Portal : MonoBehaviour
     public bool isRight = false;
 
     public float distance = 0.1f;
-    public float portalThrust = 750f;
+    public float portalThrust = 1000f;
     public float teleportCooldown = 0.5f;
 
     // Gets location of the opposite portal & checks if other portal exists.

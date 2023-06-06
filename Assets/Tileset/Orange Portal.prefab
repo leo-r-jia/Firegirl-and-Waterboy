@@ -139,5 +139,5 @@ MonoBehaviour:
   isLeft: 0
   isRight: 0
   distance: 0.2
-  portalThrust: 500
+  portalThrust: 1000
   teleportCooldown: 0.5
