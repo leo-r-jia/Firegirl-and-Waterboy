@@ -28,6 +28,7 @@ public class PlayerDeath : MonoBehaviour
     private IEnumerator DieCoroutine()
     {
         AudioManager.Instance.PlaySFX("Player Death");
+        AudioManager.Instance.PlayMusic("Menu Theme");
         DissolveManager dissolveManager = GetComponent<DissolveManager>();
         dissolveManager.Dissolve(3.5f);
         InputSystem.DisableDevice(Keyboard.current);
