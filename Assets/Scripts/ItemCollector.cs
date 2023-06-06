@@ -18,10 +18,7 @@ public class ItemCollector : MonoBehaviour
 
             coinCollected.Invoke();
 
-            if (gameObject.name == "Player 1")
-                AudioManager.Instance.PlaySFX("Collected P1");
-            else
-                AudioManager.Instance.PlaySFX("Collected P2");
+            AudioManager.Instance.PlaySFX("Collected P2");
         }
     }
 }
