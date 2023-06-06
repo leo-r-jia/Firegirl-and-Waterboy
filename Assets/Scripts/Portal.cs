@@ -13,24 +13,8 @@ public class Portal : MonoBehaviour
     public bool isRight = false;
 
     public float distance = 0.1f;
-    public float portalThrust = 500f;
+    public float portalThrust = 1000f;
     public float teleportCooldown = 0.5f;
-
-    private bool isPlayer;
-    private float teleportSpeed = 0.1f;
-
-    void Start()
-    {
-        // Code may be implemented if a portal sprite is added.
-        /*if (isRight)
-        {
-            transform.Rotate(0, 0, 180);
-        }
-        else if (isLeft)
-        {
-            transform.Rotate(0, 0, -180);
-        }*/
-    }
 
     // Gets location of the opposite portal & checks if other portal exists.
     void Update()
@@ -57,11 +41,11 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "Orange Portal" && other.tag != "Blue Portal" && otherPortalExists) {
+        if ((other.tag == "Player1" || other.tag == "Player2" || other.tag == "Box") && otherPortalExists) {
 
             if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2"))
                 isPlayer = true;
-            
+
             if (Vector2.Distance(transform.position, other.transform.position) > distance)
             {
                 StartCoroutine(Teleport(other));
@@ -80,7 +64,7 @@ public class Portal : MonoBehaviour
         }
 
         TeleportingCooldown.Instance.teleporting = true;
-        
+
         if (otherPortal.isLeft)
         {
             other.transform.position = new Vector2(destination.position.x + 2, destination.position.y);
@@ -100,7 +84,7 @@ public class Portal : MonoBehaviour
         TeleportingCooldown.Instance.teleporting = false;
     }
 
-    //Calls functions in the PlayTeleport script 
+    //Calls functions in the PlayTeleport script
     void PlayerDissolve(Collider2D other)
     {
         PlayerTeleport playerTeleport = other.gameObject.GetComponent<PlayerTeleport>();
