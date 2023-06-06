@@ -1,24 +1,21 @@
 # Firegirl & Waterboy
 
 ## Description
-Firegirl & Waterboy is a cooperative puzzle-solving 2D platformer developed with [Unity](https://unity.com/).
+Firegirl and Waterboy is a 2D platformer game developed in developed with [Unity](https://unity.com/). It has similar play-style and mechanics as a childhood favourite game of ours - Fireboy and Watergirl. It is a local co-op where you work together with a partner to complete puzzles and to get through the levels, with levels increasing in difficulty.
 
-### Background
-The goal of this project is to develop a modernised and improved version of the childhood favourite series of games titled "Fireboy and Watergirl".
+Each level contains a range of puzzles and obstacles, like lava/water/acid, buttons and levers that trigger moving platforms and doors, and portals.
 
 ### Features
 - Local 2-player multiplayer
 - Multiple levels
 - Intuitive UI
-- Diverse mechanics (e.g. portal guns, obstacles, switches)
+- Diverse mechanics
 - Animations and sound effects
 - Cloud saving
 - Global and personal leaderboards
 
 ## Installation
-Please download the latest release.
-
-Otherwise, the project can be built from the release branch within Unity through File -> Build and Run.
+To run the game, pull from the ```Release``` branch of this repo, load the Main Menu scene, and select the play button.
 
 ### Requirments
 Tested to work on Windows 10 and 11.
