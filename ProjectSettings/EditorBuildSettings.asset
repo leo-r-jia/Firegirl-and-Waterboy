@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Dylan/Level 4.unity
     guid: 63c5637e988db4c478b2adc764b8eeb1
   - enabled: 1
+    path: Assets/Scenes/Jack/LevelOne.unity
+    guid: e16797a39589d1b4ba6abf67e5102125
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 4.unity
+    guid: 63c5637e988db4c478b2adc764b8eeb1
+  - enabled: 1
     path: Assets/Scenes/Dylan/Level 5.unity
     guid: 3c90bdd58b34e054f83058f2fa51b341
   - enabled: 1
