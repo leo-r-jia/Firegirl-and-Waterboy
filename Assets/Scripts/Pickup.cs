@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public PortalGun gun;
     public bool isOrange = false;
 
     private void OnTriggerEnter2D(Collider2D collision)

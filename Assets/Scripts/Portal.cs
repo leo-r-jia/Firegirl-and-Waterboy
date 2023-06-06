@@ -13,21 +13,8 @@ public class Portal : MonoBehaviour
     public bool isRight = false;
 
     public float distance = 0.1f;
-    public float portalThrust = 500f;
+    public float portalThrust = 1000f;
     public float teleportCooldown = 0.5f;
-
-    void Start()
-    {
-        // Code may be implemented if a portal sprite is added.
-        /*if (isRight)
-        {
-            transform.Rotate(0, 0, 180);
-        }
-        else if (isLeft)
-        {
-            transform.Rotate(0, 0, -180);
-        }*/
-    }
 
     // Gets location of the opposite portal & checks if other portal exists.
     void Update()
@@ -54,7 +41,7 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "Orange Portal" && other.tag != "Blue Portal" && otherPortalExists) { 
+        if ((other.tag == "Player1" || other.tag == "Player2" || other.tag == "Box") && otherPortalExists) { 
             if (Vector2.Distance(transform.position, other.transform.position) > distance)
             {
                 StartCoroutine(Teleport(other));
