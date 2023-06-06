@@ -5,6 +5,9 @@ public class ScoreManager : MonoBehaviour
 {
     //Live coin count
     private int coins = 0;
+
+    private int customTime = 0; // Added for testing purposes
+
     [SerializeField] public TextMeshProUGUI coinsCollected;
 
     //Fields displayed upon level completion
@@ -37,6 +40,7 @@ public class ScoreManager : MonoBehaviour
         coinsCollected.text = "Coins: " + coins;
     }
 
+    //Calculate the number of stars to display based on score
     private void CalculateStars()
     {
         if (score < 10000)
@@ -62,10 +66,36 @@ public class ScoreManager : MonoBehaviour
     }
 
     //Calculate score on level complete
-    private void CalculateFinalScore()
+    public void CalculateFinalScore()
     {
         score = 0;
-        //Calculate final score based on coins collected and time taken
-        score = coins * 10000 + (5000 - timer.GetTime());
+        // Calculate final score based on coins collected and time taken
+        score = coins * 10000 + (5000 - GetTime()); 
+    }
+
+    //Get and set methods for coins
+    public int Coins
+    {
+        get { return coins; }
+        set { coins = value; }
+    }
+
+    //Get and set methods for score
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
+
+    // New method to get time (used for testing)
+    private int GetTime()
+    {
+        return (timer != null) ? timer.GetTime() : customTime;
+    }
+
+    // Testing method to set custom time
+    public void SetCustomTime(int time)
+    {
+        customTime = time;
     }
 }
