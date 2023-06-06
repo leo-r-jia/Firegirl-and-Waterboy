@@ -16,6 +16,9 @@ public class Portal : MonoBehaviour
     public float portalThrust = 500f;
     public float teleportCooldown = 0.5f;
 
+    private bool isPlayer;
+    private float teleportSpeed = 0.1f;
+
     void Start()
     {
         // Code may be implemented if a portal sprite is added.
@@ -54,7 +57,11 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "Orange Portal" && other.tag != "Blue Portal" && otherPortalExists) { 
+        if (other.tag != "VerticalWall" && other.tag != "HorizontalWall" && other.tag != "Orange Portal" && other.tag != "Blue Portal" && otherPortalExists) {
+
+            if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2"))
+                isPlayer = true;
+            
             if (Vector2.Distance(transform.position, other.transform.position) > distance)
             {
                 StartCoroutine(Teleport(other));
@@ -65,6 +72,13 @@ public class Portal : MonoBehaviour
     // Teleports object to the opposite portal.
     private IEnumerator Teleport(Collider2D other)
     {
+        //If object is a player, trigger dissolve animation
+        if (isPlayer)
+        {
+            PlayerDissolve(other);
+            yield return new WaitForSeconds(teleportSpeed);
+        }
+
         TeleportingCooldown.Instance.teleporting = true;
         
         if (otherPortal.isLeft)
@@ -78,10 +92,24 @@ public class Portal : MonoBehaviour
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(-portalThrust, 2f));
         }
 
+        //Trigger reappear animation
+        if (isPlayer)
+            PlayerAppear(other);
+
         yield return new WaitForSeconds(teleportCooldown);
         TeleportingCooldown.Instance.teleporting = false;
-      
-
     }
 
+    //Calls functions in the PlayTeleport script 
+    void PlayerDissolve(Collider2D other)
+    {
+        PlayerTeleport playerTeleport = other.gameObject.GetComponent<PlayerTeleport>();
+        playerTeleport.Dissolve();
+    }
+
+    void PlayerAppear(Collider2D other)
+    {
+        PlayerTeleport playerTeleport = other.gameObject.GetComponent<PlayerTeleport>();
+        playerTeleport.Appear();
+    }
 }

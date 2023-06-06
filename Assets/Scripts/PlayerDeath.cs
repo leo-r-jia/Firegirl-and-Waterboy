@@ -9,6 +9,7 @@ using System.Threading;
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] public bool fireWeakness = false;
+    [SerializeField] Color dissolveColor;
     public GameObject gameOverMenu;
 
     public UnityEvent OnDeath;
@@ -29,7 +30,7 @@ public class PlayerDeath : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Player Death");
         DissolveManager dissolveManager = GetComponent<DissolveManager>();
-        dissolveManager.Dissolve(3.5f);
+        dissolveManager.Dissolve(3.5f, dissolveColor);
         InputSystem.DisableDevice(Keyboard.current);
 
         yield return new WaitForSeconds(0.4f); // Wait for 0.4 second

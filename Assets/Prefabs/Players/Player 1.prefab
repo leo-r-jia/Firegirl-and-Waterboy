@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1823869322546278428}
   - component: {fileID: 1062579337264080744}
   - component: {fileID: 5371825467916598386}
+  - component: {fileID: 7768264533976425923}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player1
@@ -242,6 +243,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 25ea12f2-4f9c-47c1-ae64-b7e9903cc699
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 414713e9-ac27-4644-b34c-9908372dc3d9
+    m_ActionName: Player/Shoot[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -267,6 +272,9 @@ MonoBehaviour:
   switchTriggerLayer:
     serializedVersion: 2
     m_Bits: 256
+  boxLayer:
+    serializedVersion: 2
+    m_Bits: 0
   maxSpeed: 12
   jumpAmount: 12
 --- !u!95 &1823869322546278430
@@ -342,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireWeakness: 0
+  dissolveColor: {r: 0.7529412, g: 0.19215687, b: 0.1254902, a: 0}
   gameOverMenu: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
@@ -382,3 +391,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9596c49c782474d40a768c13f0bf18e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7768264533976425923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823869322546278407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdb7020a82238d40b23d7710c2367a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveColor: {r: 0, g: 0.019607844, b: 1, a: 0}
