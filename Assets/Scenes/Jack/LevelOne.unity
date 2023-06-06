@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4405290ca5784c4aaecd4e76d6fc1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
   isOrange: 1
 --- !u!212 &1673263
 SpriteRenderer:
@@ -2030,7 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 767293220}
-  bulletPrefab: {fileID: 5816752484465557610, guid: f534035dbc896f1469d928bcac37797e, type: 3}
+  bulletPrefab: {fileID: 5816752484465557610, guid: a9463834243705e469efa3b3946d890f, type: 3}
   reloadTime: 0.5
   groundLayer:
     serializedVersion: 2
@@ -8290,7 +8289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4405290ca5784c4aaecd4e76d6fc1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
   isOrange: 0
 --- !u!61 &2010197276
 BoxCollider2D:
