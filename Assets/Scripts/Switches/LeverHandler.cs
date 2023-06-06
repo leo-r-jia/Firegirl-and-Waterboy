@@ -1,51 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeverHandler : SwitchHandler
 {
     [SerializeField] protected Transform offCheck;
 
-    private void Start()
+    void Start()
     {
         //Set the lever's initial states
-        state = false;
-        previousState = false;
+        switchIsPressed = false;
+        switchPreviouslyOn = false;
+
+        switchTriggerPointRadius = .2f;
     }
 
-    private void Update()
+    void Update()
     {
-        //Check the lever's position and change its state accordingly
-        if (Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer))
+        //Check the lever's position and change whether its pressed accordingly
+        if (Physics2D.OverlapCircle(onCheck.position, switchTriggerPointRadius, switchInteractionLayer))
         {
-            state = true;
+            switchIsPressed = true;
         }
-        else if (Physics2D.OverlapCircle(offCheck.position, 0.2f, switchInteractionLayer))
+        else if (Physics2D.OverlapCircle(offCheck.position, switchTriggerPointRadius, switchInteractionLayer))
         {
-            state = false;
+            switchIsPressed = false;
         }
 
-        //If the lever's value has changed, broadcast this and update its prev. state, play click sound when switched
-        if (state != previousState)
+        if (switchIsPressed != switchPreviouslyOn)
         {
-            if (state)
-            {
-                switchedOn.Invoke();
-            }
-            else
-            {
-                switchedOff.Invoke();
-            }
-
-            AudioManager.Instance.PlaySFX("Switch");
-
-            previousState = state;
+            LeverChangedState();
         }
     }
 
-    //Return whether the switch is on
+    //If the lever's value has changed, broadcast this and update its prev. switchIsPressed, play click sound when switched
+    void LeverChangedState()
+    {
+        if (switchIsPressed)
+        {
+            switchedOn.Invoke();
+        }
+        else
+        {
+            switchedOff.Invoke();
+        }
+
+        AudioManager.Instance.PlaySFX("Switch");
+
+        switchPreviouslyOn = switchIsPressed;
+    }
+
+    //Return whether the lever is on
     public override bool IsOn()
     {
-        return state;
+        return switchIsPressed;
     }
 }

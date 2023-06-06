@@ -63,6 +63,7 @@ public class ObjectMover : MonoBehaviour
         }
     }
 
+    //If all switches in the AND array are true
     private bool AndSwitchesTrue()
     {
         for (int i = 0; i < andSwitches.Length; i++)
@@ -73,6 +74,7 @@ public class ObjectMover : MonoBehaviour
         return true;
     }
 
+    //If one switch in the OR array is true
     private bool OneOrSwitchTrue()
     {
         for (int i = 0; i < orSwitches.Length; i++)
