@@ -17,8 +17,10 @@ public class DissolveManager : MonoBehaviour
 		material = GetComponent<SpriteRenderer>().material;
 	}
 
+	//Update based on isAppearing or isDissolving boolean values
 	void Update()
 	{
+		//Dissolve
 		if (isDissolving)
 		{
 			fade -= Time.deltaTime * dissolveSpeed;
@@ -32,6 +34,7 @@ public class DissolveManager : MonoBehaviour
 			// Set the property
 			material.SetFloat("_Fade", fade);
 		}
+		//Appear
         if (isAppearing)
         {
 			fade += Time.deltaTime * dissolveSpeed;
@@ -48,19 +51,22 @@ public class DissolveManager : MonoBehaviour
 	}
 
 	//Trigger sprite dissolve
-	public void Dissolve(float dissolveSpeed)
+	public void Dissolve(float dissolveSpeed, Color dissolveColor)
 	{
-		isDissolving = true;
+		material.SetColor("_Color", dissolveColor);
 		this.dissolveSpeed = dissolveSpeed;
+		isDissolving = true;
 	}
 
 	//Trigger sprite reappear
-	public void Appear(float dissolveSpeed)
+	public void Appear(float dissolveSpeed, Color dissolveColor)
 	{
-		isDissolving = false;
+		material.SetColor("_Color", dissolveColor);
 		this.dissolveSpeed = dissolveSpeed;
+		isAppearing = true;
 	}
 
+	//Return if sprite is dissolving
 	public bool getIsDissolving()
     {
 		return this.isDissolving;
