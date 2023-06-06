@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,7 @@ public class PortalGun : MonoBehaviour
 {
     public Transform shootingPoint;
     public GameObject bulletPrefab;
-    private bool shootKeyPressed;
+    public bool shootKeyPressed;
     private int currentAmmo = 1;
     private int maxAmmo = 1;
     private bool isReloading = false;
@@ -44,7 +43,6 @@ public class PortalGun : MonoBehaviour
         {
             Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
             currentAmmo--;
-
         }
     }
 

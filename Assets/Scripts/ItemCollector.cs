@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ItemCollector : MonoBehaviour
 {
     //Score manager that manages the scene score
     [SerializeField] private ScoreManager scoreManager;
+
+    public UnityEvent coinCollected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,6 +15,8 @@ public class ItemCollector : MonoBehaviour
         {
             Destroy(collision.gameObject);
             scoreManager.UpdateScore();
+
+            coinCollected.Invoke();
 
             if (gameObject.name == "Player 1")
                 AudioManager.Instance.PlaySFX("Collected P1");

@@ -52,6 +52,7 @@ public class CompleteLevel : MonoBehaviour
     // Opens level complete menu
     private void Win()
     {
+        AudioManager.Instance.PlayMusic("Menu Theme");
         Time.timeScale = 0f;
         completeLevelMenu.SetActive(true);
         scoreManager.LevelComplete();
