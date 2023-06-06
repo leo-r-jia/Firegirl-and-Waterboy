@@ -43,7 +43,6 @@ public class PortalGun : MonoBehaviour
         {
             Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
             currentAmmo--;
-
         }
     }
 

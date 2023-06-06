@@ -10,13 +10,15 @@ public class Pickup : MonoBehaviour
     {
         if (collision.tag == "Player1" && isOrange == true)
         {
-            GameObject child = GameObject.Find("Firegirl").transform.GetChild(1).gameObject;
+            AudioManager.Instance.PlaySFX("Collected P1");
+            GameObject child = GameObject.Find("Player 1").transform.GetChild(1).gameObject;
             child.SetActive(true);
             Destroy(this.gameObject);
         }
         else if (collision.tag == "Player2" && isOrange == false)
         {
-            GameObject child = GameObject.Find("Waterboy").transform.GetChild(1).gameObject;
+            AudioManager.Instance.PlaySFX("Collected P2");
+            GameObject child = GameObject.Find("Player 2").transform.GetChild(1).gameObject;
             child.SetActive(true);
             Destroy(this.gameObject);
         }
