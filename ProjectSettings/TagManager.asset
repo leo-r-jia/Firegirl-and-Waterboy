@@ -12,6 +12,12 @@ TagManager:
   - WaterDoor
   - Coin
   - Gems
+  - Blue Portal
+  - Orange Portal
+  - HorizontalWall
+  - VerticalWall
+  - OrangeShot
+  - BlueShot
   - Acid
   - Box
   layers:
