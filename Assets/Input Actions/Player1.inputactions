@@ -147,10 +147,10 @@
                 {
                     "name": "",
                     "id": "003227ab-9132-4851-8047-1961c5de690f",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false

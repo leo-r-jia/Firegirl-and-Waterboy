@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask switchTriggerLayer;
+    [SerializeField] private LayerMask boxLayer;
 
     //For animator and animations
     private MovementState state;
@@ -25,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
     private float dirX;
 
     //For sound effects
-    [SerializeField] private AudioSource jumpSoundEffect;
-    [SerializeField] private AudioSource landSoundEffect;
-    [SerializeField] private AudioSource runSoundEffect;
+    private AudioSource jumpSoundEffect;
+    private AudioSource landSoundEffect;
+    private AudioSource runSoundEffect;
 
     //Before first frame update
     private void Start()
@@ -35,6 +36,23 @@ public class PlayerMovement : MonoBehaviour
         state = MovementState.Idle;
         anim = GetComponent<Animator>();
         InputSystem.EnableDevice(Keyboard.current);
+
+        //Get sounds from the sound manager
+        jumpSoundEffect = GetSoundForThisPlayer("Jump");
+        landSoundEffect = GetSoundForThisPlayer("Land");
+        runSoundEffect = GetSoundForThisPlayer("Run");
+    }
+
+    AudioSource GetSoundForThisPlayer(string name)
+    {
+        AudioSource sound;
+
+        if (gameObject.name == "Player 1")
+            sound = AudioManager.Instance.GetSound(name + " P1").source;
+        else
+            sound = AudioManager.Instance.GetSound(name + " P2").source;
+
+        return sound;
     }
 
     //FixedUpdate is synced with Unity physics
@@ -115,13 +133,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
-    private void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
         dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
-    private void Jump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
         jumpKeyPressed = context.performed;
 
@@ -132,10 +150,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Returns true if the player is touching the ground layer (or the top of a switch)
+    //Returns true if the player is touching a layer that they can jump on
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer);
+        return PlayerIsOnLayer(groundLayer) || PlayerIsOnLayer(switchTriggerLayer) || PlayerIsOnLayer(boxLayer);
+    }
+
+    bool PlayerIsOnLayer(LayerMask layer)
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, layer);
     }
 
     //Calculate the and return the player's movement speed

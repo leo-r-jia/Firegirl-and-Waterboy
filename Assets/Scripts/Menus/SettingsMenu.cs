@@ -8,18 +8,6 @@ public class SettingsMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
 
-    // Music slider
-    public void SetMusic (float musicVolume)
-    {
-        Debug.Log(musicVolume);
-    }
-
-    // SFX slider
-    public void SetSFX (float sfxVolume)
-    {
-        Debug.Log(sfxVolume);
-    }
-
     // Confirms settings and closes settings menu
     public void confirm()
     {

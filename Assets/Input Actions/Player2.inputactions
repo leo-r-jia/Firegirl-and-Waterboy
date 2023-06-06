@@ -147,10 +147,10 @@
                 {
                     "name": "",
                     "id": "1dce621e-4f66-4f75-b536-fbe26bb0599f",
-                    "path": "<Keyboard>/rightCtrl",
+                    "path": "<Keyboard>/period",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
