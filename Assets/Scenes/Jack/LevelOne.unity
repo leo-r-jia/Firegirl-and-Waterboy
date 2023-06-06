@@ -599,6 +599,130 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &120234967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120234969}
+  - component: {fileID: 120234968}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &120234968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120234967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e48418564c402c4d9a6301c1aaa724b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Player Death
+    clip: {fileID: 8300000, guid: f0c8566a977a1f24e9948bbb4c424c30, type: 3}
+    volume: 1
+    pitch: 1.8
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump P1
+    clip: {fileID: 8300000, guid: b6ce84f72912bae4eb5de7a15b62254e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump P2
+    clip: {fileID: 8300000, guid: 052faf18d71b53b48ac9a6bbae17443d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Land P1
+    clip: {fileID: 8300000, guid: 44c9ad01139146244ae9330b25c2d29a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Land P2
+    clip: {fileID: 8300000, guid: adafeda5abcf2084eb91194d626ced60, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Run P1
+    clip: {fileID: 8300000, guid: a4b1737a458442144b7a662814e0c9c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Run P2
+    clip: {fileID: 8300000, guid: 42fb1b0ad6c08db45a5cb5f3bae3bd2e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Collected P1
+    clip: {fileID: 8300000, guid: 9c84f009991081d429c0b832a5d5ad30, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Collected P2
+    clip: {fileID: 8300000, guid: f9bb21814aa8549488f36126ae7e70f3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Switch
+    clip: {fileID: 8300000, guid: cd34f51360ddabc4d948ecd80d517ccf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Box Slide
+    clip: {fileID: 8300000, guid: a0b9e9f54646a454189ef4dbe42fedaa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  musicTracks:
+  - name: Menu Theme
+    clip: {fileID: 8300000, guid: 41e627e56bbf7de4a81296be3162226f, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Level Theme
+    clip: {fileID: 8300000, guid: 8d6ffb37eb0214f478d0466a9bab0263, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &120234969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120234967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &286754773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,6 +2634,7 @@ GameObject:
   - component: {fileID: 667201098}
   - component: {fileID: 667201097}
   - component: {fileID: 667201104}
+  - component: {fileID: 667201105}
   m_Layer: 7
   m_Name: Waterboy
   m_TagString: Player2
@@ -2810,10 +2935,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireWeakness: 0
+  dissolveColor: {r: 0, g: 0, b: 0, a: 0}
   gameOverMenu: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &667201105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667201096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdb7020a82238d40b23d7710c2367a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveColor: {r: 0, g: 0.1660657, b: 1, a: 0}
 --- !u!1 &679974921
 GameObject:
   m_ObjectHideFlags: 0
@@ -6476,6 +6615,7 @@ GameObject:
   - component: {fileID: 1594958491}
   - component: {fileID: 1594958490}
   - component: {fileID: 1594958497}
+  - component: {fileID: 1594958498}
   m_Layer: 6
   m_Name: Firegirl
   m_TagString: Player1
@@ -6776,10 +6916,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireWeakness: 0
+  dissolveColor: {r: 0, g: 0, b: 0, a: 0}
   gameOverMenu: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1594958498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594958489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdb7020a82238d40b23d7710c2367a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveColor: {r: 0, g: 0.16862746, b: 1, a: 0}
 --- !u!1 &1633702087
 GameObject:
   m_ObjectHideFlags: 0
