@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2412599367478294539}
   - component: {fileID: 4555851812470258480}
   m_Layer: 6
-  m_Name: BlueShot
-  m_TagString: BlueShot
+  m_Name: OrangeShot
+  m_TagString: OrangeShot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f15174e3f60c0af45ac986ac1046a22c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d42a23579ca188a45ab9c451f1b70d72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   isRightShot: 0
-  playerPortal: {fileID: 3849896097595950595, guid: a116d3befd06a894392bee6c85006918, type: 3}
+  playerPortal: {fileID: 6326246887780154234, guid: 6f84ce698286de14fa9ce017933dfae6, type: 3}
 --- !u!1 &8099849183274502790
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f15174e3f60c0af45ac986ac1046a22c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d42a23579ca188a45ab9c451f1b70d72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
