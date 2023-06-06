@@ -1,41 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonHandler : SwitchHandler
 {
     //Set button's initial states
-    public void Start()
+    void Start()
     {
-        state = false;
-        previousState = false;
+        switchIsPressed = false;
+        switchPreviouslyOn = false;
+
+        switchTriggerPointRadius = .2f;
     }
 
-    public void Update()
+    void Update()
     {
-        //Check and set the button's state
-        state = (Physics2D.OverlapCircle(onCheck.position, 0.2f, switchInteractionLayer) ? true : false);
+        //Check and set the button's switchIsPressed
+        switchIsPressed = (Physics2D.OverlapCircle(onCheck.position, switchTriggerPointRadius, switchInteractionLayer) ? true : false);
 
-        //If the button's value has changed, broadcast this and update its prev. state
-        if (state != previousState)
+        if (switchIsPressed != switchPreviouslyOn)
         {
-            if (state)
-            {
-                switchedOn.Invoke();
-
-                AudioManager.Instance.PlaySFX("Switch");
-            } 
-            else
-            {
-                switchedOff.Invoke();
-            }
-            previousState = state;
+            ButtonChangedState();
         }
     }
 
-    //Checks if the interactable part of the switch is touching a point
+    //If the button's value has changed, broadcast this and update its prev. switchIsPressed
+    void ButtonChangedState()
+    {
+        if (switchIsPressed)
+        {
+            switchedOn.Invoke();
+
+            AudioManager.Instance.PlaySFX("Switch");
+        }
+        else
+        {
+            switchedOff.Invoke();
+        }
+        switchPreviouslyOn = switchIsPressed;
+    }
+
+    //Whether the button is on
     public override bool IsOn()
     {
-        return state;
+        return switchIsPressed;
     }
 }
