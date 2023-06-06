@@ -133,13 +133,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
-    private void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
         dirX = context.ReadValue<Vector2>().x;
     }
 
     //Jump method
-    private void Jump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
         jumpKeyPressed = context.performed;
 
@@ -182,9 +182,7 @@ public class PlayerMovement : MonoBehaviour
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
+        transform.Rotate(0, -180, 0);
     }
 
     //Update the player's state so that appropriate animations can be played
