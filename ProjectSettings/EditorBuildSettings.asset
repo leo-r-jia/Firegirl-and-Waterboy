@@ -11,5 +11,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dylan/Level 1.unity
     guid: eeb9e957cf786d3429881f6f011a2a64
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 2.unity
+    guid: 906b3748b6ac5ac48aad56f66e76a31d
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 3.unity
+    guid: 6947061a1ee05ba4f903cfbdb4d5299f
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 4.unity
+    guid: 63c5637e988db4c478b2adc764b8eeb1
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 5.unity
+    guid: 3c90bdd58b34e054f83058f2fa51b341
+  - enabled: 1
+    path: Assets/Scenes/Dylan/Level 6.unity
+    guid: e002ae0e3eef26b40be790ad31f1b680
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acbdd3e5a2a6adb4c82b8a96da50c907, type: 2}
