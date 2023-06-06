@@ -31,7 +31,7 @@ public class PlayerDeath : MonoBehaviour
     private IEnumerator DieCoroutine()
     {
         AudioManager.Instance.PlaySFX("Player Death");
-
+        AudioManager.Instance.PlayMusic("Menu Theme");
         //Triggers dissolve animation
         DissolveManager dissolveManager = GetComponent<DissolveManager>();
         dissolveManager.Dissolve(3.5f, dissolveColor);

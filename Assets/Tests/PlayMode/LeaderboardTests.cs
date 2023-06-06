@@ -14,7 +14,7 @@ public class LeaderboardTests
     [UnitySetUp]
     public IEnumerator SetUp()
     {   
-        SceneManager.LoadScene("Scenes/Dylan/Main Menu");
+        SceneManager.LoadScene("Scenes/Game/Main Menu");
 
         yield return null;
 
