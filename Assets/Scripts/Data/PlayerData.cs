@@ -73,7 +73,7 @@ public class PlayerData : MonoBehaviour
     //Unlock the next level if it hasn't been already
     public void UnlockNextLevel()
     {
-        if (!Levels[CurrentLevel + 1].Unlocked)
+        if (++CurrentLevel < NumLevels && !Levels[CurrentLevel + 1].Unlocked)
         {
             for (int i = 0; i < Levels.Length; i++)
             {
