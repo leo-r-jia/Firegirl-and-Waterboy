@@ -16,6 +16,9 @@ public class Portal : MonoBehaviour
     public float portalThrust = 1000f;
     public float teleportCooldown = 0.5f;
 
+    private bool isPlayer;
+    private float teleportSpeed = 0.1f;
+
     // Gets location of the opposite portal & checks if other portal exists.
     void Update()
     {
