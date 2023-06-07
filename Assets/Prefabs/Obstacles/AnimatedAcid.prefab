@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2125907964607441819}
   - component: {fileID: 4801425542096633033}
   - component: {fileID: 8234561464988181261}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AnimatedAcid
   m_TagString: Acid
   m_Icon: {fileID: 0}
