@@ -25,12 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource jumpSoundEffect;
     private AudioSource landSoundEffect;
     private AudioSource runSoundEffect;
-    private AudioSource landInWaterSoundEffect;
-    private AudioSource runInWaterSoundEffect;
 
     private bool touchingLiquid = false;
-    private bool inWater = false;
-    private AudioSource currentRunningSound;
 
     //Before first frame update
     private void Start()
@@ -42,9 +38,6 @@ public class PlayerMovement : MonoBehaviour
         jumpSoundEffect = GetSoundForThisPlayer("Jump");
         landSoundEffect = GetSoundForThisPlayer("Land");
         runSoundEffect = GetSoundForThisPlayer("Run");
-        runInWaterSoundEffect = GetSoundForThisPlayer("Run In Water");
-        landInWaterSoundEffect = GetSoundForThisPlayer("Land In Water");
-        currentRunningSound = runSoundEffect;
     }
 
     //Sounds are different dependant on whether the object is Player 1 or 2
@@ -101,30 +94,25 @@ public class PlayerMovement : MonoBehaviour
     {
         bool falling = false;
 
-        if (touchingLiquid && !inWater)
-        {
-            currentRunningSound = runInWaterSoundEffect;
-            EaseOutSound(runSoundEffect, 2f);
-            inWater = true;
-        } 
-        else if (!touchingLiquid && inWater)
-        {
-            currentRunningSound = runSoundEffect;
-            EaseOutSound(runInWaterSoundEffect, 4f);
-            inWater = false;
-        }
-
         //If player is running on the ground, play running sound effect
         if (IsGrounded() && GetState() == MovementState.Running)
         {
-            currentRunningSound.enabled = true;
+            runSoundEffect.enabled = true;
         }
-        else if (currentRunningSound.enabled)
+        else if (runSoundEffect.enabled)
         {
-            if (inWater)
-                EaseOutSound(currentRunningSound, 4f);
-            else
-                EaseOutSound(currentRunningSound, 2f);
+            //Ease out running/footstep sound
+            float currentTime = 0;
+            float start = runSoundEffect.volume;
+
+            while (currentTime < (float)3500)
+            {
+                currentTime += Time.deltaTime;
+                runSoundEffect.volume = Mathf.Lerp(start, 0, currentTime / (float)3500);
+            }
+
+            runSoundEffect.enabled = false;
+            runSoundEffect.volume = start;
         }
 
         //If falling, play landing sound upon landing
@@ -135,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsGrounded() && falling && !Physics2D.OverlapCircle(groundCheck.position, 0.2f, switchTriggerLayer) && !landSoundEffect.isPlaying)
         {
-            StartCoroutine(PlayLandSound());
+            landSoundEffect.Play();
             falling = false;
         }
 
@@ -143,40 +131,6 @@ public class PlayerMovement : MonoBehaviour
         if (jumpKeyPressed && IsGrounded())
         {
             jumpSoundEffect.Play();
-        } 
-    }
-
-    private IEnumerator PlayLandSound()
-    {
-        yield return new WaitForSeconds(0.05f); // Adjust the delay as needed
-
-        if (touchingLiquid)
-        {
-            landInWaterSoundEffect.Play();
-        }
-        else
-        {
-            landSoundEffect.Play();
-        }
-    }
-
-    //Ease out sound
-    private void EaseOutSound(AudioSource audio, float fadeTime)
-    {
-        if (audio.enabled)
-        {
-            float startVolume = audio.volume;
-            float timer = 0f;
-
-            while (timer < fadeTime)
-            {
-                Debug.Log("Fading " + fadeTime + timer);
-                timer += Time.deltaTime;
-                audio.volume = Mathf.Lerp(startVolume, 0f, timer / fadeTime);
-            }
-
-            audio.enabled = false;
-            audio.volume = startVolume;
         }
     }
 
@@ -186,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
         jumpSoundEffect.Stop();
         landSoundEffect.Stop();
         runSoundEffect.Stop();
-        runInWaterSoundEffect.Stop();
     }
 
     //Record the player's x velocity whenever their horizontal movement keys are pressed
@@ -222,13 +175,9 @@ public class PlayerMovement : MonoBehaviour
     private float CalculateMovement()
     {
         //Find the directional (+/-) maxSpeed the player can move
-        float dirMaxSpeed;
-
-        //If in water, max speed is 80% 
-        if (touchingLiquid) 
-            dirMaxSpeed = dirX * maxSpeed * 0.8f;
-        else 
-            dirMaxSpeed = dirX * maxSpeed;
+        float dirMaxSpeed = dirX * maxSpeed;
+        if (touchingLiquid)
+            dirMaxSpeed = dirMaxSpeed * 0.7f;
 
         //Calc. the difference between their current speed and their maxSpeed
         float speedDif = dirMaxSpeed - rb.velocity.x;
@@ -259,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.Jumping;
         }
         else if (rb.velocity.y < -1.6f)
-        {   
+        {
             state = MovementState.Falling;
         }
 
