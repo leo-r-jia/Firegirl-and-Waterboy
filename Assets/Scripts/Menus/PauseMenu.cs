@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public bool activeSettings = false;
+
+    public UnityEvent pauseMenuToggled;
 
     private bool isPaused;
     // Start is called before the first frame update
@@ -70,6 +71,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f; // Freezes time in-game
         pauseMenu.SetActive(true);
         Cursor.visible = true;
+
+        pauseMenuToggled.Invoke();
     }
 
     // Closes pause menu
@@ -79,6 +82,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Cursor.visible = false;
         isPaused = false;
+
+        pauseMenuToggled.Invoke();
     }
 
     // Returns user to start point and restarts the level

@@ -160,11 +160,12 @@ public class AudioManager : MonoBehaviour
 
         foreach(MusicTrack music in musicTracks)
         {
-            if (music.source.isPlaying)
+            if (music.source != m.source && music.source.isPlaying)
                 music.source.Stop();
         }
 
-        m.source.Play();
+        if (!m.source.isPlaying)
+            m.source.Play();
     }
 
     public Sound GetSound(string name)
