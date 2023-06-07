@@ -2173,7 +2173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368012845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.33, y: -3.26, z: 0.080102175}
+  m_LocalPosition: {x: -8.39, y: -12.26, z: 0.080102175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14132,7 +14132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929643718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.87, y: 18.66, z: 0.080102175}
+  m_LocalPosition: {x: 40.42, y: -12.4, z: 0.080102175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23707,6 +23707,10 @@ PrefabInstance:
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 330376447}
+    - target: {fileID: 7053267067136060785, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1782414283}
     - target: {fileID: 8508030029613149780, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: bulletPrefab
       value: 
@@ -23858,6 +23862,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2739372698640434295, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1782414283}
+    - target: {fileID: 5951226711583424279, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1782414283}
