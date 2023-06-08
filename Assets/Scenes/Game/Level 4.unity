@@ -30167,6 +30167,10 @@ PrefabInstance:
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 330376447}
+    - target: {fileID: 7053267067136060785, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1782414283}
     - target: {fileID: 8508030029613149780, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: bulletPrefab
       value: 
@@ -30371,6 +30375,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2739372698640434295, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1782414283}
+    - target: {fileID: 5951226711583424279, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1782414283}

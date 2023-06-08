@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 95fcfff36dca2f9408f6502beca0f18f
   - enabled: 1
     path: Assets/Scenes/Game/Level 3.unity
-    guid: fce73e97036355c40851bd4aed1c8e2c
+    guid: c1d5eb993728f8a4899eff3a8f3ee000
   - enabled: 1
     path: Assets/Scenes/Game/Level 4.unity
     guid: c0aa0261deb2fe748810d579e06ec6ed
@@ -28,6 +28,6 @@ EditorBuildSettings:
     guid: 55f99e07a7c98ea4bbe467f06dc650a0
   - enabled: 1
     path: Assets/Scenes/Game/Level 7.unity
-    guid: 574852557b64f164590b2d6d02d99aed
+    guid: e443f86861e977440bc7429b845ed6e9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acbdd3e5a2a6adb4c82b8a96da50c907, type: 2}
