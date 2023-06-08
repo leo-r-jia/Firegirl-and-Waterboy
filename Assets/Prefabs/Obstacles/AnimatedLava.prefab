@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 307744140659424708}
   - component: {fileID: 483250686996764325}
   - component: {fileID: 5699382619069502922}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AnimatedLava
   m_TagString: Fire
   m_Icon: {fileID: 0}

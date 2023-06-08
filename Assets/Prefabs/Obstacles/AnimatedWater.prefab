@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8054604377750767763}
   - component: {fileID: 3523254244311670721}
   - component: {fileID: -6715598933789534548}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AnimatedWater
   m_TagString: Water
   m_Icon: {fileID: 0}

@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource landSoundEffect;
     private AudioSource runSoundEffect;
 
+    private bool touchingLiquid = false;
+
     //Before first frame update
     private void Start()
     {
@@ -72,6 +74,19 @@ public class PlayerMovement : MonoBehaviour
         SoundEffectManager();
 
         UpdateAnimationState();
+    }
+
+    // Set the flag when the player touches water
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Fire") || collision.gameObject.CompareTag("Water"))
+        {
+            touchingLiquid = true;
+        }
+        else
+        {
+            touchingLiquid = false;
+        }
     }
 
     //Triggers sound effects depending on player state
@@ -161,6 +176,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //Find the directional (+/-) maxSpeed the player can move
         float dirMaxSpeed = dirX * maxSpeed;
+        if (touchingLiquid)
+            dirMaxSpeed = dirMaxSpeed * 0.7f;
 
         //Calc. the difference between their current speed and their maxSpeed
         float speedDif = dirMaxSpeed - rb.velocity.x;
@@ -191,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.Jumping;
         }
         else if (rb.velocity.y < -1.6f)
-        {   
+        {
             state = MovementState.Falling;
         }
 
