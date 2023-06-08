@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
@@ -70,12 +69,12 @@ public class Portal : MonoBehaviour
 
         if (otherPortal.isLeft)
         {
-            other.transform.position = new Vector2(destination.position.x + 2, destination.position.y);
+            other.transform.position = new Vector2(destination.position.x + 1, destination.position.y);
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(portalThrust, 2f));
         }
         else
         {
-            other.transform.position = new Vector2(destination.position.x - 2, destination.position.y);
+            other.transform.position = new Vector2(destination.position.x - 1, destination.position.y);
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(-portalThrust, 2f));
         }
 
