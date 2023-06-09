@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shot : MonoBehaviour
 { 
     public float speed;
-    public bool isRightShot;
     public Portal playerPortal;
     private GameObject player;
     private Vector2 direction;
@@ -16,16 +15,15 @@ public class Shot : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * speed;
-
-        // Player is aiming left or right
         direction = transform.right;
+        rb.velocity = direction * speed;
+       
     }
 
     // Affects the bullet velocity.
     void Update()
     {
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
+        rb.velocity = direction * speed;
     }
 
     // Bullets collides with an object
@@ -44,9 +42,9 @@ public class Shot : MonoBehaviour
                 Portal portal = Instantiate(playerPortal, portalPosition, transform.rotation) as Portal;
 
                 // Checks if portal is left or right.
-                if (portal.transform.position.x > 0)
+                if(direction.x > 0)
                     portal.isRight = true;
-                else if (portal.transform.position.x < 0)
+                else if (direction.x < 0)
                     portal.isLeft = true;
             }
             else if (tag == "OrangeShot")
@@ -60,12 +58,16 @@ public class Shot : MonoBehaviour
                 Portal portal = Instantiate(playerPortal, portalPosition, transform.rotation) as Portal;
 
                 // Checks if portal is left or right.
-                if (portal.transform.position.x > 0)
+                if (direction.x > 0)
                     portal.isRight = true;
-                else if (portal.transform.position.x < 0)
+                else if (direction.x < 0)
                     portal.isLeft = true;
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        if (target.tag == "Box")
+        {
+            Destroy(gameObject);
+        }
     }
 }
