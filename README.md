@@ -20,7 +20,7 @@ Each level contains a range of puzzles and obstacles, like lava/water/acid, butt
 - Global and personal leaderboards
 
 ## Installation
-To run the game, pull from the ```Release``` branch of this repo, go into ```Assets>Scenes>Game``` and load the ```Main Menu``` scene, and select the play button.
+To run the game, download the files from the ```main``` branch of this repo, open the project in Unity, press ```Build``` and run.
 
 ### Requirments
 Tested to work on Windows 10 and 11.
@@ -43,4 +43,4 @@ Reliant on [Azure PlayFab](https://playfab.com/) for saving and leaderboard func
 - [Jack Waitoa](https://github.com/jWaitoa)
 
 ## Project status
-This was developed as a university project. Though more features are planned, probably development will not continue.
+This was developed as a university project. Though more features are planned, development is unlikely to continue.
