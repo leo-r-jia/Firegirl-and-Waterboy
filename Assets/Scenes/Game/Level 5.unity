@@ -2303,6 +2303,10 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 253338413}
+    - target: {fileID: 5951226711583424296, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
+      propertyPath: gameOverMenu
+      value: 
+      objectReference: {fileID: 1893353105}
     - target: {fileID: 5951226711583424299, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19164,6 +19168,10 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 253338413}
+    - target: {fileID: 7053267067136060784, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
+      propertyPath: gameOverMenu
+      value: 
+      objectReference: {fileID: 1893353105}
     - target: {fileID: 7053267067136060785, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: scoreManager
       value: 

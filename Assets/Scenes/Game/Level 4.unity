@@ -30166,7 +30166,7 @@ PrefabInstance:
     - target: {fileID: 7053267067136060784, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: gameOverMenu
       value: 
-      objectReference: {fileID: 330376447}
+      objectReference: {fileID: 1180103192}
     - target: {fileID: 7053267067136060785, guid: 6ee9411187d38044a9a4d8dac4ccebc2, type: 3}
       propertyPath: scoreManager
       value: 
@@ -30385,7 +30385,7 @@ PrefabInstance:
     - target: {fileID: 5951226711583424296, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: gameOverMenu
       value: 
-      objectReference: {fileID: 330376447}
+      objectReference: {fileID: 1180103192}
     - target: {fileID: 7499004816586167532, guid: 15dc8c239d3279f4eaf53929043564c5, type: 3}
       propertyPath: m_Name
       value: Player 2
