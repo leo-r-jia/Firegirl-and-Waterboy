@@ -2,11 +2,14 @@
 
 ![Cover1](https://github.com/leo-r-jia/Firegirl-and-Waterboy/assets/105583042/0c98c3e3-f2c2-4bf5-a472-08abf5f9bf7f)
 
+Play it online [Here](https://leo-r-jia.itch.io/firegirl-and-waterboy)!
+
 ## Description
 Firegirl and Waterboy is a 2D platformer game developed in developed with [Unity](https://unity.com/). It has similar play-style and mechanics as a childhood favourite game of ours - Fireboy and Watergirl. It is a local co-op where you work together with a partner to complete puzzles and to get through the levels, with levels increasing in difficulty.
 
 Each level contains a range of puzzles and obstacles, like lava/water/acid, buttons and levers that trigger moving platforms and doors, and portals.
 
+<div>
 ### Features
 - Local 2-player multiplayer
 - Multiple levels
