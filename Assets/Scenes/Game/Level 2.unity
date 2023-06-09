@@ -60782,6 +60782,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimatedWater
       objectReference: {fileID: 0}
+    - target: {fileID: 8054604377750767763, guid: 0148bd2058c4d1b43b9239f3869ee591, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054604377750767763, guid: 0148bd2058c4d1b43b9239f3869ee591, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054604377750767763, guid: 0148bd2058c4d1b43b9239f3869ee591, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5294118
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0148bd2058c4d1b43b9239f3869ee591, type: 3}
 --- !u!4 &489265681 stripped
@@ -65372,6 +65384,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1158553418}
     m_Modifications:
+    - target: {fileID: 307744140659424708, guid: 63c6a51645378bc4ba7516d02324b086, type: 3}
+      propertyPath: m_Color.b
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 307744140659424708, guid: 63c6a51645378bc4ba7516d02324b086, type: 3}
+      propertyPath: m_Color.g
+      value: 0.12941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 307744140659424708, guid: 63c6a51645378bc4ba7516d02324b086, type: 3}
+      propertyPath: m_Color.r
+      value: 0.28235295
+      objectReference: {fileID: 0}
     - target: {fileID: 307744140659424708, guid: 63c6a51645378bc4ba7516d02324b086, type: 3}
       propertyPath: m_SortingOrder
       value: 0
