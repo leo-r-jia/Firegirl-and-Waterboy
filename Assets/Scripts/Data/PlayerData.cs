@@ -31,6 +31,9 @@ public class PlayerData : MonoBehaviour
     //On first run set the number of levels and initialise
     void Start()
     {
+        //Set the target framerate to 60    
+        Application.targetFrameRate = 60;
+
         foreach (Transform child in levelMenu.transform.GetComponentsInChildren<Transform>())
         {
             if (child.gameObject.transform.name.Contains("Level"))

@@ -313,7 +313,7 @@ MonoBehaviour:
     m_Bits: 256
   boxLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   maxSpeed: 12
   jumpAmount: 12
 --- !u!95 &5951226711583424278
@@ -350,6 +350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
+  coinCollected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5951226711583424296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 4217286866116807079}
   bulletPrefab: {fileID: 5816752484465557610, guid: 297063ea323f7a84a93ebf60d273a567, type: 3}
+  shootKeyPressed: 0
   reloadTime: 0.5
   groundLayer:
     serializedVersion: 2

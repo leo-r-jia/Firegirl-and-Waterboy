@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3482552397460491160}
   - component: {fileID: 3482552397460491167}
   - component: {fileID: 3482552397460491163}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: Box
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3482552397460491167}
+  doSoundEffect: 0
