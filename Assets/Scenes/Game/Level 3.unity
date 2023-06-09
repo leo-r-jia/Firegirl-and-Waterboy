@@ -30535,6 +30535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 122260844256854342, guid: 5e9d421562cc58448af6ce5f00f037c2, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9d421562cc58448af6ce5f00f037c2, type: 3}
 --- !u!4 &248337010 stripped
@@ -31321,6 +31325,10 @@ PrefabInstance:
     - target: {fileID: 122260844256854342, guid: 5e9d421562cc58448af6ce5f00f037c2, type: 3}
       propertyPath: m_Name
       value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 122260844256854342, guid: 5e9d421562cc58448af6ce5f00f037c2, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9d421562cc58448af6ce5f00f037c2, type: 3}
