@@ -9,7 +9,6 @@ Firegirl and Waterboy is a 2D platformer game developed in developed with [Unity
 
 Each level contains a range of puzzles and obstacles, like lava/water/acid, buttons and levers that trigger moving platforms and doors, and portals.
 
-<div>
 ### Features
 - Local 2-player multiplayer
 - Multiple levels
